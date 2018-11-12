@@ -16,5 +16,10 @@ namespace _560Theater
         {
             InitializeComponent();
         }
+
+        private void uxHistory_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This will open the ticket history form.");
+        }
     }
 }
