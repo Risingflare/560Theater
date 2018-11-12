@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace _560Theater
 {
-    public partial class Form1 : Form
+    public partial class uxCustomerUI : Form
     {
-        public Form1()
+        public uxCustomerUI()
         {
             InitializeComponent();
         }
