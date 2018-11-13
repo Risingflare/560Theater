@@ -6,6 +6,17 @@ using System.Windows.Forms;
 
 namespace _560Theater
 {
+    /// <summary>
+    /// Handles the Show Showtime click.
+    /// </summary>
+    public delegate void ShowShowtimeDel(string moviename, string theatername, string time);
+    /// <summary>
+    /// Handles the History click
+    /// </summary>
+    public delegate void ShowHistoryDel();
+    /// <summary>
+    /// Runs the program
+    /// </summary>
     static class Program
     {
         /// <summary>
@@ -16,7 +27,8 @@ namespace _560Theater
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new uxCustomerUI());
+            Controller controller = new Controller();
+            Application.Run(new uxCustomerUI(controller.Showtimes,controller.History));
         }
     }
 }
