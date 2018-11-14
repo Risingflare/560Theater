@@ -38,7 +38,9 @@
             this.uxHistory = new System.Windows.Forms.ToolStripLabel();
             this.uxHoursNumeric = new System.Windows.Forms.NumericUpDown();
             this.uxMinutesNumeric = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
+            this.uxDescriptionLabel = new System.Windows.Forms.Label();
+            this.uxHourLabel = new System.Windows.Forms.Label();
+            this.uxMinutesLabel = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uxHoursNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uxMinutesNumeric)).BeginInit();
@@ -147,22 +149,42 @@
             this.uxMinutesNumeric.Size = new System.Drawing.Size(33, 20);
             this.uxMinutesNumeric.TabIndex = 12;
             // 
-            // label1
+            // uxDescriptionLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.label1.Location = new System.Drawing.Point(9, 314);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(253, 16);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Military Time using 15 minutes increments";
+            this.uxDescriptionLabel.AutoSize = true;
+            this.uxDescriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.uxDescriptionLabel.Location = new System.Drawing.Point(9, 314);
+            this.uxDescriptionLabel.Name = "uxDescriptionLabel";
+            this.uxDescriptionLabel.Size = new System.Drawing.Size(253, 16);
+            this.uxDescriptionLabel.TabIndex = 13;
+            this.uxDescriptionLabel.Text = "Military Time using 15 minutes increments";
+            // 
+            // uxHourLabel
+            // 
+            this.uxHourLabel.AutoSize = true;
+            this.uxHourLabel.Location = new System.Drawing.Point(85, 375);
+            this.uxHourLabel.Name = "uxHourLabel";
+            this.uxHourLabel.Size = new System.Drawing.Size(30, 13);
+            this.uxHourLabel.TabIndex = 14;
+            this.uxHourLabel.Text = "Hour";
+            // 
+            // uxMinutesLabel
+            // 
+            this.uxMinutesLabel.AutoSize = true;
+            this.uxMinutesLabel.Location = new System.Drawing.Point(129, 375);
+            this.uxMinutesLabel.Name = "uxMinutesLabel";
+            this.uxMinutesLabel.Size = new System.Drawing.Size(44, 13);
+            this.uxMinutesLabel.TabIndex = 15;
+            this.uxMinutesLabel.Text = "Minutes";
             // 
             // uxCustomerUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(466, 397);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.uxMinutesLabel);
+            this.Controls.Add(this.uxHourLabel);
+            this.Controls.Add(this.uxDescriptionLabel);
             this.Controls.Add(this.uxMinutesNumeric);
             this.Controls.Add(this.uxHoursNumeric);
             this.Controls.Add(this.toolStrip1);
@@ -195,7 +217,9 @@
         private System.Windows.Forms.ToolStripLabel uxHistory;
         private System.Windows.Forms.NumericUpDown uxHoursNumeric;
         private System.Windows.Forms.NumericUpDown uxMinutesNumeric;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label uxDescriptionLabel;
+        private System.Windows.Forms.Label uxHourLabel;
+        private System.Windows.Forms.Label uxMinutesLabel;
     }
 }
 

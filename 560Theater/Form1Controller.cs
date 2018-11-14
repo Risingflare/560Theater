@@ -17,7 +17,16 @@ namespace _560Theater
         /// <summary>
         /// The list of movies
         /// </summary>
-        List<string> movieList;
+        List<string> _movieList;
+        List<Ticket> _ticketList;
+        SqlConnection connection;
+        SqlCommand cmd;
+        SqlDataReader reader;
+        public Form1Controller()
+        {
+            connection = new SqlConnection("Data Source=mssql.cs.ksu.edu;Initial Catalog=cis560_team04;Integrated Security=True;Encrypt=False");
+            cmd = new SqlCommand();
+        }
         /// <summary>
         /// Method creates a new Showtime form. It also initates another controller to handle any methods
         /// within that GUI.
@@ -36,8 +45,7 @@ namespace _560Theater
         /// </summary>
         public void History()
         {
-            HistoryController controller = new HistoryController();
-            HistoryGUI gui = new HistoryGUI(controller.RemoveTicket);
+            HistoryGUI gui = new HistoryGUI(this.HistoryRemoveTicket);
             gui.Show();
         }
         /// <summary>
@@ -45,21 +53,55 @@ namespace _560Theater
         /// </summary>
         private void GetMovieList()
         {
-            SqlConnection connection = new SqlConnection(/* Our connection string */);
-            SqlCommand cmd = new SqlCommand();
+            connection.Open();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "StoredProcedureName";
             cmd.Connection = connection;
-            SqlDataReader reader;
-
-            connection.Open();
             using (reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    movieList.Add(reader["MovieName"].ToString());
+                    string moviename = reader["MovieName"].ToString();
+                    _movieList.Add(moviename);
                 }
-            }                       
+            }
+            connection.Close();
+        }
+        /// <summary>
+        /// This code needs some updates but I need to see the procedure so I can execute it correctly.
+        /// </summary>
+        private void HistoryGetTicketList()
+        {
+            connection.Open();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "StoredProcedureName";
+            cmd.Connection = connection;
+            using (reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    string moviename = reader["MovieName"].ToString();
+                    string theatername = reader["TheaterName"].ToString();
+                    DateTime showtime = Convert.ToDateTime(reader["ShowTime"]);
+                    int room = Convert.ToInt32(reader["Room"]);
+                    Ticket ticket = new Ticket(moviename, theatername, showtime, room);
+                    _ticketList.Add(ticket);
+                }
+            }
+            connection.Close();
+        }
+        /// <summary>
+        /// This will execute the Remove History Procedure.
+        /// </summary>
+        /// <param name="ticket"></param>
+        private void HistoryRemoveTicket(string ticket)
+        {
+            connection.Open();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "StoredProcedureName";
+            cmd.Connection = connection;
+            cmd.Parameters.AddWithValue("@ticket", ticket);
+
         }
     }
 }
