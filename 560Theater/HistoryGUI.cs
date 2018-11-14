@@ -18,7 +18,11 @@ namespace _560Theater
             removeHistHandler = removeTicket;
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Removes selected ticket from the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxHistoryRemoveSelected_Click(object sender, EventArgs e)
         {
             try

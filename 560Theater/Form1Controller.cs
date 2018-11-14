@@ -13,20 +13,127 @@ namespace _560Theater
     /// </summary>
     public delegate void RemoveTicketHistoryDel(string ticket);
     class Form1Controller
-    {
-        /// <summary>
-        /// The list of movies
-        /// </summary>
-        List<string> _movieList;
-        List<Ticket> _ticketList;
+    {        
         SqlConnection connection;
         SqlCommand cmd;
         SqlDataReader reader;
-        public Form1Controller()
+        List<ListBoxTheaterMovie> movies;
+        List<ListBoxTheaterMovie> theaters;
+        int customerID;
+        /// <summary>
+        /// A test string that I use to test my list boxes.
+        /// </summary>
+        List<string> test;
+        public Form1Controller(int customerID)
         {
             connection = new SqlConnection("Data Source=mssql.cs.ksu.edu;Initial Catalog=cis560_team04;Integrated Security=True;Encrypt=False");
             cmd = new SqlCommand();
+            this.customerID = customerID;
+            movies = new List<ListBoxTheaterMovie>();
+            theaters = new List<ListBoxTheaterMovie>();
+            test = new List<string>();
+            test.Add("ACM");
+            test.Add("Warner Bros");
+            test.Add("ACM");
+            test.Add("Warner Bros");
+            test.Add("ACM");
+            test.Add("Warner Bros");
+            test.Add("ACM");
+            test.Add("ACM");
+            test.Add("Warner Bros");
+            test.Add("ACM");
+            test.Add("Warner Bros");
+            test.Add("ACM");
+            test.Add("Warner Bros");
+            test.Add("Warner Bros");
+
         }
+        /// <summary>
+        /// I think this gets the procedure information from the database.
+        /// </summary>
+        public void GetMovieList()
+        {
+            string moviename = "";
+            int count = 0;
+            while(count < test.Count)
+            {
+                moviename = moviename + test[count] + count.ToString()+"\n";
+                count++;
+            }
+            /*
+            connection.Open();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "StoredProcedureName";//This is getting the movie list procedure
+            cmd.Connection = connection;
+            using (reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    moviename = moviename + reader["MovieName"].ToString() + "\n";
+                }
+            }
+            connection.Close();
+            */
+            foreach (ListBoxTheaterMovie movie in movies)
+            {
+                movie(moviename);
+            }
+        }
+        /// <summary>
+        /// It works but I need more research on the topic, will come back with better code or answer.
+        /// </summary>
+        /// <param name="movie"></param>
+        public void UpdateMovies(ListBoxTheaterMovie movie)
+        {
+            movies.Add(movie);
+        }
+        public void GetTheaterList()
+        {
+            string theatername = "";
+            int count = 0;
+            while (count < test.Count)
+            {
+                theatername = theatername + test[count] + count.ToString() + "\n";
+                count++;
+            }
+            /*
+            connection.Open();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "StoredProcedureName";//This is getting the theater list procedure
+            cmd.Connection = connection;
+            using (reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    theatername = reader["TheaterName"].ToString();
+                }
+            }
+            connection.Close();
+            */
+            foreach (ListBoxTheaterMovie theater in theaters)
+            {
+                theater(theatername);
+            }
+        }
+        /// <summary>
+        /// It works but I need more research on the topic
+        /// </summary>
+        /// <param name="theater"></param>
+        public void UpdateTheater(ListBoxTheaterMovie theater)
+        {
+            movies.Add(theater);
+        }
+        /// <summary>
+        /// Method that handles the history option click
+        /// It creates a new form and a controller to take care of any actions within that form
+        /// </summary>
+        public void History()
+        {
+            HistoryGUIController controller = new HistoryGUIController(connection,cmd,reader);
+            HistoryGUI gui = new HistoryGUI(controller.HistoryRemoveTicket);
+            gui.Show();
+        }
+
         /// <summary>
         /// Method creates a new Showtime form. It also initates another controller to handle any methods
         /// within that GUI.
@@ -36,72 +143,9 @@ namespace _560Theater
         /// <param name="time"></param>
         public void Showtimes(string moviename,string theatername,string time)
         {
+            ShowTimeController controller = new ShowTimeController(connection, cmd, reader);
             ShowTimeGUI gui = new ShowTimeGUI();
             gui.Show();
-        }
-        /// <summary>
-        /// Method that handles the history option click
-        /// It creates a new form and a controller to take care of any actions within that form
-        /// </summary>
-        public void History()
-        {
-            HistoryGUI gui = new HistoryGUI(this.HistoryRemoveTicket);
-            gui.Show();
-        }
-        /// <summary>
-        /// I think this gets the procedure information from the database.
-        /// </summary>
-        private void GetMovieList()
-        {
-            connection.Open();
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = "StoredProcedureName";
-            cmd.Connection = connection;
-            using (reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    string moviename = reader["MovieName"].ToString();
-                    _movieList.Add(moviename);
-                }
-            }
-            connection.Close();
-        }
-        /// <summary>
-        /// This code needs some updates but I need to see the procedure so I can execute it correctly.
-        /// </summary>
-        private void HistoryGetTicketList()
-        {
-            connection.Open();
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = "StoredProcedureName";
-            cmd.Connection = connection;
-            using (reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    string moviename = reader["MovieName"].ToString();
-                    string theatername = reader["TheaterName"].ToString();
-                    DateTime showtime = Convert.ToDateTime(reader["ShowTime"]);
-                    int room = Convert.ToInt32(reader["Room"]);
-                    Ticket ticket = new Ticket(moviename, theatername, showtime, room);
-                    _ticketList.Add(ticket);
-                }
-            }
-            connection.Close();
-        }
-        /// <summary>
-        /// This will execute the Remove History Procedure.
-        /// </summary>
-        /// <param name="ticket"></param>
-        private void HistoryRemoveTicket(string ticket)
-        {
-            connection.Open();
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = "StoredProcedureName";
-            cmd.Connection = connection;
-            cmd.Parameters.AddWithValue("@ticket", ticket);
-
         }
     }
 }

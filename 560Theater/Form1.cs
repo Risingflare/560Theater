@@ -20,10 +20,16 @@ namespace _560Theater
         /// Handler that takes care of the history click
         /// </summary>
         private ShowHistoryDel showHistoryHandler;
-        public uxCustomerUI(ShowShowtimeDel showdel, ShowHistoryDel histdel)
+        private ShowMoviesDel showMoviesHandler;
+        private ShowTheatersDel showTheaterHandler;
+        uxLoginScreen loginScreen;
+        public uxCustomerUI(ShowShowtimeDel showdel, ShowHistoryDel histdel, ShowMoviesDel moviesdel, ShowTheatersDel theatersDel, uxLoginScreen loginScreen)
         {
             showShowtimeHandler = showdel;
             showHistoryHandler = histdel;
+            showMoviesHandler = moviesdel;
+            showTheaterHandler = theatersDel;
+            this.loginScreen = loginScreen;
             InitializeComponent();
         }
         /// <summary>
@@ -48,6 +54,53 @@ namespace _560Theater
             if(uxTheaterListBox.SelectedItem != null) theatername = uxTheaterListBox.SelectedItem.ToString();
             string showtime = uxHoursNumeric.ToString() + uxMinutesNumeric.ToString();
             showShowtimeHandler(moviename, theatername, showtime);
+        }
+        /// <summary>
+        /// Updates the movie list box
+        /// </summary>
+        /// <param name="movie"></param>
+        public void UpdateMovie(string movie)
+        {
+            uxMovieListBox.Items.Clear();
+            string[] substrings = movie.Split('\n');
+            foreach(string m in substrings)
+            {
+                uxMovieListBox.Items.Add(m);
+            }
+            uxMovieListBox.Update();
+        }
+        /// <summary>
+        /// Updates the theater list box
+        /// </summary>
+        /// <param name="theater"></param>
+        public void UpdateTheater(string theater)
+        {
+            uxTheaterListBox.Items.Clear();
+            string[] substrings = theater.Split('\n');
+            foreach (string m in substrings)
+            {
+                uxTheaterListBox.Items.Add(m);
+            }
+            uxTheaterListBox.Update();
+        }
+        /// <summary>
+        /// Shows the login screen when this form is closed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void uxCustomerUI_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            loginScreen.Show();
+        }
+        /// <summary>
+        /// Populates the movie and theater list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void uxCustomerUI_Load(object sender, EventArgs e)
+        {
+            showTheaterHandler();
+            showMoviesHandler();
         }
     }
 }

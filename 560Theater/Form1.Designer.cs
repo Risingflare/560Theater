@@ -196,6 +196,8 @@
             this.Controls.Add(this.uxTheaterListBox);
             this.Name = "uxCustomerUI";
             this.Text = "Customer";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.uxCustomerUI_FormClosed);
+            this.Load += new System.EventHandler(this.uxCustomerUI_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uxHoursNumeric)).EndInit();
