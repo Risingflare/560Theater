@@ -16,5 +16,10 @@ namespace _560Theater
         {
             InitializeComponent();
         }
+
+        private void ShowTimeGUI_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

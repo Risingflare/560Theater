@@ -11,14 +11,16 @@ namespace _560Theater
     /// This class will be the controller in our MVC interface.
     /// It will use procedures to execute any requests to the database.
     /// </summary>
-    class Controller
+    public delegate void RemoveTicketHistoryDel(string ticket);
+    class Form1Controller
     {
         /// <summary>
         /// The list of movies
         /// </summary>
         List<string> movieList;
         /// <summary>
-        /// 
+        /// Method creates a new Showtime form. It also initates another controller to handle any methods
+        /// within that GUI.
         /// </summary>
         /// <param name="moviename"></param>
         /// <param name="theatername"></param>
@@ -29,11 +31,13 @@ namespace _560Theater
             gui.Show();
         }
         /// <summary>
-        /// 
+        /// Method that handles the history option click
+        /// It creates a new form and a controller to take care of any actions within that form
         /// </summary>
         public void History()
         {
-            HistoryGUI gui = new HistoryGUI();
+            HistoryController controller = new HistoryController();
+            HistoryGUI gui = new HistoryGUI(controller.RemoveTicket);
             gui.Show();
         }
         /// <summary>

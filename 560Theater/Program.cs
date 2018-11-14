@@ -27,7 +27,7 @@ namespace _560Theater
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Controller controller = new Controller();
+            Form1Controller controller = new Form1Controller();
             Application.Run(new uxCustomerUI(controller.Showtimes,controller.History));
         }
     }
