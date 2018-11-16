@@ -75,3 +75,29 @@ CREATE TABLE cis560_team04.Showing
 	UpdatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
 	UNIQUE(Room, ShowTime)
 );
+
+						  
+INSERT cis560_team04.Person(MovieName, ReleaseYear, Genre, IsActive)
+VALUES
+	('Pulp Fiction',1994,'Crime, Drama', 1 ),
+	('The Lord of the Rings: The Return of the King',2003,'Action, Adventure, Drama',1 ),
+	('The Dark Knight',2008,'Action, Crime, Drama',1 ),
+	('Shrek',2001,'Animation, Adventure, Comedy',1),
+	('Les Misérables',2012,'Drama, History, Musical',1),
+	('Avatar',2009,'Action, Adventure, Fantasy',1 ),
+	('Avengers: Infinity War',2018,'Action, Adventure, Fantasy',1),
+	('A Quiet Place',2018,'Drama, Horror, Mystery',1),
+	('Star Wars: The Last Jedi',2017,'Action, Adventure, Fantasy',1 ),
+	('Star Wars: Episode IV - A New Hope',1977,'Action, Adventure, Fantasy',1),
+	('Finding Dory',2016,'Animation, Adventure, Comedy',1),
+	('The Wizard of Oz',1939,'Adventure, Family, Fantasy',1 ),
+	('Get Out',2017,'Horror, Mystery, Thriller',1),
+	('Inside Out',2015,'Animation, Adventure, Comedy',1),
+	('Tropic Thunder',2008,'Action, Adventure, Comedy',1 ),
+	('Ready Player One',2018,'Action, Adventure, Sci-Fi',1),
+	('Incredibles 2',2018,'Animation, Action, Adventure',1),
+	('Robin Hood',2018,'Action,Adventure',1),
+	('Bohemian Rhapsody',2018,'Biography, Drama, Music',1),
+	('Venom',2018,'Action,Sci-Fi',1);						  
+						  
+						  
