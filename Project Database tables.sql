@@ -77,7 +77,7 @@ CREATE TABLE cis560_team04.Showing
 );
 
 						  
-INSERT cis560_team04.Person(MovieName, ReleaseYear, Genre, IsActive)
+INSERT cis560_team04.Movie(MovieName, ReleaseYear, Genre, IsActive)
 VALUES
 	('Pulp Fiction',1994,'Crime, Drama', 1 ),
 	('The Lord of the Rings: The Return of the King',2003,'Action, Adventure, Drama',1 ),
@@ -98,6 +98,14 @@ VALUES
 	('Incredibles 2',2018,'Animation, Action, Adventure',1),
 	('Robin Hood',2018,'Action,Adventure',1),
 	('Bohemian Rhapsody',2018,'Biography, Drama, Music',1),
-	('Venom',2018,'Action, Sci-Fi',1);						  
+	('Venom',2018,'Action, Sci-Fi',1);	
+						  
+INSERT cis560_team04.Theater(TheaterName, [Location],IsActive)
+VALUES
+	('AMC Dine-IN Manhattan 13','Manthattan',1),
+	('Regal Hollywood Stadium 14 - Topeka','Topeka',1),
+	('B & B Shawnee 18','Shawnee',1),
+	('Cinetopia Overland Park 18','Overland Park',1),
+	('AMC Town Center 20','Leadwood',1);						  
 						  
 						  
