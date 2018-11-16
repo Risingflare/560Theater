@@ -98,6 +98,6 @@ VALUES
 	('Incredibles 2',2018,'Animation, Action, Adventure',1),
 	('Robin Hood',2018,'Action,Adventure',1),
 	('Bohemian Rhapsody',2018,'Biography, Drama, Music',1),
-	('Venom',2018,'Action,Sci-Fi',1);						  
+	('Venom',2018,'Action, Sci-Fi',1);						  
 						  
 						  
