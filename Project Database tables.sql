@@ -1,6 +1,6 @@
 
 
-CREATE TABLE Project."User"
+CREATE TABLE cis560_team04."User"
 (
    UserID INT NOT NULL IDENTITY(1, 1) PRIMARY KEY ,
    FirstName NVARCHAR(32) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE Project."User"
    UNIQUE(FirstName, LastName, EmailAdress)
 );
 
-CREATE TABLE Project."Admin"
+CREATE TABLE cis560_team04."Admin"
 (
    AdminID INT NOT NULL IDENTITY(1, 1) PRIMARY KEY ,
    UserID INT NOT NULL FOREIGN KEY,
@@ -20,7 +20,7 @@ CREATE TABLE Project."Admin"
    UpdatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET())
 );
 
-CREATE TABLE Project.Customer
+CREATE TABLE cis560_team04.Customer
 (
    CustomerID INT NOT NULL IDENTITY(1, 1) PRIMARY KEY ,
    UserID INT NOT NULL FOREIGN KEY,
@@ -28,7 +28,7 @@ CREATE TABLE Project.Customer
    UpdatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET())
 );
 
-CREATE TABLE Project.Ticket
+CREATE TABLE cis560_team04.Ticket
 (
    CustomerID INT NOT NULL FOREIGN KEY ,
    ShowingID INT NOT NULL FOREIGN KEY ,
@@ -38,7 +38,7 @@ CREATE TABLE Project.Ticket
    PRIMARY KEY(CustomerID, ShowingID)
 );
 
-CREATE TABLE Project.Theater
+CREATE TABLE cis560_team04.Theater
 (
 	TheaterID INT NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	TheaterName NVARCHAR(32) NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE Project.Theater
 
 --Documentation says Release Year should be Unique, but that doesn't make sense?
 
-CREATE TABLE Project.Movie
+CREATE TABLE cis560_team04.Movie
 (
 	MovieID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	MovieName NVARCHAR(32) NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE Project.Movie
 	UNIQUE(MovieName)
 );
 
-CREATE TABLE Project.Showing
+CREATE TABLE cis560_team04.Showing
 (
 	ShowingID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	TheaterName NVARCHAR(32) NOT NULL FOREIGN KEY REFERENCES Theater(TheaterName),
