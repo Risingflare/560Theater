@@ -32,38 +32,16 @@ namespace _560Theater
             movies = new List<ListBoxTheaterMovie>();
             theaters = new List<ListBoxTheaterMovie>();
             test = new List<string>();
-            test.Add("ACM");
-            test.Add("Warner Bros");
-            test.Add("ACM");
-            test.Add("Warner Bros");
-            test.Add("ACM");
-            test.Add("Warner Bros");
-            test.Add("ACM");
-            test.Add("ACM");
-            test.Add("Warner Bros");
-            test.Add("ACM");
-            test.Add("Warner Bros");
-            test.Add("ACM");
-            test.Add("Warner Bros");
-            test.Add("Warner Bros");
-
         }
         /// <summary>
         /// I think this gets the procedure information from the database.
         /// </summary>
         public void GetMovieList()
         {
-            string moviename = "";
-            int count = 0;
-            while(count < test.Count)
-            {
-                moviename = moviename + test[count] + count.ToString()+"\n";
-                count++;
-            }
-            /*
+            string moviename = "";         
             connection.Open();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = "StoredProcedureName";//This is getting the movie list procedure
+            cmd.CommandText = "dbo.GetMovies";//This is getting the movie list procedure
             cmd.Connection = connection;
             using (reader = cmd.ExecuteReader())
             {
@@ -73,7 +51,7 @@ namespace _560Theater
                 }
             }
             connection.Close();
-            */
+            
             foreach (ListBoxTheaterMovie movie in movies)
             {
                 movie(moviename);
@@ -90,26 +68,18 @@ namespace _560Theater
         public void GetTheaterList()
         {
             string theatername = "";
-            int count = 0;
-            while (count < test.Count)
-            {
-                theatername = theatername + test[count] + count.ToString() + "\n";
-                count++;
-            }
-            /*
             connection.Open();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = "StoredProcedureName";//This is getting the theater list procedure
+            cmd.CommandText = "dbo.GetTheaters";//This is getting the theater list procedure
             cmd.Connection = connection;
             using (reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    theatername = reader["TheaterName"].ToString();
+                    theatername = theatername + reader["TheaterName"].ToString() + "\n";
                 }
             }
             connection.Close();
-            */
             foreach (ListBoxTheaterMovie theater in theaters)
             {
                 theater(theatername);
@@ -121,7 +91,7 @@ namespace _560Theater
         /// <param name="theater"></param>
         public void UpdateTheater(ListBoxTheaterMovie theater)
         {
-            movies.Add(theater);
+            theaters.Add(theater);
         }
         /// <summary>
         /// Method that handles the history option click
