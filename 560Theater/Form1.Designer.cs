@@ -51,7 +51,7 @@
             this.uxTheaterListBox.FormattingEnabled = true;
             this.uxTheaterListBox.Location = new System.Drawing.Point(12, 62);
             this.uxTheaterListBox.Name = "uxTheaterListBox";
-            this.uxTheaterListBox.Size = new System.Drawing.Size(148, 212);
+            this.uxTheaterListBox.Size = new System.Drawing.Size(192, 212);
             this.uxTheaterListBox.TabIndex = 0;
             // 
             // uxShowtimeLabel
@@ -78,7 +78,7 @@
             // 
             this.uxMovieLabel.AutoSize = true;
             this.uxMovieLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.uxMovieLabel.Location = new System.Drawing.Point(292, 32);
+            this.uxMovieLabel.Location = new System.Drawing.Point(252, 32);
             this.uxMovieLabel.Name = "uxMovieLabel";
             this.uxMovieLabel.Size = new System.Drawing.Size(71, 17);
             this.uxMovieLabel.TabIndex = 5;
@@ -87,9 +87,9 @@
             // uxMovieListBox
             // 
             this.uxMovieListBox.FormattingEnabled = true;
-            this.uxMovieListBox.Location = new System.Drawing.Point(295, 62);
+            this.uxMovieListBox.Location = new System.Drawing.Point(255, 62);
             this.uxMovieListBox.Name = "uxMovieListBox";
-            this.uxMovieListBox.Size = new System.Drawing.Size(148, 212);
+            this.uxMovieListBox.Size = new System.Drawing.Size(188, 212);
             this.uxMovieListBox.TabIndex = 6;
             // 
             // uxSearch

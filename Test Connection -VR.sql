@@ -1,12 +1,11 @@
-﻿DROP TABLE IF EXISTS dbo.[Admin]
+﻿use cis560_team04;
+DROP TABLE IF EXISTS dbo.[Admin]
 DROP TABLE IF EXISTS dbo.Customer
 DROP TABLE IF EXISTS dbo.[User]
 DROP TABLE IF EXISTS dbo.Ticket
 DROP TABLE IF EXISTS dbo.Showing
 DROP TABLE IF EXISTS dbo.Theater
 DROP TABLE IF EXISTS dbo.Movie
-
-
 
 
 CREATE TABLE dbo.[User]
@@ -86,6 +85,7 @@ CREATE TABLE dbo.Ticket
    UpdatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
    PRIMARY KEY(CustomerID, ShowingID)
 );
+GO
 						  
 INSERT dbo.Movie(MovieName, ReleaseYear, Genre, IsActive)
 VALUES
