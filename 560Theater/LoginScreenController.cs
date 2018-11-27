@@ -40,12 +40,8 @@ namespace _560Theater
         {
             if(number == 1)
             {
-                /* 
-                 * Jessy this is where you can put your code for your admin form and admin controller.
-                 * Make sure your Form's constructor get the "login" otherwise we won't be able to access the login screen
-                 * In my customerUI, I make the login form show again whenever my customerUI gets closed.
-                 *
-                 */
+                AdminGUI adminGui = new AdminGUI(login);
+                adminGui.Show();
             }
             if(number == 2)
             {
