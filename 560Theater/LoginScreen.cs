@@ -49,6 +49,21 @@ namespace _560Theater
             {
                 MessageBox.Show(excep.Message);
             }
+
+
+            string username = uxLoginTextbox.Text;
+            string password = uxPasswordBox.Text;
+            
+
+
+            
+            //if userid in admin or customer
+
+
+
+
+
+
         }
         /// <summary>
         /// Clears the textboxes when the form is either hidden or shown.
