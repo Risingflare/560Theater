@@ -245,6 +245,10 @@ namespace _560Theater
                     {
                         MessageBox.Show("Enter one or more parameters to be updated");
                     }
+                    else if (movieList.SelectedItems == null)
+                    {
+                        MessageBox.Show("Select an item to edit");
+                    }
                     else
                     {
                         String movieName = textBox1.Text.Trim();
@@ -321,6 +325,10 @@ namespace _560Theater
                     {
                         MessageBox.Show("Enter one or more parameters to be updated");
                     }
+                    else if (theaterList.SelectedItems == null)
+                    {
+                        MessageBox.Show("Select an item to edit");
+                    }
                     else
                     {
                         String theaterName = textBox1.Text;
@@ -378,63 +386,145 @@ namespace _560Theater
         {
             if (tabControl.SelectedTab.Name.Equals("Movie"))
             {
-                connection.Open();
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.CommandText = "dbo.AdminDeleteMovie";
-                cmd.Connection = connection;
+                if(movieList.SelectedItems != null)
+                {
+                    connection.Open();
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "dbo.AdminDeleteMovie";
+                    cmd.Connection = connection;
 
-                SqlParameter id = new SqlParameter();
-                id.ParameterName = "@id";
-                id.SqlDbType = System.Data.SqlDbType.Int;
-                id.Direction = System.Data.ParameterDirection.Input;
-                id.Value = int.Parse(movieList.SelectedItems[0].Text);
-                cmd.Parameters.Add(id);
+                    SqlParameter id = new SqlParameter();
+                    id.ParameterName = "@id";
+                    id.SqlDbType = System.Data.SqlDbType.Int;
+                    id.Direction = System.Data.ParameterDirection.Input;
+                    id.Value = int.Parse(movieList.SelectedItems[0].Text);
+                    cmd.Parameters.Add(id);
 
-                cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
 
-                connection.Close();
-                cmd.Parameters.Clear();
-                updateMovieTable();
+                    connection.Close();
+                    cmd.Parameters.Clear();
+                    updateMovieTable();
+                }
             }
             else if (tabControl.SelectedTab.Name.Equals("Theater"))
             {
-                connection.Open();
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.CommandText = "dbo.AdminDeleteTheater";
-                cmd.Connection = connection;
+                if(theaterList.SelectedItems != null)
+                {
+                    connection.Open();
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "dbo.AdminDeleteTheater";
+                    cmd.Connection = connection;
 
-                SqlParameter id = new SqlParameter();
-                id.ParameterName = "@id";
-                id.SqlDbType = System.Data.SqlDbType.Int;
-                id.Direction = System.Data.ParameterDirection.Input;
-                id.Value = int.Parse(theaterList.SelectedItems[0].Text);
-                cmd.Parameters.Add(id);
+                    SqlParameter id = new SqlParameter();
+                    id.ParameterName = "@id";
+                    id.SqlDbType = System.Data.SqlDbType.Int;
+                    id.Direction = System.Data.ParameterDirection.Input;
+                    id.Value = int.Parse(theaterList.SelectedItems[0].Text);
+                    cmd.Parameters.Add(id);
 
-                cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
 
-                connection.Close();
-                cmd.Parameters.Clear();
-                updateMovieTable();
+                    connection.Close();
+                    cmd.Parameters.Clear();
+                    updateMovieTable();
+                }
             }
             else if(tabControl.SelectedTab.Name.Equals("Showing"))
             {
-                connection.Open();
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.CommandText = "dbo.AdminDeleteShowing";
-                cmd.Connection = connection;
+                if(showingList.SelectedItems != null)
+                {
+                    connection.Open();
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "dbo.AdminDeleteShowing";
+                    cmd.Connection = connection;
 
-                SqlParameter id = new SqlParameter();
-                id.ParameterName = "@id";
-                id.SqlDbType = System.Data.SqlDbType.Int;
-                id.Direction = System.Data.ParameterDirection.Input;
-                id.Value = int.Parse(showingList.SelectedItems[0].Text);
-                cmd.Parameters.Add(id);
+                    SqlParameter id = new SqlParameter();
+                    id.ParameterName = "@id";
+                    id.SqlDbType = System.Data.SqlDbType.Int;
+                    id.Direction = System.Data.ParameterDirection.Input;
+                    id.Value = int.Parse(showingList.SelectedItems[0].Text);
+                    cmd.Parameters.Add(id);
 
-                cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
 
-                connection.Close();
-                cmd.Parameters.Clear();
-                updateMovieTable();
+                    connection.Close();
+                    cmd.Parameters.Clear();
+                    updateMovieTable();
+                }
+            }
+        }
+
+        private void activateBtn_Click(object sender, EventArgs e)
+        {
+            if (tabControl.SelectedTab.Name.Equals("Movie"))
+            {
+                if (movieList.SelectedItems != null)
+                {
+                    connection.Open();
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "dbo.ActivateMovie";
+                    cmd.Connection = connection;
+
+                    SqlParameter id = new SqlParameter();
+                    id.ParameterName = "@id";
+                    id.SqlDbType = System.Data.SqlDbType.Int;
+                    id.Direction = System.Data.ParameterDirection.Input;
+                    id.Value = int.Parse(movieList.SelectedItems[0].Text);
+                    cmd.Parameters.Add(id);
+
+                    cmd.ExecuteNonQuery();
+
+                    connection.Close();
+                    cmd.Parameters.Clear();
+                    updateMovieTable();
+                }
+            }
+            else if (tabControl.SelectedTab.Name.Equals("Theater"))
+            {
+                if (theaterList.SelectedItems != null)
+                {
+                    connection.Open();
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "dbo.ActivateTheater";
+                    cmd.Connection = connection;
+
+                    SqlParameter id = new SqlParameter();
+                    id.ParameterName = "@id";
+                    id.SqlDbType = System.Data.SqlDbType.Int;
+                    id.Direction = System.Data.ParameterDirection.Input;
+                    id.Value = int.Parse(theaterList.SelectedItems[0].Text);
+                    cmd.Parameters.Add(id);
+
+                    cmd.ExecuteNonQuery();
+
+                    connection.Close();
+                    cmd.Parameters.Clear();
+                    updateMovieTable();
+                }
+            }
+            else if (tabControl.SelectedTab.Name.Equals("Showing"))
+            {
+                if (showingList.SelectedItems != null)
+                {
+                    connection.Open();
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "dbo.ActivateShowing";
+                    cmd.Connection = connection;
+
+                    SqlParameter id = new SqlParameter();
+                    id.ParameterName = "@id";
+                    id.SqlDbType = System.Data.SqlDbType.Int;
+                    id.Direction = System.Data.ParameterDirection.Input;
+                    id.Value = int.Parse(showingList.SelectedItems[0].Text);
+                    cmd.Parameters.Add(id);
+
+                    cmd.ExecuteNonQuery();
+
+                    connection.Close();
+                    cmd.Parameters.Clear();
+                    updateMovieTable();
+                }
             }
         }
 
