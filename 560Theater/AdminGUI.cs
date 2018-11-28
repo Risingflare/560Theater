@@ -64,7 +64,7 @@ namespace _560Theater
             {
                 while (reader.Read())
                 {
-                    ListViewItem item = new ListViewItem(reader["TheaterID"].ToString(), row);
+                    ListViewItem item = new ListViewItem(reader["TheaterID"].ToString());
                     item.SubItems.Add(reader["TheaterName"].ToString());
                     item.SubItems.Add(reader["Location"].ToString());
                     item.SubItems.Add(reader["IsActive"].ToString());
