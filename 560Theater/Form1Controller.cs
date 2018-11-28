@@ -19,6 +19,9 @@ namespace _560Theater
         SqlDataReader reader;
         List<ListBoxTheaterMovie> movies;
         List<ListBoxTheaterMovie> theaters;
+        List<string> movienames;
+        List<string> theaternames;
+        List<string> theaterLocation;
         int customerID;
         /// <summary>
         /// A test string that I use to test my list boxes.
@@ -31,7 +34,9 @@ namespace _560Theater
             this.customerID = customerID;
             movies = new List<ListBoxTheaterMovie>();
             theaters = new List<ListBoxTheaterMovie>();
-            test = new List<string>();
+            movienames = new List<string>();
+            theaternames = new List<string>();
+            theaterLocation = new List<string>();
         }
         /// <summary>
         /// I think this gets the procedure information from the database.
@@ -47,7 +52,9 @@ namespace _560Theater
             {
                 while (reader.Read())
                 {
-                    moviename = moviename + reader["MovieName"].ToString() + "\n";
+                    string name = reader["MovieName"].ToString();
+                    movienames.Add(name);
+                    moviename = moviename + name + "\n";
                 }
             }
             connection.Close();
@@ -76,7 +83,10 @@ namespace _560Theater
             {
                 while (reader.Read())
                 {
-                    theatername = theatername + reader["TheaterName"].ToString() + "\n";
+                    string name = reader["TheaterName"].ToString();
+                    theaterLocation.Add(reader["Location"].ToString());
+                    theaternames.Add(name);
+                    theatername = theatername + name + "\n";
                 }
             }
             connection.Close();
@@ -116,6 +126,35 @@ namespace _560Theater
             ShowTimeController controller = new ShowTimeController(connection, cmd, reader);
             ShowTimeGUI gui = new ShowTimeGUI();
             gui.Show();
+        }
+
+        public void GenerateShowtimes()
+        {
+            connection.Open();
+            string showtime = "";
+            int[] hours = new int[] { 14, 15, 16, 17, 18, 19, 20 };
+            int[] minutes = new int[] { 00, 15, 30, 45 };
+            Random rn = new Random();
+            int count = 0;
+            while(count >= 15)
+            {
+                int i = rn.Next(0, 6);
+                int j = rn.Next(0, 3);
+                int hour = hours[i];
+                int minute = minutes[j];
+                if(minute == 0)
+                {
+                   showtime = hour.ToString() + "00" + "00";
+                }
+                else
+                {
+                    showtime = hour.ToString() + minute.ToString() + "00";
+                }
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = "dbo.GetTheaters";//This is getting the theater list procedure
+                cmd.Connection = connection;
+                cmd.Parameters.AddWithValue("@TheaterName", , "@MovieName", , "@Room", , "@ShowTime", , "@Location");
+            }
         }
     }
 }
