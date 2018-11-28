@@ -41,6 +41,7 @@
             this.uxDescriptionLabel = new System.Windows.Forms.Label();
             this.uxHourLabel = new System.Windows.Forms.Label();
             this.uxMinutesLabel = new System.Windows.Forms.Label();
+            this.uxGenerateShowings = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uxHoursNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uxMinutesNumeric)).BeginInit();
@@ -106,7 +107,8 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.uxHistory});
+            this.uxHistory,
+            this.uxGenerateShowings});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(466, 25);
@@ -177,6 +179,13 @@
             this.uxMinutesLabel.TabIndex = 15;
             this.uxMinutesLabel.Text = "Minutes";
             // 
+            // uxGenerateShowings
+            // 
+            this.uxGenerateShowings.Name = "uxGenerateShowings";
+            this.uxGenerateShowings.Size = new System.Drawing.Size(108, 22);
+            this.uxGenerateShowings.Text = "Generate Showings";
+            this.uxGenerateShowings.Click += new System.EventHandler(this.uxGenerateShowings_Click);
+            // 
             // uxCustomerUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -222,6 +231,7 @@
         private System.Windows.Forms.Label uxDescriptionLabel;
         private System.Windows.Forms.Label uxHourLabel;
         private System.Windows.Forms.Label uxMinutesLabel;
+        private System.Windows.Forms.ToolStripLabel uxGenerateShowings;
     }
 }
 

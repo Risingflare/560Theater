@@ -14,31 +14,95 @@ namespace _560Theater
     public partial class AdminGUI : Form
     {
         uxLoginScreen loginScreen;
-        SqlConnection connectionconnection = new SqlConnection("Data Source=mssql.cs.ksu.edu;Initial Catalog=cis560_team04;Integrated Security=True;Encrypt=False");
+        SqlConnection connection = new SqlConnection("Data Source=mssql.cs.ksu.edu;Initial Catalog=cis560_team04;Integrated Security=True;Encrypt=False");
         SqlCommand cmd = new SqlCommand();
+        SqlDataReader reader;
 
         public AdminGUI(uxLoginScreen login)
         {
             loginScreen = login;
+            InitializeComponent();
             updateMovieTable();
             updateTheaterTable();
             updateShowingTable();
-            InitializeComponent();
         }
 
         private void updateMovieTable()
         {
-            //TODO: this
+            connection.Open();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.AdminGetMovies";
+            cmd.Connection = connection;
+            int row = 0;
+            using (reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    ListViewItem item = new ListViewItem(reader["MovieID"].ToString(), row);
+                    item.SubItems.Add(reader["MovieName"].ToString());
+                    item.SubItems.Add(reader["ReleaseYear"].ToString());
+                    item.SubItems.Add(reader["Genre"].ToString());
+                    item.SubItems.Add(reader["IsActive"].ToString());
+                    item.SubItems.Add(reader["CreatedOn"].ToString());
+                    item.SubItems.Add(reader["UpdatedOn"].ToString());
+                    movieList.Items.Add(item);
+                    row++;
+                }
+            }
+            connection.Close();
         }
 
         private void updateTheaterTable()
         {
-            //TODO: this
+            connection.Open();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.AdminGetTheater";
+            cmd.Connection = connection;
+            int row = 0;
+
+            using (reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    ListViewItem item = new ListViewItem(reader["TheaterID"].ToString());
+                    item.SubItems.Add(reader["TheaterName"].ToString());
+                    item.SubItems.Add(reader["Location"].ToString());
+                    item.SubItems.Add(reader["IsActive"].ToString());
+                    item.SubItems.Add(reader["CreatedOn"].ToString());
+                    item.SubItems.Add(reader["UpdatedOn"].ToString());
+                    theaterList.Items.Add(item);
+                    row++;
+                }
+            }
+            connection.Close();
         }
 
         private void updateShowingTable()
         {
-            //TODO: this
+            connection.Open();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.AdminGetShowings";
+            cmd.Connection = connection;
+            int row = 0;
+
+            using (reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    ListViewItem item = new ListViewItem(reader["ShowingID"].ToString(), row);
+                    item.SubItems.Add(reader["TheaterName"].ToString());
+                    item.SubItems.Add(reader["MovieName"].ToString());
+                    item.SubItems.Add(reader["Room"].ToString());
+                    item.SubItems.Add(reader["ShowTime"].ToString());
+                    item.SubItems.Add(reader["Location"].ToString());
+                    item.SubItems.Add(reader["IsActive"].ToString());
+                    item.SubItems.Add(reader["CreatedOn"].ToString());
+                    item.SubItems.Add(reader["UpdatedOn"].ToString());
+                    theaterList.Items.Add(item);
+                    row++;
+                }
+            }
+            connection.Close();
         }
 
         private void addBtn_Click(object sender, EventArgs e)

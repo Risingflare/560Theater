@@ -127,13 +127,13 @@ namespace _560Theater
             ShowTimeGUI gui = new ShowTimeGUI();
             gui.Show();
         }
-
+        
         public void GenerateShowtimes()
         {
-            connection.Open();
-            string showtime = "";
+            string showtime;
+            List<string> usedShowtimes = new List<string>();
             int[] hours = new int[] { 14, 15, 16, 17, 18, 19, 20 };
-            int[] minutes = new int[] { 00, 15, 30, 45 };
+            int[] minutes = new int[] { 0, 15, 30, 45 };
             Random rn = new Random();
             int count = 0;
             while(count >= 15)
@@ -153,7 +153,7 @@ namespace _560Theater
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.CommandText = "dbo.GetTheaters";//This is getting the theater list procedure
                 cmd.Connection = connection;
-                //cmd.Parameters.AddWithValue("@TheaterName", , "@MovieName", , "@Room", , "@ShowTime", , "@Location");
+                cmd.Parameters.AddWithValue("@TheaterName", , "@MovieName", , "@Room", , "@ShowTime", , "@Location");
             }
         }
     }

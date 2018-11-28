@@ -70,7 +70,7 @@ CREATE TABLE dbo.Showing
 	IsActive BIT NOT NULL,
 	CreatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
 	UpdatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
-	UNIQUE(Room, ShowTime, Theater),
+	UNIQUE(Room, ShowTime),
 	FOREIGN KEY(TheaterName, [Location]) REFERENCES dbo.Theater(TheaterName,[Location])
 );
 
@@ -116,11 +116,11 @@ VALUES
 	('Cinetopia Overland Park 18','Overland Park',1),
 	('AMC Town Center 20','Leadwood',1);
 
-/*INSERT dbo.[User](FirstName, LastName, EmailAddress, Password)
+INSERT dbo.[User](FirstName, LastName, EmailAddress, [Password], isActive)
 VALUES
-	(N'JOHN', N'DOE', N'johndoe@yahoo.com', N'mypassword');
-	(),
-	(),
-	(),
-	(),
-	();*/
+	(N'Koty', N'Lange', N'koty@ksu.edu', N'12345',1),
+	(N'Carson', N'Funk', N'Carson@ksu.edu', N'12345',1),
+	(N'Jesse', N'Molenda', N'Jesse@ksu.edu', N'12345',1),
+	(N'Victor', N'Aguirre', N'Victor@ksu.edu', N'12345',1),
+	(N'Jake', N'Willson', N'Jake@ksu.edu', N'12345',1),
+	(N'Steven', N'Zwahl', N'Steven@ksu.edu', N'12345',1);
