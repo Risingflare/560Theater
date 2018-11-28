@@ -17,19 +17,27 @@ namespace _560Theater
         SqlConnection connection = new SqlConnection("Data Source=mssql.cs.ksu.edu;Initial Catalog=cis560_team04;Integrated Security=True;Encrypt=False");
         SqlCommand cmd = new SqlCommand();
         SqlDataReader reader;
-
+        List<string> movieL;
+        List<string> theaterL;
+        List<string> locationL;
         public AdminGUI(uxLoginScreen login)
         {
             loginScreen = login;
             InitializeComponent();
+            movieL = new List<string>();
+            theaterL = new List<string>();
+            locationL = new List<string>();
             updateMovieTable();
             updateTheaterTable();
             updateShowingTable();
+            
         }
 
         private void updateMovieTable()
         {
+            connection.Close();
             movieList.Items.Clear();
+            cmd.Parameters.Clear();
             connection.Open();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "dbo.AdminGetMovies";
@@ -40,7 +48,9 @@ namespace _560Theater
                 while (reader.Read())
                 {
                     ListViewItem item = new ListViewItem(reader["MovieID"].ToString(), row);
-                    item.SubItems.Add(reader["MovieName"].ToString());
+                    string moviename = reader["MovieName"].ToString();
+                    item.SubItems.Add(moviename);
+                    movieL.Add(moviename);
                     item.SubItems.Add(reader["ReleaseYear"].ToString());
                     item.SubItems.Add(reader["Genre"].ToString());
                     item.SubItems.Add(reader["IsActive"].ToString());
@@ -56,7 +66,9 @@ namespace _560Theater
 
         private void updateTheaterTable()
         {
+            connection.Close();
             theaterList.Items.Clear();
+            cmd.Parameters.Clear();
             connection.Open();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "dbo.AdminGetTheater";
@@ -68,8 +80,12 @@ namespace _560Theater
                 while (reader.Read())
                 {
                     ListViewItem item = new ListViewItem(reader["TheaterID"].ToString());
-                    item.SubItems.Add(reader["TheaterName"].ToString());
-                    item.SubItems.Add(reader["Location"].ToString());
+                    string theatername = reader["TheaterName"].ToString();
+                    item.SubItems.Add(theatername);
+                    theaterL.Add(theatername);
+                    string location = reader["Location"].ToString();
+                    item.SubItems.Add(location);
+                    locationL.Add(location);
                     item.SubItems.Add(reader["IsActive"].ToString());
                     item.SubItems.Add(reader["CreatedOn"].ToString());
                     item.SubItems.Add(reader["UpdatedOn"].ToString());
@@ -83,7 +99,9 @@ namespace _560Theater
 
         private void updateShowingTable()
         {
+            connection.Close();
             showingList.Items.Clear();
+            cmd.Parameters.Clear();
             connection.Open();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "dbo.AdminGetShowing";
@@ -117,7 +135,7 @@ namespace _560Theater
             {
                 try
                 {
-                    if(textBox1.Text.Length == 0)
+                    if (textBox1.Text.Length == 0)
                     {
                         MessageBox.Show("Movie Name Required");
                     }
@@ -167,27 +185,27 @@ namespace _560Theater
                         connection.Close();
                         cmd.Parameters.Clear();
                         updateMovieTable();
-
+                        //GenerateNewShowingsMovies(movieName);
 
                         textBox1.Clear();
                         textBox2.Clear();
                         textBox3.Clear();
                     }
                 }
-                catch(Exception e1)
+                catch (Exception e1)
                 {
                     MessageBox.Show(e1.Message);
                 }
             }
-            else if(tabControl.SelectedTab.Name.Equals("Theater"))
+            else if (tabControl.SelectedTab.Name.Equals("Theater"))
             {
                 try
                 {
-                    if(textBox1.Text.Length == 0)
+                    if (textBox1.Text.Length == 0)
                     {
                         MessageBox.Show("Theater Name Required");
                     }
-                    else if(textBox2.Text.Length == 0)
+                    else if (textBox2.Text.Length == 0)
                     {
                         MessageBox.Show("Theater Location Required");
                     }
@@ -221,7 +239,7 @@ namespace _560Theater
                         connection.Close();
                         cmd.Parameters.Clear();
                         updateTheaterTable();
-
+                        GenerateShowingTheaterLocation(theaterName, Location);
 
                         textBox1.Clear();
                         textBox2.Clear();
@@ -241,7 +259,7 @@ namespace _560Theater
             {
                 try
                 {
-                    if(textBox1.Text.Length == 0 && textBox2.Text.Length == 0 && textBox3.Text.Length == 0)
+                    if (textBox1.Text.Length == 0 && textBox2.Text.Length == 0 && textBox3.Text.Length == 0)
                     {
                         MessageBox.Show("Enter one or more parameters to be updated");
                     }
@@ -326,12 +344,12 @@ namespace _560Theater
                         String theaterName = textBox1.Text;
                         String Location = textBox2.Text;
 
-                        if(theaterName.Length == 0)
+                        if (theaterName.Length == 0)
                         {
                             theaterName = theaterList.SelectedItems[0].SubItems[0].Text;
                         }
 
-                        if(Location.Length == 0)
+                        if (Location.Length == 0)
                         {
                             Location = theaterList.SelectedItems[0].SubItems[1].Text;
                         }
@@ -416,7 +434,7 @@ namespace _560Theater
                 cmd.Parameters.Clear();
                 updateMovieTable();
             }
-            else if(tabControl.SelectedTab.Name.Equals("Showing"))
+            else if (tabControl.SelectedTab.Name.Equals("Showing"))
             {
                 connection.Open();
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -440,7 +458,7 @@ namespace _560Theater
 
         private void indexChange(object sender, EventArgs e)
         {
-            if(tabControl.SelectedTab.Name.Equals("Movie"))
+            if (tabControl.SelectedTab.Name.Equals("Movie"))
             {
                 updateMovieTable();
                 editBtn.Enabled = true;
@@ -454,7 +472,7 @@ namespace _560Theater
                 textBox3.Clear();
                 textBox3.Show();
             }
-            else if(tabControl.SelectedTab.Name.Equals("Theater"))
+            else if (tabControl.SelectedTab.Name.Equals("Theater"))
             {
                 updateTheaterTable();
                 editBtn.Enabled = true;
@@ -468,7 +486,7 @@ namespace _560Theater
                 textBox3.Clear();
                 textBox3.Hide();
             }
-            else if(tabControl.SelectedTab.Name.Equals("Showing"))
+            else if (tabControl.SelectedTab.Name.Equals("Showing"))
             {
                 updateShowingTable();
                 editBtn.Enabled = false;
@@ -482,6 +500,179 @@ namespace _560Theater
         private void onClose(object sender, FormClosedEventArgs e)
         {
             loginScreen.Show();
+        }
+
+        private void GenerateNewShowingsMovies(string moviename)
+        {
+            string showtime;
+            List<string> usedShowtimes = new List<string>();
+            int[] hours = new int[] { 14, 15, 16, 17, 18, 19, 20 };
+            int[] minutes = new int[] { 0, 15, 30, 45 };
+            Random rn = new Random();
+            for (int k = 0; k < theaterL.Count; k++)
+            {
+                usedShowtimes.Clear();
+                cmd.Parameters.Clear();
+                connection.Open();
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = "dbo.GetTimes";
+                cmd.Connection = connection;
+                SqlParameter theaternameparam = new SqlParameter();
+                theaternameparam.ParameterName = "@TheaterName";
+                theaternameparam.SqlDbType = System.Data.SqlDbType.NVarChar;
+                theaternameparam.Direction = System.Data.ParameterDirection.Input;
+                theaternameparam.Value = theaterL[k];
+                cmd.Parameters.Add(theaternameparam);
+                using (reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string times = reader["Times"].ToString();
+                        usedShowtimes.Add(times);
+                    }
+                }
+                connection.Close();
+                int count = 0;
+                while (count < 5)
+                {
+                    cmd.Parameters.Clear();
+                    int i = rn.Next(0, 6);
+                    int j = rn.Next(0, 3);
+                    int room = rn.Next(1, 9);
+                    int hour = hours[i];
+                    int minute = minutes[j];
+                    if (minute == 0)
+                    {
+                        showtime = hour.ToString() + ":00" + ":00";
+                    }
+                    else
+                    {
+                        showtime = hour.ToString() + ":" + minute.ToString() + ":00";
+                    }
+                    if (usedShowtimes.Contains(showtime) == false)
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.CommandText = "dbo.CreateShowing";//This is getting the theater list procedure
+                        cmd.Connection = connection;
+
+                        SqlParameter theatername = new SqlParameter();
+                        theatername.ParameterName = "@TheaterName";
+                        theatername.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        theatername.Direction = System.Data.ParameterDirection.Input;
+                        theatername.Value = theaterL[k];
+
+                        SqlParameter movienameparam = new SqlParameter();
+                        movienameparam.ParameterName = "@MovieName";
+                        movienameparam.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        movienameparam.Direction = System.Data.ParameterDirection.Input;
+                        movienameparam.Value = moviename;
+
+                        SqlParameter roomnum = new SqlParameter();
+                        roomnum.ParameterName = "@Room";
+                        roomnum.SqlDbType = System.Data.SqlDbType.Int;
+                        roomnum.Direction = System.Data.ParameterDirection.Input;
+                        roomnum.Value = room;
+
+                        SqlParameter showtimeparam = new SqlParameter();
+                        showtimeparam.ParameterName = "@ShowTime";
+                        showtimeparam.SqlDbType = System.Data.SqlDbType.Time;
+                        showtimeparam.Direction = System.Data.ParameterDirection.Input;
+                        showtimeparam.Value = showtime;
+
+                        SqlParameter location = new SqlParameter();
+                        location.ParameterName = "@Location";
+                        location.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        location.Direction = System.Data.ParameterDirection.Input;
+                        location.Value = locationL[k];
+
+                        cmd.Parameters.Add(theatername);
+                        cmd.Parameters.Add(movienameparam);
+                        cmd.Parameters.Add(roomnum);
+                        cmd.Parameters.Add(showtimeparam);
+                        cmd.Parameters.Add(location);
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                        connection.Close();
+                        usedShowtimes.Add(showtime);
+                        count++;
+                    }
+                }
+            }
+        }
+        private void GenerateShowingTheaterLocation(string theater, string location)
+        {
+            string showtime;
+            List<string> usedShowtimes = new List<string>();
+            int[] hours = new int[] { 14, 15, 16, 17, 18, 19, 20 };
+            int[] minutes = new int[] { 0, 15, 30, 45 };
+            Random rn = new Random();
+            usedShowtimes.Clear();
+            int count = 0;
+            while (count < 5)
+            {
+                cmd.Parameters.Clear();
+                int i = rn.Next(0, 6);
+                int j = rn.Next(0, 3);
+                int room = rn.Next(1, 9);
+                int m = rn.Next(0, movieL.Count - 1);
+                int hour = hours[i];
+                int minute = minutes[j];
+                if (minute == 0)
+                {
+                    showtime = hour.ToString() + ":00" + ":00";
+                }
+                else
+                {
+                    showtime = hour.ToString() + ":" + minute.ToString() + ":00";
+                }
+                if (usedShowtimes.Contains(showtime) == false)
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "dbo.CreateShowing";//This is getting the theater list procedure
+                    cmd.Connection = connection;
+
+                    SqlParameter theatername = new SqlParameter();
+                    theatername.ParameterName = "@TheaterName";
+                    theatername.SqlDbType = System.Data.SqlDbType.NVarChar;
+                    theatername.Direction = System.Data.ParameterDirection.Input;
+                    theatername.Value = theater;
+
+                    SqlParameter moviename = new SqlParameter();
+                    moviename.ParameterName = "@MovieName";
+                    moviename.SqlDbType = System.Data.SqlDbType.NVarChar;
+                    moviename.Direction = System.Data.ParameterDirection.Input;
+                    moviename.Value = movieL[m];
+
+                    SqlParameter roomnum = new SqlParameter();
+                    roomnum.ParameterName = "@Room";
+                    roomnum.SqlDbType = System.Data.SqlDbType.Int;
+                    roomnum.Direction = System.Data.ParameterDirection.Input;
+                    roomnum.Value = room;
+
+                    SqlParameter showtimeparam = new SqlParameter();
+                    showtimeparam.ParameterName = "@ShowTime";
+                    showtimeparam.SqlDbType = System.Data.SqlDbType.Time;
+                    showtimeparam.Direction = System.Data.ParameterDirection.Input;
+                    showtimeparam.Value = showtime;
+
+                    SqlParameter locationparam = new SqlParameter();
+                    locationparam.ParameterName = "@Location";
+                    locationparam.SqlDbType = System.Data.SqlDbType.NVarChar;
+                    locationparam.Direction = System.Data.ParameterDirection.Input;
+                    locationparam.Value = location;
+
+                    cmd.Parameters.Add(theatername);
+                    cmd.Parameters.Add(moviename);
+                    cmd.Parameters.Add(roomnum);
+                    cmd.Parameters.Add(showtimeparam);
+                    cmd.Parameters.Add(locationparam);
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+                    usedShowtimes.Add(showtime);
+                    count++;
+                }
+            }
         }
     }
 }

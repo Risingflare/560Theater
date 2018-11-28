@@ -133,7 +133,7 @@ namespace _560Theater
         public void Showtimes(string moviename,string theatername,string time)
         {
             ShowTimeController controller = new ShowTimeController(connection, cmd, reader);
-            ShowTimeGUI gui = new ShowTimeGUI();
+            ShowTimeGUI gui = new ShowTimeGUI(connection, cmd, reader,moviename,theatername,time);
             gui.Show();
         }
         

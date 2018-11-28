@@ -53,8 +53,14 @@ namespace _560Theater
             string moviename = "";
             if (uxMovieListBox.SelectedItem != null) moviename = uxMovieListBox.SelectedItem.ToString();
             string theatername = "";
-            if(uxTheaterListBox.SelectedItem != null) theatername = uxTheaterListBox.SelectedItem.ToString();
-            string showtime = uxHoursNumeric.ToString() + uxMinutesNumeric.ToString();
+            if (uxTheaterListBox.SelectedItem != null) theatername = uxTheaterListBox.SelectedItem.ToString();
+            
+            string showtime = "";
+            if (uxHoursNumeric.Value == 0) showtime = "00:00:00";
+            else
+            {
+                showtime = uxHoursNumeric.Value.ToString() + ":" + uxMinutesNumeric.Value.ToString() + ":00";
+            }
             showShowtimeHandler(moviename, theatername, showtime);
         }
         /// <summary>

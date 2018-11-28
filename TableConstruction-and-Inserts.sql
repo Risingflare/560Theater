@@ -70,7 +70,7 @@ CREATE TABLE dbo.Showing
 	IsActive BIT NOT NULL,
 	CreatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
 	UpdatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
-	UNIQUE(Room, ShowTime),
+	UNIQUE(Room, ShowTime, TheaterName),
 	FOREIGN KEY(TheaterName, [Location]) REFERENCES dbo.Theater(TheaterName,[Location])
 );
 

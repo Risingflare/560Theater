@@ -33,9 +33,9 @@ namespace _560Theater
             }
             else
             {
-                ShowTimeGUI showings = new ShowTimeGUI();
-                this.Hide();
-                showings.ShowDialog();
+                //ShowTimeGUI showings = new ShowTimeGUI();
+                //this.Hide();
+                //showings.ShowDialog();
             }
         }
 
