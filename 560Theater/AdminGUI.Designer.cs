@@ -30,17 +30,32 @@
         {
             this.tabControl = new System.Windows.Forms.TabControl();
             this.Movie = new System.Windows.Forms.TabPage();
-            this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
-            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
-            this.movieTable = new System.Windows.Forms.TableLayoutPanel();
+            this.movieList = new System.Windows.Forms.ListView();
+            this.MovieIDCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.MovieNameCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.MovieGenreCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.MovieReleaseYearCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.MovieIsActiveCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.MovieCreatedOnCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.MovieUpdatedOnCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Theater = new System.Windows.Forms.TabPage();
-            this.hScrollBar2 = new System.Windows.Forms.HScrollBar();
-            this.vScrollBar2 = new System.Windows.Forms.VScrollBar();
-            this.theaterTable = new System.Windows.Forms.TableLayoutPanel();
+            this.theaterList = new System.Windows.Forms.ListView();
+            this.TheaterIDCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TheaterNameCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TheaterLocationCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TheaterIsActiveCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TheaterCreatedOnCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TheaterUpdatedOnCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Showing = new System.Windows.Forms.TabPage();
-            this.hScrollBar3 = new System.Windows.Forms.HScrollBar();
-            this.vScrollBar3 = new System.Windows.Forms.VScrollBar();
-            this.showingTable = new System.Windows.Forms.TableLayoutPanel();
+            this.showingList = new System.Windows.Forms.ListView();
+            this.ShowingIDCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ShowingTheaterNameCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ShowingMovieNameCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ShowingRoomCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ShowingShowTimeCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ShowingIsActiveCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ShowingCreatedOnCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ShowingUpdatedOnCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.addBtn = new System.Windows.Forms.Button();
             this.editBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
@@ -50,6 +65,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.ShowingLocationCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl.SuspendLayout();
             this.Movie.SuspendLayout();
             this.Theater.SuspendLayout();
@@ -70,9 +86,7 @@
             // 
             // Movie
             // 
-            this.Movie.Controls.Add(this.hScrollBar1);
-            this.Movie.Controls.Add(this.vScrollBar1);
-            this.Movie.Controls.Add(this.movieTable);
+            this.Movie.Controls.Add(this.movieList);
             this.Movie.Location = new System.Drawing.Point(4, 22);
             this.Movie.Name = "Movie";
             this.Movie.Padding = new System.Windows.Forms.Padding(3);
@@ -81,43 +95,60 @@
             this.Movie.Text = "Movie";
             this.Movie.UseVisualStyleBackColor = true;
             // 
-            // hScrollBar1
+            // movieList
             // 
-            this.hScrollBar1.Location = new System.Drawing.Point(0, 280);
-            this.hScrollBar1.Name = "hScrollBar1";
-            this.hScrollBar1.Size = new System.Drawing.Size(470, 20);
-            this.hScrollBar1.TabIndex = 2;
+            this.movieList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.MovieIDCol,
+            this.MovieNameCol,
+            this.MovieReleaseYearCol,
+            this.MovieGenreCol,
+            this.MovieIsActiveCol,
+            this.MovieCreatedOnCol,
+            this.MovieUpdatedOnCol});
+            this.movieList.Location = new System.Drawing.Point(0, 0);
+            this.movieList.Name = "movieList";
+            this.movieList.Size = new System.Drawing.Size(490, 300);
+            this.movieList.TabIndex = 3;
+            this.movieList.UseCompatibleStateImageBehavior = false;
+            this.movieList.View = System.Windows.Forms.View.Details;
             // 
-            // vScrollBar1
+            // MovieIDCol
             // 
-            this.vScrollBar1.Location = new System.Drawing.Point(470, 0);
-            this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(20, 280);
-            this.vScrollBar1.TabIndex = 1;
+            this.MovieIDCol.Text = "MovieID";
             // 
-            // movieTable
+            // MovieNameCol
             // 
-            this.movieTable.ColumnCount = 7;
-            this.movieTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.06452F));
-            this.movieTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.93548F));
-            this.movieTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 77F));
-            this.movieTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82F));
-            this.movieTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 73F));
-            this.movieTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.movieTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 52F));
-            this.movieTable.Location = new System.Drawing.Point(0, 0);
-            this.movieTable.Name = "movieTable";
-            this.movieTable.RowCount = 2;
-            this.movieTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.movieTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.movieTable.Size = new System.Drawing.Size(470, 37);
-            this.movieTable.TabIndex = 0;
+            this.MovieNameCol.Text = "MovieName";
+            this.MovieNameCol.Width = 77;
+            // 
+            // MovieGenreCol
+            // 
+            this.MovieGenreCol.DisplayIndex = 2;
+            this.MovieGenreCol.Text = "Genre";
+            // 
+            // MovieReleaseYearCol
+            // 
+            this.MovieReleaseYearCol.DisplayIndex = 3;
+            this.MovieReleaseYearCol.Text = "ReleaseYear";
+            this.MovieReleaseYearCol.Width = 74;
+            // 
+            // MovieIsActiveCol
+            // 
+            this.MovieIsActiveCol.Text = "IsActive";
+            // 
+            // MovieCreatedOnCol
+            // 
+            this.MovieCreatedOnCol.Text = "CreatedOn";
+            this.MovieCreatedOnCol.Width = 66;
+            // 
+            // MovieUpdatedOnCol
+            // 
+            this.MovieUpdatedOnCol.Text = "UpdatedOn";
+            this.MovieUpdatedOnCol.Width = 70;
             // 
             // Theater
             // 
-            this.Theater.Controls.Add(this.hScrollBar2);
-            this.Theater.Controls.Add(this.vScrollBar2);
-            this.Theater.Controls.Add(this.theaterTable);
+            this.Theater.Controls.Add(this.theaterList);
             this.Theater.Location = new System.Drawing.Point(4, 22);
             this.Theater.Name = "Theater";
             this.Theater.Padding = new System.Windows.Forms.Padding(3);
@@ -126,42 +157,52 @@
             this.Theater.Text = "Theater";
             this.Theater.UseVisualStyleBackColor = true;
             // 
-            // hScrollBar2
+            // theaterList
             // 
-            this.hScrollBar2.Location = new System.Drawing.Point(0, 280);
-            this.hScrollBar2.Name = "hScrollBar2";
-            this.hScrollBar2.Size = new System.Drawing.Size(470, 20);
-            this.hScrollBar2.TabIndex = 4;
+            this.theaterList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.TheaterIDCol,
+            this.TheaterNameCol,
+            this.TheaterLocationCol,
+            this.TheaterIsActiveCol,
+            this.TheaterCreatedOnCol,
+            this.TheaterUpdatedOnCol});
+            this.theaterList.Location = new System.Drawing.Point(0, 0);
+            this.theaterList.Name = "theaterList";
+            this.theaterList.Size = new System.Drawing.Size(490, 300);
+            this.theaterList.TabIndex = 0;
+            this.theaterList.UseCompatibleStateImageBehavior = false;
+            this.theaterList.View = System.Windows.Forms.View.Details;
             // 
-            // vScrollBar2
+            // TheaterIDCol
             // 
-            this.vScrollBar2.Location = new System.Drawing.Point(470, 0);
-            this.vScrollBar2.Name = "vScrollBar2";
-            this.vScrollBar2.Size = new System.Drawing.Size(20, 280);
-            this.vScrollBar2.TabIndex = 3;
+            this.TheaterIDCol.Text = "TheaterID";
             // 
-            // theaterTable
+            // TheaterNameCol
             // 
-            this.theaterTable.ColumnCount = 6;
-            this.theaterTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.theaterTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.theaterTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 77F));
-            this.theaterTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.theaterTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
-            this.theaterTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 79F));
-            this.theaterTable.Location = new System.Drawing.Point(0, 0);
-            this.theaterTable.Name = "theaterTable";
-            this.theaterTable.RowCount = 2;
-            this.theaterTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.theaterTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.theaterTable.Size = new System.Drawing.Size(470, 46);
-            this.theaterTable.TabIndex = 0;
+            this.TheaterNameCol.Text = "TheaterName";
+            this.TheaterNameCol.Width = 86;
+            // 
+            // TheaterLocationCol
+            // 
+            this.TheaterLocationCol.Text = "Location";
+            // 
+            // TheaterIsActiveCol
+            // 
+            this.TheaterIsActiveCol.Text = "IsActive";
+            // 
+            // TheaterCreatedOnCol
+            // 
+            this.TheaterCreatedOnCol.Text = "CreatedOn";
+            this.TheaterCreatedOnCol.Width = 71;
+            // 
+            // TheaterUpdatedOnCol
+            // 
+            this.TheaterUpdatedOnCol.Text = "UpdatedOn";
+            this.TheaterUpdatedOnCol.Width = 71;
             // 
             // Showing
             // 
-            this.Showing.Controls.Add(this.hScrollBar3);
-            this.Showing.Controls.Add(this.vScrollBar3);
-            this.Showing.Controls.Add(this.showingTable);
+            this.Showing.Controls.Add(this.showingList);
             this.Showing.Location = new System.Drawing.Point(4, 22);
             this.Showing.Name = "Showing";
             this.Showing.Padding = new System.Windows.Forms.Padding(3);
@@ -170,38 +211,66 @@
             this.Showing.Text = "Showing";
             this.Showing.UseVisualStyleBackColor = true;
             // 
-            // hScrollBar3
+            // showingList
             // 
-            this.hScrollBar3.Location = new System.Drawing.Point(0, 280);
-            this.hScrollBar3.Name = "hScrollBar3";
-            this.hScrollBar3.Size = new System.Drawing.Size(470, 20);
-            this.hScrollBar3.TabIndex = 4;
+            this.showingList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ShowingIDCol,
+            this.ShowingTheaterNameCol,
+            this.ShowingMovieNameCol,
+            this.ShowingRoomCol,
+            this.ShowingShowTimeCol,
+            this.ShowingLocationCol,
+            this.ShowingIsActiveCol,
+            this.ShowingCreatedOnCol,
+            this.ShowingUpdatedOnCol});
+            this.showingList.Location = new System.Drawing.Point(0, 0);
+            this.showingList.Name = "showingList";
+            this.showingList.Size = new System.Drawing.Size(490, 300);
+            this.showingList.TabIndex = 0;
+            this.showingList.UseCompatibleStateImageBehavior = false;
+            this.showingList.View = System.Windows.Forms.View.Details;
             // 
-            // vScrollBar3
+            // ShowingIDCol
             // 
-            this.vScrollBar3.Location = new System.Drawing.Point(470, 0);
-            this.vScrollBar3.Name = "vScrollBar3";
-            this.vScrollBar3.Size = new System.Drawing.Size(20, 280);
-            this.vScrollBar3.TabIndex = 3;
+            this.ShowingIDCol.Text = "ShowingID";
+            this.ShowingIDCol.Width = 71;
             // 
-            // showingTable
+            // ShowingTheaterNameCol
             // 
-            this.showingTable.ColumnCount = 8;
-            this.showingTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.showingTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.showingTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.showingTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.showingTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.showingTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.showingTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.showingTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.showingTable.Location = new System.Drawing.Point(0, 0);
-            this.showingTable.Name = "showingTable";
-            this.showingTable.RowCount = 2;
-            this.showingTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.showingTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.showingTable.Size = new System.Drawing.Size(470, 53);
-            this.showingTable.TabIndex = 0;
+            this.ShowingTheaterNameCol.Text = "TheaterName";
+            this.ShowingTheaterNameCol.Width = 79;
+            // 
+            // ShowingMovieNameCol
+            // 
+            this.ShowingMovieNameCol.Text = "MovieName";
+            this.ShowingMovieNameCol.Width = 69;
+            // 
+            // ShowingRoomCol
+            // 
+            this.ShowingRoomCol.Text = "Room";
+            this.ShowingRoomCol.Width = 41;
+            // 
+            // ShowingShowTimeCol
+            // 
+            this.ShowingShowTimeCol.Text = "ShowTime";
+            this.ShowingShowTimeCol.Width = 62;
+            // 
+            // ShowingIsActiveCol
+            // 
+            this.ShowingIsActiveCol.DisplayIndex = 5;
+            this.ShowingIsActiveCol.Text = "IsActive";
+            // 
+            // ShowingCreatedOnCol
+            // 
+            this.ShowingCreatedOnCol.DisplayIndex = 6;
+            this.ShowingCreatedOnCol.Text = "CreatedOn";
+            this.ShowingCreatedOnCol.Width = 63;
+            // 
+            // ShowingUpdatedOnCol
+            // 
+            this.ShowingUpdatedOnCol.DisplayIndex = 7;
+            this.ShowingUpdatedOnCol.Text = "UpdatedOn";
+            this.ShowingUpdatedOnCol.Width = 76;
             // 
             // addBtn
             // 
@@ -281,6 +350,11 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "ReleaseYear:";
             // 
+            // ShowingLocationCol
+            // 
+            this.ShowingLocationCol.DisplayIndex = 8;
+            this.ShowingLocationCol.Text = "Location";
+            // 
             // AdminGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -312,25 +386,41 @@
 
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage Movie;
-        private System.Windows.Forms.TableLayoutPanel movieTable;
         private System.Windows.Forms.TabPage Theater;
         private System.Windows.Forms.TabPage Showing;
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Button editBtn;
         private System.Windows.Forms.Button deleteBtn;
-        private System.Windows.Forms.TableLayoutPanel theaterTable;
-        private System.Windows.Forms.TableLayoutPanel showingTable;
-        private System.Windows.Forms.HScrollBar hScrollBar1;
-        private System.Windows.Forms.VScrollBar vScrollBar1;
-        private System.Windows.Forms.HScrollBar hScrollBar2;
-        private System.Windows.Forms.VScrollBar vScrollBar2;
-        private System.Windows.Forms.HScrollBar hScrollBar3;
-        private System.Windows.Forms.VScrollBar vScrollBar3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ListView movieList;
+        private System.Windows.Forms.ColumnHeader MovieIDCol;
+        private System.Windows.Forms.ColumnHeader MovieNameCol;
+        private System.Windows.Forms.ColumnHeader MovieGenreCol;
+        private System.Windows.Forms.ColumnHeader MovieReleaseYearCol;
+        private System.Windows.Forms.ColumnHeader MovieIsActiveCol;
+        private System.Windows.Forms.ColumnHeader MovieCreatedOnCol;
+        private System.Windows.Forms.ColumnHeader MovieUpdatedOnCol;
+        private System.Windows.Forms.ListView theaterList;
+        private System.Windows.Forms.ColumnHeader TheaterIDCol;
+        private System.Windows.Forms.ColumnHeader TheaterNameCol;
+        private System.Windows.Forms.ColumnHeader TheaterLocationCol;
+        private System.Windows.Forms.ColumnHeader TheaterIsActiveCol;
+        private System.Windows.Forms.ColumnHeader TheaterCreatedOnCol;
+        private System.Windows.Forms.ColumnHeader TheaterUpdatedOnCol;
+        private System.Windows.Forms.ListView showingList;
+        private System.Windows.Forms.ColumnHeader ShowingIDCol;
+        private System.Windows.Forms.ColumnHeader ShowingTheaterNameCol;
+        private System.Windows.Forms.ColumnHeader ShowingMovieNameCol;
+        private System.Windows.Forms.ColumnHeader ShowingRoomCol;
+        private System.Windows.Forms.ColumnHeader ShowingShowTimeCol;
+        private System.Windows.Forms.ColumnHeader ShowingIsActiveCol;
+        private System.Windows.Forms.ColumnHeader ShowingCreatedOnCol;
+        private System.Windows.Forms.ColumnHeader ShowingUpdatedOnCol;
+        private System.Windows.Forms.ColumnHeader ShowingLocationCol;
     }
 }
