@@ -130,7 +130,7 @@ namespace _560Theater
         
         public void GenerateShowtimes()
         {
-            string showtime = "";
+            string showtime;
             List<string> usedShowtimes = new List<string>();
             int[] hours = new int[] { 14, 15, 16, 17, 18, 19, 20 };
             int[] minutes = new int[] { 0, 15, 30, 45 };
@@ -139,7 +139,7 @@ namespace _560Theater
             {
                 usedShowtimes.Clear();
                 int count = 0;
-                while (count < 15)
+                while (count < 5)
                 {
                     cmd.Parameters.Clear();
                     int i = rn.Next(0, 6);
@@ -156,52 +156,54 @@ namespace _560Theater
                     {
                         showtime = hour.ToString() +":"+ minute.ToString() + ":00";
                     }
-                    if (usedShowtimes.Contains(showtime)) continue;
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.CommandText = "dbo.CreateShowing";//This is getting the theater list procedure
-                    cmd.Connection = connection;
+                    if (usedShowtimes.Contains(showtime) == false)
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.CommandText = "dbo.CreateShowing";//This is getting the theater list procedure
+                        cmd.Connection = connection;
 
-                    SqlParameter theatername = new SqlParameter();
-                    theatername.ParameterName = "@TheaterName";
-                    theatername.SqlDbType = System.Data.SqlDbType.NVarChar;
-                    theatername.Direction = System.Data.ParameterDirection.Input;
-                    theatername.Value = theaternames[k];
+                        SqlParameter theatername = new SqlParameter();
+                        theatername.ParameterName = "@TheaterName";
+                        theatername.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        theatername.Direction = System.Data.ParameterDirection.Input;
+                        theatername.Value = theaternames[k];
 
-                    SqlParameter moviename = new SqlParameter();
-                    moviename.ParameterName = "@MovieName";
-                    moviename.SqlDbType = System.Data.SqlDbType.NVarChar;
-                    moviename.Direction = System.Data.ParameterDirection.Input;
-                    moviename.Value = movienames[m];
+                        SqlParameter moviename = new SqlParameter();
+                        moviename.ParameterName = "@MovieName";
+                        moviename.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        moviename.Direction = System.Data.ParameterDirection.Input;
+                        moviename.Value = movienames[m];
 
-                    SqlParameter roomnum = new SqlParameter();
-                    roomnum.ParameterName = "@Room";
-                    roomnum.SqlDbType = System.Data.SqlDbType.Int;
-                    roomnum.Direction = System.Data.ParameterDirection.Input;
-                    roomnum.Value = room;
+                        SqlParameter roomnum = new SqlParameter();
+                        roomnum.ParameterName = "@Room";
+                        roomnum.SqlDbType = System.Data.SqlDbType.Int;
+                        roomnum.Direction = System.Data.ParameterDirection.Input;
+                        roomnum.Value = room;
 
-                    SqlParameter showtimeparam = new SqlParameter();
-                    showtimeparam.ParameterName = "@ShowTime";
-                    showtimeparam.SqlDbType = System.Data.SqlDbType.Time;
-                    showtimeparam.Direction = System.Data.ParameterDirection.Input;
-                    showtimeparam.Value = showtime;
+                        SqlParameter showtimeparam = new SqlParameter();
+                        showtimeparam.ParameterName = "@ShowTime";
+                        showtimeparam.SqlDbType = System.Data.SqlDbType.Time;
+                        showtimeparam.Direction = System.Data.ParameterDirection.Input;
+                        showtimeparam.Value = showtime;
 
-                    SqlParameter location = new SqlParameter();
-                    location.ParameterName = "@Location";
-                    location.SqlDbType = System.Data.SqlDbType.NVarChar;
-                    location.Direction = System.Data.ParameterDirection.Input;
-                    location.Value = theaterLocation[k];
+                        SqlParameter location = new SqlParameter();
+                        location.ParameterName = "@Location";
+                        location.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        location.Direction = System.Data.ParameterDirection.Input;
+                        location.Value = theaterLocation[k];
 
-                    cmd.Parameters.Add(theatername);
-                    cmd.Parameters.Add(moviename);
-                    cmd.Parameters.Add(roomnum);
-                    cmd.Parameters.Add(showtimeparam);
-                    cmd.Parameters.Add(location);
+                        cmd.Parameters.Add(theatername);
+                        cmd.Parameters.Add(moviename);
+                        cmd.Parameters.Add(roomnum);
+                        cmd.Parameters.Add(showtimeparam);
+                        cmd.Parameters.Add(location);
 
-                    connection.Open();
-                    cmd.ExecuteNonQuery();
-                    connection.Close();
-                    usedShowtimes.Add(showtime);
-                    count++;
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                        connection.Close();
+                        usedShowtimes.Add(showtime);
+                        count++;
+                    }
                 }
             }
         }
