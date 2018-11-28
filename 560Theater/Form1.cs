@@ -22,13 +22,15 @@ namespace _560Theater
         private ShowHistoryDel showHistoryHandler;
         private ShowMoviesDel showMoviesHandler;
         private ShowTheatersDel showTheaterHandler;
+        private GenerateShowingDel generate;
         uxLoginScreen loginScreen;
-        public uxCustomerUI(ShowShowtimeDel showdel, ShowHistoryDel histdel, ShowMoviesDel moviesdel, ShowTheatersDel theatersDel, uxLoginScreen loginScreen)
+        public uxCustomerUI(ShowShowtimeDel showdel, ShowHistoryDel histdel, ShowMoviesDel moviesdel, ShowTheatersDel theatersDel, GenerateShowingDel s, uxLoginScreen loginScreen)
         {
             showShowtimeHandler = showdel;
             showHistoryHandler = histdel;
             showMoviesHandler = moviesdel;
             showTheaterHandler = theatersDel;
+            generate = s;
             this.loginScreen = loginScreen;
             InitializeComponent();
         }
@@ -101,6 +103,12 @@ namespace _560Theater
         {
             showTheaterHandler();
             showMoviesHandler();
+        }
+
+        private void uxGenerateShowings_Click(object sender, EventArgs e)
+        {
+            generate();
+            MessageBox.Show("Done");
         }
     }
 }

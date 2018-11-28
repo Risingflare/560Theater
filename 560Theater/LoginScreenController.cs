@@ -23,6 +23,7 @@ namespace _560Theater
     /// </summary>
     public delegate void ShowTheatersDel();
     /// <summary>
+    public delegate void GenerateShowingDel();
     /// This delegate handles the showing of the string to the list boxes.
     /// </summary>
     /// <param name="name"></param>
@@ -47,7 +48,7 @@ namespace _560Theater
             {
                 int customerID = 0;//We will get this from the authentication
                 Form1Controller controller = new Form1Controller(customerID);
-                uxCustomerUI customerUI = new uxCustomerUI(controller.Showtimes, controller.History, controller.GetMovieList, controller.GetTheaterList, login);
+                uxCustomerUI customerUI = new uxCustomerUI(controller.Showtimes, controller.History, controller.GetMovieList, controller.GetTheaterList, controller.GenerateShowtimes, login);
                 controller.UpdateMovies(customerUI.UpdateMovie);
                 controller.UpdateTheater(customerUI.UpdateTheater);
                 customerUI.Show();
