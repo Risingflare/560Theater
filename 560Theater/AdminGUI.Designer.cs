@@ -33,8 +33,8 @@
             this.movieList = new System.Windows.Forms.ListView();
             this.MovieIDCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.MovieNameCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.MovieGenreCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.MovieReleaseYearCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.MovieGenreCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.MovieIsActiveCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.MovieCreatedOnCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.MovieUpdatedOnCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -53,6 +53,7 @@
             this.ShowingMovieNameCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ShowingRoomCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ShowingShowTimeCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ShowingLocationCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ShowingIsActiveCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ShowingCreatedOnCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ShowingUpdatedOnCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -65,7 +66,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.ShowingLocationCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl.SuspendLayout();
             this.Movie.SuspendLayout();
             this.Theater.SuspendLayout();
@@ -105,7 +105,9 @@
             this.MovieIsActiveCol,
             this.MovieCreatedOnCol,
             this.MovieUpdatedOnCol});
+            this.movieList.FullRowSelect = true;
             this.movieList.Location = new System.Drawing.Point(0, 0);
+            this.movieList.MultiSelect = false;
             this.movieList.Name = "movieList";
             this.movieList.Size = new System.Drawing.Size(490, 300);
             this.movieList.TabIndex = 3;
@@ -121,16 +123,16 @@
             this.MovieNameCol.Text = "MovieName";
             this.MovieNameCol.Width = 77;
             // 
-            // MovieGenreCol
-            // 
-            this.MovieGenreCol.DisplayIndex = 2;
-            this.MovieGenreCol.Text = "Genre";
-            // 
             // MovieReleaseYearCol
             // 
             this.MovieReleaseYearCol.DisplayIndex = 3;
             this.MovieReleaseYearCol.Text = "ReleaseYear";
             this.MovieReleaseYearCol.Width = 74;
+            // 
+            // MovieGenreCol
+            // 
+            this.MovieGenreCol.DisplayIndex = 2;
+            this.MovieGenreCol.Text = "Genre";
             // 
             // MovieIsActiveCol
             // 
@@ -255,6 +257,11 @@
             this.ShowingShowTimeCol.Text = "ShowTime";
             this.ShowingShowTimeCol.Width = 62;
             // 
+            // ShowingLocationCol
+            // 
+            this.ShowingLocationCol.DisplayIndex = 8;
+            this.ShowingLocationCol.Text = "Location";
+            // 
             // ShowingIsActiveCol
             // 
             this.ShowingIsActiveCol.DisplayIndex = 5;
@@ -349,11 +356,6 @@
             this.label3.Size = new System.Drawing.Size(71, 13);
             this.label3.TabIndex = 9;
             this.label3.Text = "ReleaseYear:";
-            // 
-            // ShowingLocationCol
-            // 
-            this.ShowingLocationCol.DisplayIndex = 8;
-            this.ShowingLocationCol.Text = "Location";
             // 
             // AdminGUI
             // 

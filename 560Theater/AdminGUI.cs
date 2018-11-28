@@ -213,7 +213,29 @@ namespace _560Theater
 
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-            //TODO: this
+            if (tabControl.SelectedTab.Name.Equals("Movie"))
+            {
+                connection.Open();
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = "dbo.AdminDeleteMovie";
+                cmd.Connection = connection;
+
+                SqlParameter id = new SqlParameter();
+                id.ParameterName = "@id";
+                id.SqlDbType = System.Data.SqlDbType.Int;
+                id.Direction = System.Data.ParameterDirection.Input;
+                id.Value = int.Parse(movieList.SelectedItems[0].Name);
+                cmd.Parameters.Add(id);
+
+                cmd.ExecuteNonQuery();
+
+                connection.Close();
+                updateMovieTable();
+            }
+            else if (tabControl.SelectedTab.Name.Equals("Theater"))
+            {
+
+            }
         }
 
         private void indexChange(object sender, EventArgs e)
