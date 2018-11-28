@@ -224,12 +224,13 @@ namespace _560Theater
                 id.ParameterName = "@id";
                 id.SqlDbType = System.Data.SqlDbType.Int;
                 id.Direction = System.Data.ParameterDirection.Input;
-                id.Value = int.Parse(movieList.SelectedItems[0].Name);
+                id.Value = int.Parse(movieList.SelectedItems[0].Text);
                 cmd.Parameters.Add(id);
 
                 cmd.ExecuteNonQuery();
 
                 connection.Close();
+                cmd.Parameters.Clear();
                 updateMovieTable();
             }
             else if (tabControl.SelectedTab.Name.Equals("Theater"))
