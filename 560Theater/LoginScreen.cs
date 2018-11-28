@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace _560Theater
 {
@@ -51,17 +52,34 @@ namespace _560Theater
             }
 
 
-            string username = uxLoginTextbox.Text;
-            string password = uxPasswordBox.Text;
+
+            /*const string connection = "Data Source=mssql.cs.ksu.edu;Initial Catalog=cis560_team04;Integrated Security=True;Encrypt=False";
+            string username = uxLoginTextbox.Text.Trim();
+            string password = uxPasswordBox.Text.Trim();
+
+
+            using (var conn = new SqlConnection(connection))
+            {
+                var cmd = new SqlCommand();
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = "dbo.GetCustomers";
+                cmd.Connection = conn;
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while(dr.Read())
+                    {
+                        string n = dr["UserID"].ToString();
+
+                    }
+                }
+            }*/
+
             
 
 
-            
+
+
             //if userid in admin or customer
-
-
-
-
 
 
         }
