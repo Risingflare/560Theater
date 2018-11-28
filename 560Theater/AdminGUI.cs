@@ -14,7 +14,7 @@ namespace _560Theater
     public partial class AdminGUI : Form
     {
         uxLoginScreen loginScreen;
-        SqlConnection connectionconnection = new SqlConnection("Data Source=mssql.cs.ksu.edu;Initial Catalog=cis560_team04;Integrated Security=True;Encrypt=False");
+        SqlConnection connection = new SqlConnection("Data Source=mssql.cs.ksu.edu;Initial Catalog=cis560_team04;Integrated Security=True;Encrypt=False");
         SqlCommand cmd = new SqlCommand();
 
         public AdminGUI(uxLoginScreen login)
@@ -28,17 +28,69 @@ namespace _560Theater
 
         private void updateMovieTable()
         {
-            //TODO: this
+            connection.Open();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.GetMovies";
+            cmd.Connection = connection;
+            int row = 0;
+            while(cmd.ExecuteReader().Read())
+            {
+                ListViewItem item = new ListViewItem(cmd.ExecuteReader()["MovieID"].ToString(), row);
+                item.SubItems.Add(cmd.ExecuteReader()["MovieName"].ToString());
+                item.SubItems.Add(cmd.ExecuteReader()["ReleaseYear"].ToString());
+                item.SubItems.Add(cmd.ExecuteReader()["Genre"].ToString());
+                item.SubItems.Add(cmd.ExecuteReader()["IsActive"].ToString());
+                item.SubItems.Add(cmd.ExecuteReader()["CreatedOn"].ToString());
+                item.SubItems.Add(cmd.ExecuteReader()["UpdatedOn"].ToString());
+                movieList.Items.Add(item);
+                row++;
+            }
+            connection.Close();
         }
 
         private void updateTheaterTable()
         {
-            //TODO: this
+            connection.Open();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.GetTheaters";
+            cmd.Connection = connection;
+            int row = 0;
+            while (cmd.ExecuteReader().Read())
+            {
+                ListViewItem item = new ListViewItem(cmd.ExecuteReader()["TheaterID"].ToString(), row);
+                item.SubItems.Add(cmd.ExecuteReader()["TheaterName"].ToString());
+                item.SubItems.Add(cmd.ExecuteReader()["Location"].ToString());
+                item.SubItems.Add(cmd.ExecuteReader()["IsActive"].ToString());
+                item.SubItems.Add(cmd.ExecuteReader()["CreatedOn"].ToString());
+                item.SubItems.Add(cmd.ExecuteReader()["UpdatedOn"].ToString());
+                theaterList.Items.Add(item);
+                row++;
+            }
+            connection.Close();
         }
 
         private void updateShowingTable()
         {
-            //TODO: this
+            connection.Open();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.GetShowings";
+            cmd.Connection = connection;
+            int row = 0;
+            while (cmd.ExecuteReader().Read())
+            {
+                ListViewItem item = new ListViewItem(cmd.ExecuteReader()["ShowingID"].ToString(), row);
+                item.SubItems.Add(cmd.ExecuteReader()["TheaterName"].ToString());
+                item.SubItems.Add(cmd.ExecuteReader()["MovieName"].ToString());
+                item.SubItems.Add(cmd.ExecuteReader()["Room"].ToString());
+                item.SubItems.Add(cmd.ExecuteReader()["ShowTime"].ToString());
+                item.SubItems.Add(cmd.ExecuteReader()["Location"].ToString());
+                item.SubItems.Add(cmd.ExecuteReader()["IsActive"].ToString());
+                item.SubItems.Add(cmd.ExecuteReader()["CreatedOn"].ToString());
+                item.SubItems.Add(cmd.ExecuteReader()["UpdatedOn"].ToString());
+                theaterList.Items.Add(item);
+                row++;
+            }
+            connection.Close();
         }
 
         private void addBtn_Click(object sender, EventArgs e)
