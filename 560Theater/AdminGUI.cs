@@ -16,6 +16,7 @@ namespace _560Theater
         uxLoginScreen loginScreen;
         SqlConnection connection = new SqlConnection("Data Source=mssql.cs.ksu.edu;Initial Catalog=cis560_team04;Integrated Security=True;Encrypt=False");
         SqlCommand cmd = new SqlCommand();
+        SqlDataReader reader;
 
         public AdminGUI(uxLoginScreen login)
         {
@@ -30,17 +31,20 @@ namespace _560Theater
             cmd.CommandText = "dbo.GetMovies";
             cmd.Connection = connection;
             int row = 0;
-            while(cmd.ExecuteReader().Read())
+            using (reader = cmd.ExecuteReader())
             {
-                ListViewItem item = new ListViewItem(cmd.ExecuteReader()["MovieID"].ToString(), row);
-                item.SubItems.Add(cmd.ExecuteReader()["MovieName"].ToString());
-                item.SubItems.Add(cmd.ExecuteReader()["ReleaseYear"].ToString());
-                item.SubItems.Add(cmd.ExecuteReader()["Genre"].ToString());
-                item.SubItems.Add(cmd.ExecuteReader()["IsActive"].ToString());
-                item.SubItems.Add(cmd.ExecuteReader()["CreatedOn"].ToString());
-                item.SubItems.Add(cmd.ExecuteReader()["UpdatedOn"].ToString());
-                movieList.Items.Add(item);
-                row++;
+                while (reader.Read())
+                {
+                    ListViewItem item = new ListViewItem(reader["MovieID"].ToString(), row);
+                    item.SubItems.Add(reader["MovieName"].ToString());
+                    item.SubItems.Add(reader["ReleaseYear"].ToString());
+                    item.SubItems.Add(reader["Genre"].ToString());
+                    item.SubItems.Add(reader["IsActive"].ToString());
+                    item.SubItems.Add(reader["CreatedOn"].ToString());
+                    item.SubItems.Add(reader["UpdatedOn"].ToString());
+                    movieList.Items.Add(item);
+                    row++;
+                }
             }
             connection.Close();
         }
@@ -52,16 +56,20 @@ namespace _560Theater
             cmd.CommandText = "dbo.GetTheaters";
             cmd.Connection = connection;
             int row = 0;
-            while (cmd.ExecuteReader().Read())
+
+            using (reader = cmd.ExecuteReader())
             {
-                ListViewItem item = new ListViewItem(cmd.ExecuteReader()["TheaterID"].ToString(), row);
-                item.SubItems.Add(cmd.ExecuteReader()["TheaterName"].ToString());
-                item.SubItems.Add(cmd.ExecuteReader()["Location"].ToString());
-                item.SubItems.Add(cmd.ExecuteReader()["IsActive"].ToString());
-                item.SubItems.Add(cmd.ExecuteReader()["CreatedOn"].ToString());
-                item.SubItems.Add(cmd.ExecuteReader()["UpdatedOn"].ToString());
-                theaterList.Items.Add(item);
-                row++;
+                while (reader.Read())
+                {
+                    ListViewItem item = new ListViewItem(reader["TheaterID"].ToString(), row);
+                    item.SubItems.Add(reader["TheaterName"].ToString());
+                    item.SubItems.Add(reader["Location"].ToString());
+                    item.SubItems.Add(reader["IsActive"].ToString());
+                    item.SubItems.Add(reader["CreatedOn"].ToString());
+                    item.SubItems.Add(reader["UpdatedOn"].ToString());
+                    theaterList.Items.Add(item);
+                    row++;
+                }
             }
             connection.Close();
         }
@@ -73,19 +81,23 @@ namespace _560Theater
             cmd.CommandText = "dbo.GetShowings";
             cmd.Connection = connection;
             int row = 0;
-            while (cmd.ExecuteReader().Read())
+
+            using (reader = cmd.ExecuteReader())
             {
-                ListViewItem item = new ListViewItem(cmd.ExecuteReader()["ShowingID"].ToString(), row);
-                item.SubItems.Add(cmd.ExecuteReader()["TheaterName"].ToString());
-                item.SubItems.Add(cmd.ExecuteReader()["MovieName"].ToString());
-                item.SubItems.Add(cmd.ExecuteReader()["Room"].ToString());
-                item.SubItems.Add(cmd.ExecuteReader()["ShowTime"].ToString());
-                item.SubItems.Add(cmd.ExecuteReader()["Location"].ToString());
-                item.SubItems.Add(cmd.ExecuteReader()["IsActive"].ToString());
-                item.SubItems.Add(cmd.ExecuteReader()["CreatedOn"].ToString());
-                item.SubItems.Add(cmd.ExecuteReader()["UpdatedOn"].ToString());
-                theaterList.Items.Add(item);
-                row++;
+                while (reader.Read())
+                {
+                    ListViewItem item = new ListViewItem(reader["ShowingID"].ToString(), row);
+                    item.SubItems.Add(reader["TheaterName"].ToString());
+                    item.SubItems.Add(reader["MovieName"].ToString());
+                    item.SubItems.Add(reader["Room"].ToString());
+                    item.SubItems.Add(reader["ShowTime"].ToString());
+                    item.SubItems.Add(reader["Location"].ToString());
+                    item.SubItems.Add(reader["IsActive"].ToString());
+                    item.SubItems.Add(reader["CreatedOn"].ToString());
+                    item.SubItems.Add(reader["UpdatedOn"].ToString());
+                    theaterList.Items.Add(item);
+                    row++;
+                }
             }
             connection.Close();
         }
