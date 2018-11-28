@@ -21,6 +21,9 @@ namespace _560Theater
         public AdminGUI(uxLoginScreen login)
         {
             loginScreen = login;
+            updateMovieTable();
+            updateTheaterTable();
+            updateShowingTable();
             InitializeComponent();
         }
 
@@ -28,7 +31,7 @@ namespace _560Theater
         {
             connection.Open();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = "dbo.GetMovies";
+            cmd.CommandText = "dbo.AdminGetMovies";
             cmd.Connection = connection;
             int row = 0;
             using (reader = cmd.ExecuteReader())
@@ -53,7 +56,7 @@ namespace _560Theater
         {
             connection.Open();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = "dbo.GetTheaters";
+            cmd.CommandText = "dbo.AdminGetTheater";
             cmd.Connection = connection;
             int row = 0;
 
@@ -78,7 +81,7 @@ namespace _560Theater
         {
             connection.Open();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = "dbo.GetShowings";
+            cmd.CommandText = "dbo.AdminGetShowings";
             cmd.Connection = connection;
             int row = 0;
 
