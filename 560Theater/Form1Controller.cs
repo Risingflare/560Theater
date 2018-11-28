@@ -53,8 +53,12 @@ namespace _560Theater
                 while (reader.Read())
                 {
                     string name = reader["MovieName"].ToString();
-                    movienames.Add(name);
-                    moviename = moviename + name + "\n";
+                    bool b = (bool)reader["Active"];
+                    if (b)
+                    {
+                        movienames.Add(name);
+                        moviename = moviename + name + "\n";
+                    }
                 }
             }
             connection.Close();
@@ -84,9 +88,14 @@ namespace _560Theater
                 while (reader.Read())
                 {
                     string name = reader["TheaterName"].ToString();
-                    theaterLocation.Add(reader["Location"].ToString());
-                    theaternames.Add(name);
-                    theatername = theatername + name + "\n";
+                    string location = reader["Location"].ToString();
+                    bool b = (bool)reader["Active"];
+                    if(b)
+                    {
+                        theaterLocation.Add(location);
+                        theaternames.Add(name);
+                        theatername = theatername + name + "\n";
+                    }
                 }
             }
             connection.Close();
