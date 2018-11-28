@@ -148,9 +148,9 @@
             this.Controls.Add(this.uxEmailAddressTxt);
             this.Controls.Add(this.uxLastNameTxt);
             this.Controls.Add(this.uxFNameTxtbox);
-            this.Location = new System.Drawing.Point(0, -50);
             this.Name = "CreateAccount";
             this.Text = "CreateAccount";
+            this.Load += new System.EventHandler(this.CreateAccount_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

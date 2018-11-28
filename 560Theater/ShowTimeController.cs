@@ -7,11 +7,12 @@ using System.Data.SqlClient;
 
 namespace _560Theater
 {
-    class ShowTimeController
+    public class ShowTimeController
     {
         SqlConnection connection;
         SqlCommand cmd;
         SqlDataReader reader;
+
         public ShowTimeController(SqlConnection connection, SqlCommand cmd, SqlDataReader reader)
         {
             this.connection = connection;
