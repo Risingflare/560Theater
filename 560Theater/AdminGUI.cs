@@ -20,9 +20,6 @@ namespace _560Theater
         public AdminGUI(uxLoginScreen login)
         {
             loginScreen = login;
-            updateMovieTable();
-            updateTheaterTable();
-            updateShowingTable();
             InitializeComponent();
         }
 
