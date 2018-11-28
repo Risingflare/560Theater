@@ -92,5 +92,13 @@ namespace _560Theater
         {
             uxLoginTextbox.Clear();
         }
+
+        // CREATE ACCOUNT RE-DIRECT
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CreateAccount acctFrm = new CreateAccount();
+            LoginScreen.Hide();
+            acctFrm.ShowDialog();
+        }
     }
 }
