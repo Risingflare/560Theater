@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,8 @@ namespace _560Theater
     public partial class AdminGUI : Form
     {
         uxLoginScreen loginScreen;
+        SqlConnection connectionconnection = new SqlConnection("Data Source=mssql.cs.ksu.edu;Initial Catalog=cis560_team04;Integrated Security=True;Encrypt=False");
+        SqlCommand cmd = new SqlCommand();
 
         public AdminGUI(uxLoginScreen login)
         {
