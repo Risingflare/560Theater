@@ -135,25 +135,69 @@ namespace _560Theater
             int[] hours = new int[] { 14, 15, 16, 17, 18, 19, 20 };
             int[] minutes = new int[] { 0, 15, 30, 45 };
             Random rn = new Random();
-            int count = 0;
-            while(count >= 15)
+            for (int k = 0; k < theaternames.Count; k++)
             {
-                int i = rn.Next(0, 6);
-                int j = rn.Next(0, 3);
-                int hour = hours[i];
-                int minute = minutes[j];
-                if(minute == 0)
+                usedShowtimes.Clear();
+                int count = 0;
+                while (count < 5)
                 {
-                   showtime = hour.ToString() + "00" + "00";
+                    cmd.Parameters.Clear();
+                    int i = rn.Next(0, 6);
+                    int j = rn.Next(0, 3);
+                    int room = rn.Next(1, 9);
+                    int m = rn.Next(0, movienames.Count - 1);
+                    int hour = hours[i];
+                    int minute = minutes[j];
+                    if (minute == 0)
+                    {
+                        showtime = hour.ToString() + ":00" + ":00";
+                    }
+                    else
+                    {
+                        showtime = hour.ToString() + ":" + minute.ToString() + ":00";
+                    }
+                    if (usedShowtimes.Contains(showtime) == false)
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.CommandText = "dbo.CreateShowing";//This is getting the theater list procedure
+                        cmd.Connection = connection;
+                        SqlParameter theatername = new SqlParameter();
+                        theatername.ParameterName = "@TheaterName";
+                        theatername.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        theatername.Direction = System.Data.ParameterDirection.Input;
+                        theatername.Value = theaternames[k];
+                        SqlParameter moviename = new SqlParameter();
+                        moviename.ParameterName = "@MovieName";
+                        moviename.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        moviename.Direction = System.Data.ParameterDirection.Input;
+                        moviename.Value = movienames[m];
+                        SqlParameter roomnum = new SqlParameter();
+                        roomnum.ParameterName = "@Room";
+                        roomnum.SqlDbType = System.Data.SqlDbType.Int;
+                        roomnum.Direction = System.Data.ParameterDirection.Input;
+                        roomnum.Value = room;
+                        SqlParameter showtimeparam = new SqlParameter();
+                        showtimeparam.ParameterName = "@ShowTime";
+                        showtimeparam.SqlDbType = System.Data.SqlDbType.Time;
+                        showtimeparam.Direction = System.Data.ParameterDirection.Input;
+                        showtimeparam.Value = showtime;
+                        SqlParameter location = new SqlParameter();
+                        location.ParameterName = "@Location";
+                        location.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        location.Direction = System.Data.ParameterDirection.Input;
+                        location.Value = theaterLocation[k];
+                        cmd.Parameters.Add(theatername);
+                        cmd.Parameters.Add(moviename);
+                        cmd.Parameters.Add(roomnum);
+                        cmd.Parameters.Add(showtimeparam);
+                        cmd.Parameters.Add(location);
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                        connection.Close();
+                        usedShowtimes.Add(showtime);
+                        count++;
+                    }
                 }
-                else
-                {
-                    showtime = hour.ToString() + minute.ToString() + "00";
-                }
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.CommandText = "dbo.GetTheaters";//This is getting the theater list procedure
-                cmd.Connection = connection;
-                cmd.Parameters.AddWithValue("@TheaterName", , "@MovieName", , "@Room", , "@ShowTime", , "@Location");
             }
         }
     }
