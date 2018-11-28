@@ -134,7 +134,41 @@ namespace _560Theater
                         String movieName = textBox1.Text;
                         String genre = textBox2.Text;
                         int releaseYear = int.Parse(textBox3.Text);
-                        //TODO: this
+
+
+                        connection.Open();
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.CommandText = "dbo.AddMovie";
+                        cmd.Connection = connection;
+
+                        SqlParameter name = new SqlParameter();
+                        name.ParameterName = "@MovieName";
+                        name.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        name.Direction = System.Data.ParameterDirection.Input;
+                        name.Value = movieName;
+                        cmd.Parameters.Add(name);
+
+                        SqlParameter Mgenre = new SqlParameter();
+                        Mgenre.ParameterName = "@Genre";
+                        Mgenre.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        Mgenre.Direction = System.Data.ParameterDirection.Input;
+                        Mgenre.Value = genre;
+                        cmd.Parameters.Add(Mgenre);
+
+                        SqlParameter year = new SqlParameter();
+                        year.ParameterName = "@ReleaseYear";
+                        year.SqlDbType = System.Data.SqlDbType.Int;
+                        year.Direction = System.Data.ParameterDirection.Input;
+                        year.Value = releaseYear;
+                        cmd.Parameters.Add(year);
+
+                        cmd.ExecuteNonQuery();
+
+                        connection.Close();
+                        cmd.Parameters.Clear();
+                        updateMovieTable();
+
+
                         textBox1.Clear();
                         textBox2.Clear();
                         textBox3.Clear();
@@ -161,7 +195,34 @@ namespace _560Theater
                     {
                         String theaterName = textBox1.Text;
                         String Location = textBox2.Text;
-                        //TODO: this
+
+
+                        connection.Open();
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.CommandText = "dbo.AddTheater";
+                        cmd.Connection = connection;
+
+                        SqlParameter name = new SqlParameter();
+                        name.ParameterName = "@TheaterName";
+                        name.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        name.Direction = System.Data.ParameterDirection.Input;
+                        name.Value = theaterName;
+                        cmd.Parameters.Add(name);
+
+                        SqlParameter Tlocation = new SqlParameter();
+                        Tlocation.ParameterName = "@Location";
+                        Tlocation.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        Tlocation.Direction = System.Data.ParameterDirection.Input;
+                        Tlocation.Value = Location;
+                        cmd.Parameters.Add(Tlocation);
+
+                        cmd.ExecuteNonQuery();
+
+                        connection.Close();
+                        cmd.Parameters.Clear();
+                        updateTheaterTable();
+
+
                         textBox1.Clear();
                         textBox2.Clear();
                         textBox3.Clear();
@@ -180,13 +241,73 @@ namespace _560Theater
             {
                 try
                 {
-                    String movieName = textBox1.Text;
-                    String genre = textBox2.Text;
-                    int releaseYear = int.Parse(textBox3.Text);
-                    //TODO: this
-                    textBox1.Clear();
-                    textBox2.Clear();
-                    textBox3.Clear();
+                    if(textBox1.Text.Length == 0 && textBox2.Text.Length == 0 && textBox3.Text.Length == 0)
+                    {
+                        MessageBox.Show("Enter one or more parameters to be updated");
+                    }
+                    else
+                    {
+                        String movieName = textBox1.Text;
+                        String genre = textBox2.Text;
+                        int releaseYear;
+
+                        if (textBox3.Text.Length == 0)
+                        {
+                            releaseYear = int.Parse(movieList.SelectedItems[0].SubItems[2].Text);
+                        }
+                        else
+                        {
+                            releaseYear = int.Parse(textBox3.Text);
+                        }
+
+                        if (movieName.Length == 0)
+                        {
+                            movieName = movieList.SelectedItems[0].SubItems[0].Text;
+                        }
+
+                        if (genre.Length == 0)
+                        {
+                            genre = movieList.SelectedItems[0].SubItems[1].Text;
+                        }
+
+
+                        connection.Open();
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.CommandText = "dbo.AdminEditMovie";
+                        cmd.Connection = connection;
+
+                        SqlParameter name = new SqlParameter();
+                        name.ParameterName = "@MovieName";
+                        name.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        name.Direction = System.Data.ParameterDirection.Input;
+                        name.Value = movieName;
+                        cmd.Parameters.Add(name);
+
+                        SqlParameter Mgenre = new SqlParameter();
+                        Mgenre.ParameterName = "@Genre";
+                        Mgenre.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        Mgenre.Direction = System.Data.ParameterDirection.Input;
+                        Mgenre.Value = genre;
+                        cmd.Parameters.Add(Mgenre);
+
+                        SqlParameter year = new SqlParameter();
+                        year.ParameterName = "@ReleaseYear";
+                        year.SqlDbType = System.Data.SqlDbType.Int;
+                        year.Direction = System.Data.ParameterDirection.Input;
+                        year.Value = releaseYear;
+                        cmd.Parameters.Add(year);
+
+                        cmd.ExecuteNonQuery();
+
+                        connection.Close();
+                        cmd.Parameters.Clear();
+                        updateMovieTable();
+
+
+                        textBox1.Clear();
+                        textBox2.Clear();
+                        textBox3.Clear();
+                    }
                 }
                 catch (Exception e1)
                 {
@@ -197,12 +318,55 @@ namespace _560Theater
             {
                 try
                 {
-                    String theaterName = textBox1.Text;
-                    String Location = textBox2.Text;
-                    //TODO: this
-                    textBox1.Clear();
-                    textBox2.Clear();
-                    textBox3.Clear();
+                    if (textBox1.Text.Length == 0 && textBox2.Text.Length == 0)
+                    {
+                        MessageBox.Show("Enter one or more parameters to be updated");
+                    }
+                    else
+                    {
+                        String theaterName = textBox1.Text;
+                        String Location = textBox2.Text;
+
+                        if(theaterName.Length == 0)
+                        {
+                            theaterName = theaterList.SelectedItems[0].SubItems[0].Text;
+                        }
+
+                        if(Location.Length == 0)
+                        {
+                            Location = theaterList.SelectedItems[0].SubItems[1].Text;
+                        }
+
+                        connection.Open();
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.CommandText = "dbo.AdminEditTheater";
+                        cmd.Connection = connection;
+
+                        SqlParameter name = new SqlParameter();
+                        name.ParameterName = "@TheaterName";
+                        name.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        name.Direction = System.Data.ParameterDirection.Input;
+                        name.Value = theaterName;
+                        cmd.Parameters.Add(name);
+
+                        SqlParameter Tlocation = new SqlParameter();
+                        Tlocation.ParameterName = "@Location";
+                        Tlocation.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        Tlocation.Direction = System.Data.ParameterDirection.Input;
+                        Tlocation.Value = Location;
+                        cmd.Parameters.Add(Tlocation);
+
+                        cmd.ExecuteNonQuery();
+
+                        connection.Close();
+                        cmd.Parameters.Clear();
+                        updateTheaterTable();
+
+
+                        textBox1.Clear();
+                        textBox2.Clear();
+                        textBox3.Clear();
+                    }
                 }
                 catch (Exception e1)
                 {
@@ -235,7 +399,43 @@ namespace _560Theater
             }
             else if (tabControl.SelectedTab.Name.Equals("Theater"))
             {
+                connection.Open();
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = "dbo.AdminDeleteTheater";
+                cmd.Connection = connection;
 
+                SqlParameter id = new SqlParameter();
+                id.ParameterName = "@id";
+                id.SqlDbType = System.Data.SqlDbType.Int;
+                id.Direction = System.Data.ParameterDirection.Input;
+                id.Value = int.Parse(theaterList.SelectedItems[0].Text);
+                cmd.Parameters.Add(id);
+
+                cmd.ExecuteNonQuery();
+
+                connection.Close();
+                cmd.Parameters.Clear();
+                updateMovieTable();
+            }
+            else if(tabControl.SelectedTab.Name.Equals("Showing"))
+            {
+                connection.Open();
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = "dbo.AdminDeleteShowing";
+                cmd.Connection = connection;
+
+                SqlParameter id = new SqlParameter();
+                id.ParameterName = "@id";
+                id.SqlDbType = System.Data.SqlDbType.Int;
+                id.Direction = System.Data.ParameterDirection.Input;
+                id.Value = int.Parse(showingList.SelectedItems[0].Text);
+                cmd.Parameters.Add(id);
+
+                cmd.ExecuteNonQuery();
+
+                connection.Close();
+                cmd.Parameters.Clear();
+                updateMovieTable();
             }
         }
 
@@ -244,9 +444,7 @@ namespace _560Theater
             if(tabControl.SelectedTab.Name.Equals("Movie"))
             {
                 updateMovieTable();
-                addBtn.Enabled = true;
                 editBtn.Enabled = true;
-                deleteBtn.Enabled = true;
                 label1.Text = "Movie Name:";
                 label1.Show();
                 label2.Text = "Genre:";
@@ -255,16 +453,12 @@ namespace _560Theater
                 textBox1.Clear();
                 textBox2.Clear();
                 textBox3.Clear();
-                textBox1.Show();
-                textBox2.Show();
                 textBox3.Show();
             }
             else if(tabControl.SelectedTab.Name.Equals("Theater"))
             {
                 updateTheaterTable();
-                addBtn.Enabled = true;
                 editBtn.Enabled = true;
-                deleteBtn.Enabled = true;
                 label1.Text = "Theater Name:";
                 label1.Show();
                 label2.Text = "Location";
@@ -273,22 +467,16 @@ namespace _560Theater
                 textBox1.Clear();
                 textBox2.Clear();
                 textBox3.Clear();
-                textBox1.Show();
-                textBox2.Show();
                 textBox3.Hide();
             }
             else if(tabControl.SelectedTab.Name.Equals("Showing"))
             {
                 updateShowingTable();
-                addBtn.Enabled = false;
                 editBtn.Enabled = false;
-                deleteBtn.Enabled = false;
                 label1.Hide();
                 label2.Hide();
                 label3.Hide();
-                textBox1.Hide();
-                textBox2.Hide();
-                textBox3.Hide();
+                textBox3.Show();
             }
         }
 
