@@ -1,91 +1,83 @@
-﻿USE cis560_team04;
-DROP TABLE IF EXISTS dbo.[Admin]
-DROP TABLE IF EXISTS dbo.Customer
-DROP TABLE IF EXISTS dbo.[User]
-DROP TABLE IF EXISTS dbo.Ticket
-DROP TABLE IF EXISTS dbo.Showing
-DROP TABLE IF EXISTS dbo.Theater
-DROP TABLE IF EXISTS dbo.Movie
 
-CREATE TABLE dbo.[User] -- BOOLEAN FOR CUSTOMER/ADMIN
+
+CREATE TABLE cis560_team04."User"
 (
    UserID INT NOT NULL IDENTITY(1, 1) PRIMARY KEY ,
    FirstName NVARCHAR(32) NOT NULL,
-   LastName NVARCHAR(32) NOT NULL,
-   EmailAddress NVARCHAR(128) NOT NULL,
-   [Password] NVARCHAR(128) NOT NULL,
-   isActive BIT NOT NULL DEFAULT(0), -- THIS
+   LastName NVARCHAR(32) NOT NULL ,
+   EmailAdress NVARCHAR(128) NOT NULL ,
    CreatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
    UpdatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
-   UNIQUE(FirstName, LastName, EmailAddress)
+   "Password" NVARCHAR(128) NOT NULL,
+   UNIQUE(FirstName, LastName, EmailAdress)
 );
 
-CREATE TABLE dbo.[Admin]
+CREATE TABLE cis560_team04."Admin"
 (
    AdminID INT NOT NULL IDENTITY(1, 1) PRIMARY KEY ,
-   UserID INT NOT NULL FOREIGN KEY REFERENCES [User](UserID),
+   UserID INT NOT NULL FOREIGN KEY,
    CreatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
    UpdatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET())
 );
 
-CREATE TABLE dbo.Customer
+CREATE TABLE cis560_team04.Customer
 (
    CustomerID INT NOT NULL IDENTITY(1, 1) PRIMARY KEY ,
-   UserID INT NOT NULL FOREIGN KEY REFERENCES [User](UserID),
+   UserID INT NOT NULL FOREIGN KEY,
    CreatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
    UpdatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET())
 );
 
-CREATE TABLE dbo.Theater
+CREATE TABLE cis560_team04.Ticket
+(
+   CustomerID INT NOT NULL FOREIGN KEY ,
+   ShowingID INT NOT NULL FOREIGN KEY ,
+   IsActive BIT NOT NULL,
+   CreatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
+   UpdatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
+   PRIMARY KEY(CustomerID, ShowingID)
+);
+
+CREATE TABLE cis560_team04.Theater
 (
 	TheaterID INT NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	TheaterName NVARCHAR(100) NOT NULL,
-	[Location] NVARCHAR(100) NOT NULL,
+	TheaterName NVARCHAR(32) NOT NULL,
+	[Location] NVARCHAR(32) NOT NULL,
 	IsActive BIT NOT NULL,
 	CreatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
 	UpdatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
 	UNIQUE(TheaterName, [Location])
 );
 
-CREATE TABLE dbo.Movie
+--Documentation says Release Year should be Unique, but that doesn't make sense?
+
+CREATE TABLE cis560_team04.Movie
 (
 	MovieID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	MovieName NVARCHAR(100) NOT NULL,
+	MovieName NVARCHAR(32) NOT NULL,
 	ReleaseYear INT NOT NULL,
-	Genre NVARCHAR(100) NOT NULL,
+	Genre NVARCHAR(32) NOT NULL,
 	IsActive BIT NOT NULL,
 	CreatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
 	UpdatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
 	UNIQUE(MovieName)
 );
 
-CREATE TABLE dbo.Showing
+CREATE TABLE cis560_team04.Showing
 (
 	ShowingID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	TheaterName NVARCHAR(100) NOT NULL ,
-	MovieName NVARCHAR(100) NOT NULL FOREIGN KEY REFERENCES dbo.Movie(MovieName),
+	TheaterName NVARCHAR(32) NOT NULL FOREIGN KEY REFERENCES Theater(TheaterName),
+	MovieName NVARCHAR(32) NOT NULL FOREIGN KEY REFERENCES Movie(MovieName),
 	Room INT NOT NULL,
-	ShowTime TIME NOT NULL, -- MAY BE APPROPRIATE TO USE DATETIME2(0) WHICH INCLUDES BOTH DATE AND TIME (for when we provide customers with their purchase history)
-	[Location] NVARCHAR(100) NOT NULL,
+	ShowTime TIME NOT NULL,
 	IsActive BIT NOT NULL,
 	CreatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
 	UpdatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
-	UNIQUE(Room, ShowTime),
-	FOREIGN KEY(TheaterName, [Location]) REFERENCES dbo.Theater(TheaterName,[Location])
+	UNIQUE(Room, ShowTime)
 );
 
-CREATE TABLE dbo.Ticket
-(
-   CustomerID INT NOT NULL FOREIGN KEY REFERENCES [Customer](CustomerID),
-   ShowingID INT NOT NULL FOREIGN KEY REFERENCES [Showing](ShowingID),
-   IsActive BIT NOT NULL,
-   CreatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
-   UpdatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
-   PRIMARY KEY(CustomerID, ShowingID)
-);
-GO
- 
-INSERT dbo.Movie(MovieName, ReleaseYear, Genre, IsActive)
+						  
+INSERT cis560_team04.Movie(MovieName, ReleaseYear, Genre, IsActive)
 VALUES
 	('Pulp Fiction',1994,'Crime, Drama', 1 ),
 	('The Lord of the Rings: The Return of the King',2003,'Action, Adventure, Drama',1 ),
@@ -108,19 +100,12 @@ VALUES
 	('Bohemian Rhapsody',2018,'Biography, Drama, Music',1),
 	('Venom',2018,'Action, Sci-Fi',1);	
 						  
-INSERT dbo.Theater(TheaterName, [Location],IsActive)
+INSERT cis560_team04.Theater(TheaterName, [Location],IsActive)
 VALUES
 	('AMC Dine-IN Manhattan 13','Manthattan',1),
 	('Regal Hollywood Stadium 14 - Topeka','Topeka',1),
 	('B & B Shawnee 18','Shawnee',1),
 	('Cinetopia Overland Park 18','Overland Park',1),
-	('AMC Town Center 20','Leadwood',1);
-
-/*INSERT dbo.[User](FirstName, LastName, EmailAddress, Password)
-VALUES
-	(N'JOHN', N'DOE', N'johndoe@yahoo.com', N'mypassword');
-	(),
-	(),
-	(),
-	(),
-	();*/
+	('AMC Town Center 20','Leadwood',1);						  
+						  
+						  

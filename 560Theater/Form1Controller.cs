@@ -153,7 +153,7 @@ namespace _560Theater
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.CommandText = "dbo.GetTheaters";//This is getting the theater list procedure
                 cmd.Connection = connection;
-                cmd.Parameters.AddWithValue("@TheaterName", , "@MovieName", , "@Room", , "@ShowTime", , "@Location");
+                //cmd.Parameters.AddWithValue("@TheaterName", , "@MovieName", , "@Room", , "@ShowTime", , "@Location");
             }
         }
     }
