@@ -1,4 +1,4 @@
-﻿use cis560_team04;
+﻿USE cis560_team04;
 DROP TABLE IF EXISTS dbo.[Admin]
 DROP TABLE IF EXISTS dbo.Customer
 DROP TABLE IF EXISTS dbo.[User]
@@ -7,17 +7,17 @@ DROP TABLE IF EXISTS dbo.Showing
 DROP TABLE IF EXISTS dbo.Theater
 DROP TABLE IF EXISTS dbo.Movie
 
-
-CREATE TABLE dbo.[User]
+CREATE TABLE dbo.[User] -- BOOLEAN FOR CUSTOMER/ADMIN
 (
    UserID INT NOT NULL IDENTITY(1, 1) PRIMARY KEY ,
    FirstName NVARCHAR(32) NOT NULL,
-   LastName NVARCHAR(32) NOT NULL ,
-   EmailAdress NVARCHAR(128) NOT NULL ,
+   LastName NVARCHAR(32) NOT NULL,
+   EmailAddress NVARCHAR(128) NOT NULL,
+   [Password] NVARCHAR(128) NOT NULL,
+   isActive BIT NOT NULL DEFAULT(0), -- THIS
    CreatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
    UpdatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
-   "Password" NVARCHAR(128) NOT NULL,
-   UNIQUE(FirstName, LastName, EmailAdress)
+   UNIQUE(FirstName, LastName, EmailAddress)
 );
 
 CREATE TABLE dbo.[Admin]
@@ -47,8 +47,6 @@ CREATE TABLE dbo.Theater
 	UNIQUE(TheaterName, [Location])
 );
 
---Documentation says Release Year should be Unique, but that doesn't make sense?
-
 CREATE TABLE dbo.Movie
 (
 	MovieID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
@@ -67,7 +65,7 @@ CREATE TABLE dbo.Showing
 	TheaterName NVARCHAR(100) NOT NULL ,
 	MovieName NVARCHAR(100) NOT NULL FOREIGN KEY REFERENCES dbo.Movie(MovieName),
 	Room INT NOT NULL,
-	ShowTime TIME NOT NULL,
+	ShowTime TIME NOT NULL, -- MAY BE APPROPRIATE TO USE DATETIME2(0) WHICH INCLUDES BOTH DATE AND TIME (for when we provide customers with their purchase history)
 	[Location] NVARCHAR(100) NOT NULL,
 	IsActive BIT NOT NULL,
 	CreatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
@@ -86,7 +84,7 @@ CREATE TABLE dbo.Ticket
    PRIMARY KEY(CustomerID, ShowingID)
 );
 GO
-						  
+ 
 INSERT dbo.Movie(MovieName, ReleaseYear, Genre, IsActive)
 VALUES
 	('Pulp Fiction',1994,'Crime, Drama', 1 ),
@@ -117,3 +115,12 @@ VALUES
 	('B & B Shawnee 18','Shawnee',1),
 	('Cinetopia Overland Park 18','Overland Park',1),
 	('AMC Town Center 20','Leadwood',1);
+
+/*INSERT dbo.[User](FirstName, LastName, EmailAddress, Password)
+VALUES
+	(N'JOHN', N'DOE', N'johndoe@yahoo.com', N'mypassword');
+	(),
+	(),
+	(),
+	(),
+	();*/
