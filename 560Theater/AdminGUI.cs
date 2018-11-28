@@ -29,6 +29,7 @@ namespace _560Theater
 
         private void updateMovieTable()
         {
+            movieList.Items.Clear();
             connection.Open();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "dbo.AdminGetMovies";
@@ -49,11 +50,13 @@ namespace _560Theater
                     row++;
                 }
             }
+            movieList.Update();
             connection.Close();
         }
 
         private void updateTheaterTable()
         {
+            theaterList.Items.Clear();
             connection.Open();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "dbo.AdminGetTheater";
@@ -74,14 +77,16 @@ namespace _560Theater
                     row++;
                 }
             }
+            theaterList.Update();
             connection.Close();
         }
 
         private void updateShowingTable()
         {
+            showingList.Items.Clear();
             connection.Open();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = "dbo.AdminGetShowings";
+            cmd.CommandText = "dbo.AdminGetShowing";
             cmd.Connection = connection;
             int row = 0;
 
@@ -98,10 +103,11 @@ namespace _560Theater
                     item.SubItems.Add(reader["IsActive"].ToString());
                     item.SubItems.Add(reader["CreatedOn"].ToString());
                     item.SubItems.Add(reader["UpdatedOn"].ToString());
-                    theaterList.Items.Add(item);
+                    showingList.Items.Add(item);
                     row++;
                 }
             }
+            showingList.Update();
             connection.Close();
         }
 
