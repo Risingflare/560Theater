@@ -73,7 +73,7 @@
             // 
             this.uxCreateAcctLabel.AutoSize = true;
             this.uxCreateAcctLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxCreateAcctLabel.Location = new System.Drawing.Point(67, 45);
+            this.uxCreateAcctLabel.Location = new System.Drawing.Point(133, 57);
             this.uxCreateAcctLabel.Name = "uxCreateAcctLabel";
             this.uxCreateAcctLabel.Size = new System.Drawing.Size(192, 25);
             this.uxCreateAcctLabel.TabIndex = 4;
@@ -137,7 +137,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(389, 367);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.uxPasswordLabel);
             this.Controls.Add(this.uxLNameLabel);
@@ -148,6 +148,7 @@
             this.Controls.Add(this.uxEmailAddressTxt);
             this.Controls.Add(this.uxLastNameTxt);
             this.Controls.Add(this.uxFNameTxtbox);
+            this.Location = new System.Drawing.Point(0, -50);
             this.Name = "CreateAccount";
             this.Text = "CreateAccount";
             this.ResumeLayout(false);
