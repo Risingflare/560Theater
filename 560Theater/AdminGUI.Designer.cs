@@ -88,10 +88,10 @@
             // Movie
             // 
             this.Movie.Controls.Add(this.movieList);
-            this.Movie.Location = new System.Drawing.Point(4, 22);
+            this.Movie.Location = new System.Drawing.Point(8, 27);
             this.Movie.Name = "Movie";
             this.Movie.Padding = new System.Windows.Forms.Padding(3);
-            this.Movie.Size = new System.Drawing.Size(490, 300);
+            this.Movie.Size = new System.Drawing.Size(482, 291);
             this.Movie.TabIndex = 0;
             this.Movie.Text = "Movie";
             this.Movie.UseVisualStyleBackColor = true;
@@ -152,10 +152,10 @@
             // Theater
             // 
             this.Theater.Controls.Add(this.theaterList);
-            this.Theater.Location = new System.Drawing.Point(4, 22);
+            this.Theater.Location = new System.Drawing.Point(8, 27);
             this.Theater.Name = "Theater";
             this.Theater.Padding = new System.Windows.Forms.Padding(3);
-            this.Theater.Size = new System.Drawing.Size(490, 300);
+            this.Theater.Size = new System.Drawing.Size(482, 291);
             this.Theater.TabIndex = 1;
             this.Theater.Text = "Theater";
             this.Theater.UseVisualStyleBackColor = true;
@@ -206,10 +206,10 @@
             // Showing
             // 
             this.Showing.Controls.Add(this.showingList);
-            this.Showing.Location = new System.Drawing.Point(4, 22);
+            this.Showing.Location = new System.Drawing.Point(8, 27);
             this.Showing.Name = "Showing";
             this.Showing.Padding = new System.Windows.Forms.Padding(3);
-            this.Showing.Size = new System.Drawing.Size(490, 300);
+            this.Showing.Size = new System.Drawing.Size(482, 291);
             this.Showing.TabIndex = 2;
             this.Showing.Text = "Showing";
             this.Showing.UseVisualStyleBackColor = true;
@@ -306,7 +306,7 @@
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(108, 23);
             this.deleteBtn.TabIndex = 3;
-            this.deleteBtn.Text = "Delete";
+            this.deleteBtn.Text = "Deactivate";
             this.deleteBtn.UseVisualStyleBackColor = true;
             this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
