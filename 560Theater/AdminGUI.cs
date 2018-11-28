@@ -21,10 +21,10 @@ namespace _560Theater
         public AdminGUI(uxLoginScreen login)
         {
             loginScreen = login;
+            InitializeComponent();
             updateMovieTable();
             updateTheaterTable();
             updateShowingTable();
-            InitializeComponent();
         }
 
         private void updateMovieTable()
