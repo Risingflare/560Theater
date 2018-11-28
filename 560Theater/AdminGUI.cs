@@ -247,27 +247,26 @@ namespace _560Theater
                     }
                     else
                     {
-                        String movieName = textBox1.Text;
-                        String genre = textBox2.Text;
+                        String movieName = textBox1.Text.Trim();
+                        String genre = textBox2.Text.Trim();
                         int releaseYear;
-
-                        if (textBox3.Text.Length == 0)
+                        if (textBox3.Text.Trim() == "")
                         {
-                            releaseYear = int.Parse(movieList.SelectedItems[0].SubItems[2].Text);
+                            int.TryParse(movieList.SelectedItems[0].SubItems[2].Text, out releaseYear);
                         }
                         else
                         {
-                            releaseYear = int.Parse(textBox3.Text);
+                            int.TryParse(textBox3.Text, out releaseYear);
                         }
 
                         if (movieName.Length == 0)
                         {
-                            movieName = movieList.SelectedItems[0].SubItems[0].Text;
+                            movieName = movieList.SelectedItems[0].SubItems[1].Text;
                         }
 
                         if (genre.Length == 0)
                         {
-                            genre = movieList.SelectedItems[0].SubItems[1].Text;
+                            genre = movieList.SelectedItems[0].SubItems[3].Text;
                         }
 
 
