@@ -26,6 +26,7 @@ namespace _560Theater
             loginHandler = login;
             InitializeComponent();
         }
+
         /// <summary>
         /// This property lets me transfer this form to my Customer view form.
         /// That way I can hide this will I'm in the customer screen. When I close the customer screen
@@ -96,7 +97,7 @@ namespace _560Theater
         // CREATE ACCOUNT RE-DIRECT
         private void button1_Click(object sender, EventArgs e)
         {
-            CreateAccount acctFrm = new CreateAccount();
+            CreateAccount acctFrm = new CreateAccount(LoginScreen);
             LoginScreen.Hide();
             acctFrm.ShowDialog();
         }

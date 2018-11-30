@@ -150,6 +150,7 @@
             this.Controls.Add(this.uxFNameTxtbox);
             this.Name = "CreateAccount";
             this.Text = "CreateAccount";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CreateAccount_FormClosing);
             this.Load += new System.EventHandler(this.CreateAccount_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

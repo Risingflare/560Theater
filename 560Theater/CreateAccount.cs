@@ -13,15 +13,24 @@ namespace _560Theater
 {
     public partial class CreateAccount : Form
     {
-        // Will be used to enforce originality and write out
+
         const string connStr = "Data Source=mssql.cs.ksu.edu;Initial Catalog=cis560_team04;Integrated Security=True;Encrypt=False";
         SqlConnection con = new SqlConnection(connStr);
-        SqlDataReader _reader;
-        SqlDataAdapter _update;
-
-        public CreateAccount()
+        uxLoginScreen log;
+        public CreateAccount(uxLoginScreen log)
         {
+            this.log = log;
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Shows the login screen when this form is closed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void uxCustomerUI_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            
         }
 
         // CREATE ACCOUNT BUTTON
@@ -29,15 +38,12 @@ namespace _560Theater
         {
             if (String.IsNullOrEmpty(uxFNameTxtbox.Text) || String.IsNullOrEmpty(uxLastNameTxt.Text) || String.IsNullOrEmpty(uxEmailAddressTxt.Text) || String.IsNullOrEmpty(uxPasswordTxt.Text))
             {
-                uxPasswordTxt.Clear();
                 MessageBox.Show("Missing Fields Required");
             }
-            // will also (1) test validity of email address and (2) write out to database
+            // (1) test validity (2) write out to database
             else
             {
-                //ShowTimeGUI showings = new ShowTimeGUI();
-                //this.Hide();
-                //showings.ShowDialog();
+
             }
         }
 
@@ -46,9 +52,14 @@ namespace _560Theater
 
         }
 
-        // private boolean isValid(string userEmail)
+        private void CreateAccount_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            log.Show();
+        }
 
-        // private boolean writeOutAcct(string first, string last, string email, string psw)
+        // private boolean isValidEmail(string userEmail)
+
+        // private boolean writeOutAccount(string first, string last, string email, string psw)
 
     }
 }

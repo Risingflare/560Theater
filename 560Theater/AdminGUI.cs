@@ -29,8 +29,7 @@ namespace _560Theater
             locationL = new List<string>();
             updateMovieTable();
             updateTheaterTable();
-            updateShowingTable();
-            
+            updateShowingTable(); 
         }
 
         private void updateMovieTable()
