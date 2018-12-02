@@ -97,9 +97,9 @@ namespace _560Theater
         // CREATE ACCOUNT RE-DIRECT
         private void button1_Click(object sender, EventArgs e)
         {
-            CreateAccount acctFrm = new CreateAccount(LoginScreen);
+            CreateAccount acctFrm = new CreateAccount(loginHandler, LoginScreen);
             LoginScreen.Hide();
-            acctFrm.ShowDialog();
+            acctFrm.Show();
         }
     }
 }
