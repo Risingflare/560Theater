@@ -12,27 +12,20 @@ using System.Data.SqlClient;
 namespace _560Theater
 {
     /// <summary>
-    /// Creates new account and writes out to database
-    ///     --[WRITING OUT INCOMPLETE]--
+    /// Creates new user account
     /// </summary>
     public partial class CreateAccount : Form
     {
 
-        private const string _connStr = "Data Source=mssql.cs.ksu.edu;Initial Catalog=cis560_team04;Integrated Security=True;Encrypt=False";
-        SqlConnection _con = new SqlConnection(_connStr);
-        SqlCommand _cmd = new SqlCommand();
-        SqlDataReader _reader;
-        
+        public const string _connStr = "Data Source=mssql.cs.ksu.edu;Initial Catalog=cis560_team04;Integrated Security=True;Encrypt=False";
+        private SqlConnection _con = new SqlConnection(_connStr);
+        private SqlCommand _cmd = new SqlCommand();
+        private SqlDataReader _reader;
         private LoginDel _logdel;
-        uxLoginScreen _logscreen;
-
-        private string _fname = ""; // need fields?
-        private string _lname = "";
-        private string _email = "";
-        private string _psw = "";
+        private uxLoginScreen _logscreen;
 
         /// <summary>
-        /// Receives parameters from LoginScreen
+        /// Constructor
         /// </summary>
         /// <param name="logdel"></param>
         /// <param name="log"></param>
@@ -41,37 +34,41 @@ namespace _560Theater
             _logdel = log;
             _logscreen = screen;
             InitializeComponent();
-            // updateUserList() ?
         }
 
         /// <summary>
         /// Create Account Button
-        /// Enforces (1) originality of email, (2) fields are full
+        /// Ensures originality and nonempty textboxes
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void uxCreateAccountButton_Click(object sender, EventArgs e)
         {
-            _fname = uxFNameTxtbox.Text;
-            _lname = uxLastNameTxt.Text;
-            _email = uxEmailAddressTxt.Text;
-            _psw = uxPasswordTxt.Text;
+            string _fname = uxFNameTxtbox.Text;
+            string _lname = uxLastNameTxt.Text;
+            string _email = uxEmailAddressTxt.Text;
+            string _psw = uxPasswordTxt.Text;
             if (String.IsNullOrWhiteSpace(_fname) || String.IsNullOrWhiteSpace(_lname) || String.IsNullOrWhiteSpace(_email) || String.IsNullOrWhiteSpace(_psw))
             {
                 MessageBox.Show("Missing Fields Required");
             }
             else if (!isValidEmail(_email))
             {
-                MessageBox.Show(_email + " is associated with existing account.");
+                MessageBox.Show("Error: " + _email + " is associated with existing account.");
             }
             else
             {
-                writeOutAccount();
-                this.Hide();
+                writeOutAccount(_fname, _lname, _email, _psw);
                 _logdel(2, _logscreen);
+                this.Hide();
             }
         }
 
+        /// <summary>
+        /// Tests originality of email
+        /// </summary>
+        /// <param name="userEmail"></param>
+        /// <returns></returns>
         private bool isValidEmail(string userEmail)
         {
              _cmd.Parameters.Clear();
@@ -84,34 +81,43 @@ namespace _560Theater
                  while (_reader.Read())
                  {
                     string email = _reader["Email"].ToString();
-                    if (userEmail == email) return false;
+                    if (userEmail == email) { _con.Close(); return false; }
                  }
              }
              _con.Close();
             return true;
         }
 
-        private void writeOutAccount()
+        /// <summary>
+        /// Adds Account to [dbo].[Users] AND [dbo].[Customers]
+        /// </summary>
+        /// <param name="f"></param>
+        /// <param name="l"></param>
+        /// <param name="e"></param>
+        /// <param name="p"></param>
+        private void writeOutAccount(string f, string l, string e, string p)
         {
-            // passes the _fields into the database as attributes to an object (row)
             _cmd.Parameters.Clear();
             _con.Open();
             _cmd.CommandType = System.Data.CommandType.StoredProcedure;
             _cmd.CommandText = "dbo.AddAccount";
             _cmd.Connection = _con;
-            SqlParameter f = convertToSqlParam(_fname, "@FirstName");
-            _cmd.Parameters.Add(f);
-            SqlParameter l = convertToSqlParam(_lname, "@LastName");
-            _cmd.Parameters.Add(l);
-            SqlParameter e = convertToSqlParam(_email, "@Email");
-            _cmd.Parameters.Add(e);
-            SqlParameter p = convertToSqlParam(_psw, "@Password");
-            _cmd.Parameters.Add(p);
+
+            _cmd.Parameters.Add(convertToSqlParam(f, "@FirstName"));
+            _cmd.Parameters.Add(convertToSqlParam(l, "@LastName"));
+            _cmd.Parameters.Add(convertToSqlParam(e, "@Email"));
+            _cmd.Parameters.Add(convertToSqlParam(p, "@Password"));
 
             _cmd.ExecuteNonQuery();
             _con.Close();
         }
 
+        /// <summary>
+        /// Converts string to SQLvar
+        /// </summary>
+        /// <param name="str">string</param>
+        /// <param name="sqlVar">@SQLvar</param>
+        /// <returns></returns>
         private SqlParameter convertToSqlParam(string str, string sqlVar)
         {
             SqlParameter temp = new SqlParameter();
