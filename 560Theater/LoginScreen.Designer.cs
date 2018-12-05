@@ -33,7 +33,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.uxLoginTextbox = new System.Windows.Forms.TextBox();
             this.uxLogin = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.uxNewAccount = new System.Windows.Forms.Button();
             this.uxPasswordBox = new System.Windows.Forms.TextBox();
             this.uxUserLabel = new System.Windows.Forms.Label();
             this.uxPassLabel = new System.Windows.Forms.Label();
@@ -84,15 +84,15 @@
             this.uxLogin.UseVisualStyleBackColor = true;
             this.uxLogin.Click += new System.EventHandler(this.uxLogin_Click);
             // 
-            // button1
+            // uxNewAccount
             // 
-            this.button1.Location = new System.Drawing.Point(374, 249);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 35);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Create Account";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.uxNewAccount.Location = new System.Drawing.Point(374, 249);
+            this.uxNewAccount.Name = "uxNewAccount";
+            this.uxNewAccount.Size = new System.Drawing.Size(75, 35);
+            this.uxNewAccount.TabIndex = 5;
+            this.uxNewAccount.Text = "Create Account";
+            this.uxNewAccount.UseVisualStyleBackColor = true;
+            this.uxNewAccount.Click += new System.EventHandler(this.uxCreateAccount_Click);
             // 
             // uxPasswordBox
             // 
@@ -127,7 +127,7 @@
             this.Controls.Add(this.uxPassLabel);
             this.Controls.Add(this.uxUserLabel);
             this.Controls.Add(this.uxPasswordBox);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.uxNewAccount);
             this.Controls.Add(this.uxLogin);
             this.Controls.Add(this.uxLoginTextbox);
             this.Controls.Add(this.label3);
@@ -147,7 +147,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox uxLoginTextbox;
         private System.Windows.Forms.Button uxLogin;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button uxNewAccount;
         private System.Windows.Forms.TextBox uxPasswordBox;
         private System.Windows.Forms.Label uxUserLabel;
         private System.Windows.Forms.Label uxPassLabel;
