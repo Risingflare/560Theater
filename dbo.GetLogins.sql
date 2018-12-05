@@ -1,0 +1,12 @@
+USE cis560_team04;
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE OR ALTER PROCEDURE [dbo].[GetLogins]
+AS
+SELECT U.EmailAddress as Email
+	,U.[Password]
+FROM dbo.[User] U;
