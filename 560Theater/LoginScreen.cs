@@ -51,22 +51,6 @@ namespace _560Theater
                     if (this.Visible.Equals(true)) MessageBox.Show("Invalid email or password");
                 }
             }
-        /* -- Backup (original: 1 / 2 = admin/user)
-        private void uxLogin_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int number;
-                if (int.TryParse(uxLoginTextbox.Text, out number) == false) throw new Exception("Please enter a number in the box");
-                loginHandler(number, this.LoginScreen);
-                this.Hide();
-            }
-            catch (Exception excep)
-            {
-                MessageBox.Show(excep.Message);
-            }
-        } 
-        */
 
         /// <summary>
         /// Form Redirect -> Create Account
@@ -78,29 +62,6 @@ namespace _560Theater
             this.Hide();
         }
 
-        /*const string connection = "Data Source=mssql.cs.ksu.edu;Initial Catalog=cis560_team04;Integrated Security=True;Encrypt=False";
-        string username = uxLoginTextbox.Text.Trim();
-        string password = uxPasswordBox.Text.Trim();
-        
-        using (var conn = new SqlConnection(connection))
-        {
-            var cmd = new SqlCommand();
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = "dbo.GetCustomers";
-            cmd.Connection = conn;
-            using (SqlDataReader dr = cmd.ExecuteReader())
-            {
-                while(dr.Read())
-                {
-                    string n = dr["UserID"].ToString();
-
-                }
-            }
-        }*/
-        //if userid in admin or customer
-
-
-
         /// <summary>
         /// Clears the textboxes when the form is either hidden or shown.
         /// </summary>
@@ -111,5 +72,43 @@ namespace _560Theater
             uxEmailTextbox.Clear();
             uxPasswordBox.Clear();
         }
+
     }
 }
+
+/* -- BACKUP --
+private void uxLogin_Click(object sender, EventArgs e)
+{
+try
+{
+int number;
+if (int.TryParse(uxLoginTextbox.Text, out number) == false) throw new Exception("Please enter a number in the box");
+loginHandler(number, this.LoginScreen);
+this.Hide();
+}
+catch (Exception excep)
+{
+MessageBox.Show(excep.Message);
+}
+} 
+*/
+/*const string connection = "Data Source=mssql.cs.ksu.edu;Initial Catalog=cis560_team04;Integrated Security=True;Encrypt=False";
+string username = uxLoginTextbox.Text.Trim();
+string password = uxPasswordBox.Text.Trim();
+
+using (var conn = new SqlConnection(connection))
+{
+var cmd = new SqlCommand();
+cmd.CommandType = System.Data.CommandType.StoredProcedure;
+cmd.CommandText = "dbo.GetCustomers";
+cmd.Connection = conn;
+using (SqlDataReader dr = cmd.ExecuteReader())
+{
+while(dr.Read())
+{
+string n = dr["UserID"].ToString();
+
+}
+}
+}*/
+//if userid in admin or customer

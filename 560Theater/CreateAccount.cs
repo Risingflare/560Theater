@@ -133,32 +133,6 @@ namespace _560Theater
             _logscreen.Show();
         }
 
-        /// <summary>
-        /// THIS EVALUATES LOGINS SUCCESSFULLY BUT IT CAN BE MOVED TO LoginScreen.cs EVENTUALLY
-        /// </summary>
-        /// <param name="userEmail"></param>
-        /// <param name="userPsw"></param>
-        /// <returns></returns>
-        public bool tryLogin(string userEmail, string userPsw)
-        {
-            _cmd.Parameters.Clear();
-            _con.Open();
-            _cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            _cmd.CommandText = "dbo.GetLogins";
-            _cmd.Connection = _con;
-            using (_reader = _cmd.ExecuteReader())
-            {
-                while (_reader.Read())
-                {
-                    string email = _reader["Email"].ToString();
-                    string psw = _reader["Password"].ToString();
-                    if (userEmail == email && userPsw == psw) { _con.Close(); return true; }
-                }
-            }
-            _con.Close();
-            return false;
-        }
-
         private void CreateAccount_Load(object sender, EventArgs e)
         {
 
