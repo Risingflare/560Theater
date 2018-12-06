@@ -123,4 +123,17 @@ VALUES
 	(N'Jesse', N'Molenda', N'Jesse@ksu.edu', N'12345',1),
 	(N'Victor', N'Aguirre', N'Victor@ksu.edu', N'12345',1),
 	(N'Jake', N'Willson', N'Jake@ksu.edu', N'12345',1),
-	(N'Steven', N'Zwahl', N'Steven@ksu.edu', N'12345',1);
+	(N'Steven', N'Zwahl', N'Steven@ksu.edu', N'12345',1),
+	(N'Admin', N'Admin', N'a', N'a', 1), -- user login: a a
+	(N'Customer',N'Customer',N'c',N'c',1); -- customer login: c	c
+
+-- STATIC ADMINS (with one TEMP USER)
+INSERT dbo.[Admin](UserID)
+SELECT U.UserID
+FROM dbo.[User] U
+WHERE U.UserID < 8
+-- TEMP USER
+INSERT dbo.[Customer](UserID)
+SELECT U.UserID
+FROM dbo.[User] U
+WHERE U.UserID = 8;

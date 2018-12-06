@@ -59,7 +59,7 @@ namespace _560Theater
             else
             {
                 writeOutAccount(_fname, _lname, _email, _psw);
-                _logdel(2, _logscreen);
+                _logdel(true, _email, _psw, _logscreen);
                 this.Hide();
             }
         }

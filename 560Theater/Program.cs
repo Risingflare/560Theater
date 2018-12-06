@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace _560Theater
 {
-    public delegate void LoginDel(int number, uxLoginScreen login);
+    public delegate void LoginDel(bool isCustomer, string email, string psw, uxLoginScreen login);
     /// Runs the program
     /// </summary>
     static class Program

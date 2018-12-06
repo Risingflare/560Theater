@@ -38,6 +38,20 @@ namespace _560Theater
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+            private void uxLogin_Click(object sender, EventArgs e)
+            {
+                if (!uxCustomerRadioButton.Checked && !uxAdminRadioButton.Checked) MessageBox.Show("Please check the User or Admin button above");
+                else if (String.IsNullOrWhiteSpace(uxEmailTextbox.Text) || String.IsNullOrWhiteSpace(uxPasswordBox.Text)) MessageBox.Show("Please enter an email and password");
+                else
+                {
+                    bool isCustomer = uxCustomerRadioButton.Checked;
+                    string email = uxEmailTextbox.Text;
+                    string psw = uxPasswordBox.Text;
+                    loginHandler(isCustomer, email, psw, this);
+                    if (this.Visible.Equals(true)) MessageBox.Show("Invalid email or password");
+                }
+            }
+        /* -- Backup (original: 1 / 2 = admin/user)
         private void uxLogin_Click(object sender, EventArgs e)
         {
             try
@@ -51,7 +65,8 @@ namespace _560Theater
             {
                 MessageBox.Show(excep.Message);
             }
-        }
+        } 
+        */
 
         /// <summary>
         /// Form Redirect -> Create Account
@@ -93,7 +108,8 @@ namespace _560Theater
         /// <param name="e"></param>
         private void uxLoginTextbox_VisibleChanged(object sender, EventArgs e)
         {
-            uxLoginTextbox.Clear();
+            uxEmailTextbox.Clear();
+            uxPasswordBox.Clear();
         }
     }
 }
