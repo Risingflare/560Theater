@@ -12,7 +12,8 @@ using System.Data.SqlClient;
 namespace _560Theater
 {
     /// <summary>
-    /// Creates new user account
+    /// Creates new user account as long as a unique email (must not correspond to any email value in the [Customer] or [Admin] subtables of [User])
+    /// Displays a message box if user fails to assign values to all 4 textboxes
     /// </summary>
     public partial class CreateAccount : Form
     {
@@ -65,7 +66,8 @@ namespace _560Theater
         }
 
         /// <summary>
-        /// Tests originality of email
+        /// Evaluates originality of email
+        /// Questions each tuple in the [Users] table by testing them for equality with a given email parameter
         /// </summary>
         /// <param name="userEmail"></param>
         /// <returns></returns>
@@ -89,12 +91,13 @@ namespace _560Theater
         }
 
         /// <summary>
-        /// Adds Account to [dbo].[Users] AND [dbo].[Customers]
+        /// Adds Account to [dbo].[Users] and its [dbo].[Customers] subtable
+        /// Reports to database with Stored Procedure
         /// </summary>
-        /// <param name="f"></param>
-        /// <param name="l"></param>
-        /// <param name="e"></param>
-        /// <param name="p"></param>
+        /// <param name="f">First Name</param>
+        /// <param name="l">Last Name</param>
+        /// <param name="e">Email</param>
+        /// <param name="p">Password</param>
         private void writeOutAccount(string f, string l, string e, string p)
         {
             _cmd.Parameters.Clear();
@@ -128,6 +131,11 @@ namespace _560Theater
             return temp;
         }
 
+        /// <summary>
+        /// State transition
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxCustomerUI_FormClosed(object sender, FormClosedEventArgs e)
         {
             _logscreen.Show();

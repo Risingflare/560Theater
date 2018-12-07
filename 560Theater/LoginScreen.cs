@@ -33,8 +33,9 @@ namespace _560Theater
         /// I can reactivate this.
         /// </summary>
         public uxLoginScreen LoginScreen { get => this;}
+        
         /// <summary>
-        /// Depending on the credentials placed, we will open an admin form, customer form, or send an error back.
+        /// Depending on the authentication values provided, we will either modify the runtime state and visibility or show an error message.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -53,7 +54,7 @@ namespace _560Theater
             }
 
         /// <summary>
-        /// Form Redirect -> Create Account
+        /// Transitions run-time state and modifies visibility
         /// </summary>
         private void uxCreateAccount_Click(object sender, EventArgs e)
         {
@@ -63,7 +64,7 @@ namespace _560Theater
         }
 
         /// <summary>
-        /// Clears the textboxes when the form is either hidden or shown.
+        /// Clears all textboxs when visibility is changed
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -73,6 +74,11 @@ namespace _560Theater
             uxPasswordBox.Clear();
         }
 
+        /// <summary>
+        /// Admin login info in documentation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxHelpButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Refer to documentation for admin login\nCreate Account for customer login");
