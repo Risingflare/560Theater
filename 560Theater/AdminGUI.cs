@@ -20,6 +20,9 @@ namespace _560Theater
         List<string> movieL;
         List<string> theaterL;
         List<string> locationL;
+        List<string> movienames;
+        List<string> theaternames;
+        List<string> theaterLocation;
         public AdminGUI(uxLoginScreen login)
         {
             loginScreen = login;
@@ -27,6 +30,9 @@ namespace _560Theater
             movieL = new List<string>();
             theaterL = new List<string>();
             locationL = new List<string>();
+            movienames = new List<string>();
+            theaternames = new List<string>();
+            theaterLocation = new List<string>();
             updateMovieTable();
             updateTheaterTable();
             updateShowingTable(); 
@@ -48,6 +54,7 @@ namespace _560Theater
                 {
                     ListViewItem item = new ListViewItem(reader["MovieID"].ToString(), row);
                     string moviename = reader["MovieName"].ToString();
+                    movienames.Add(moviename);
                     item.SubItems.Add(moviename);
                     movieL.Add(moviename);
                     item.SubItems.Add(reader["ReleaseYear"].ToString());
@@ -80,9 +87,11 @@ namespace _560Theater
                 {
                     ListViewItem item = new ListViewItem(reader["TheaterID"].ToString());
                     string theatername = reader["TheaterName"].ToString();
+                    theaternames.Add(theatername);
                     item.SubItems.Add(theatername);
                     theaterL.Add(theatername);
                     string location = reader["Location"].ToString();
+                    theaterLocation.Add(location);
                     item.SubItems.Add(location);
                     locationL.Add(location);
                     item.SubItems.Add(reader["IsActive"].ToString());
@@ -184,7 +193,7 @@ namespace _560Theater
                         connection.Close();
                         cmd.Parameters.Clear();
                         updateMovieTable();
-                        //GenerateNewShowingsMovies(movieName);
+                        GenerateNewShowingsMovies(movieName);
 
                         textBox1.Clear();
                         textBox2.Clear();
@@ -622,7 +631,7 @@ namespace _560Theater
                 }
                 connection.Close();
                 int count = 0;
-                while (count < 5)
+                while (count < 1)
                 {
                     cmd.Parameters.Clear();
                     int i = rn.Next(0, 6);
@@ -762,6 +771,86 @@ namespace _560Theater
                     count++;
                 }
             }
+        }
+
+        private void uxGenerateShowings_Click(object sender, EventArgs e)
+        {
+            string showtime;
+            List<string> usedShowtimes = new List<string>();
+            int[] hours = new int[] { 14, 15, 16, 17, 18, 19, 20 };
+            int[] minutes = new int[] { 0, 15, 30, 45 };
+            Random rn = new Random();
+            for (int k = 0; k < theaternames.Count; k++)
+            {
+                usedShowtimes.Clear();
+                int count = 0;
+                while (count < 5)
+                {
+                    cmd.Parameters.Clear();
+                    int i = rn.Next(0, 6);
+                    int j = rn.Next(0, 3);
+                    int room = rn.Next(1, 9);
+                    int m = rn.Next(0, movienames.Count - 1);
+                    int hour = hours[i];
+                    int minute = minutes[j];
+                    if (minute == 0)
+                    {
+                        showtime = hour.ToString() + ":00" + ":00";
+                    }
+                    else
+                    {
+                        showtime = hour.ToString() + ":" + minute.ToString() + ":00";
+                    }
+                    if (usedShowtimes.Contains(showtime) == false)
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.CommandText = "dbo.CreateShowing";//This is getting the theater list procedure
+                        cmd.Connection = connection;
+
+                        SqlParameter theatername = new SqlParameter();
+                        theatername.ParameterName = "@TheaterName";
+                        theatername.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        theatername.Direction = System.Data.ParameterDirection.Input;
+                        theatername.Value = theaternames[k];
+
+                        SqlParameter moviename = new SqlParameter();
+                        moviename.ParameterName = "@MovieName";
+                        moviename.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        moviename.Direction = System.Data.ParameterDirection.Input;
+                        moviename.Value = movienames[m];
+
+                        SqlParameter roomnum = new SqlParameter();
+                        roomnum.ParameterName = "@Room";
+                        roomnum.SqlDbType = System.Data.SqlDbType.Int;
+                        roomnum.Direction = System.Data.ParameterDirection.Input;
+                        roomnum.Value = room;
+
+                        SqlParameter showtimeparam = new SqlParameter();
+                        showtimeparam.ParameterName = "@ShowTime";
+                        showtimeparam.SqlDbType = System.Data.SqlDbType.Time;
+                        showtimeparam.Direction = System.Data.ParameterDirection.Input;
+                        showtimeparam.Value = showtime;
+
+                        SqlParameter location = new SqlParameter();
+                        location.ParameterName = "@Location";
+                        location.SqlDbType = System.Data.SqlDbType.NVarChar;
+                        location.Direction = System.Data.ParameterDirection.Input;
+                        location.Value = theaterLocation[k];
+
+                        cmd.Parameters.Add(theatername);
+                        cmd.Parameters.Add(moviename);
+                        cmd.Parameters.Add(roomnum);
+                        cmd.Parameters.Add(showtimeparam);
+                        cmd.Parameters.Add(location);
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                        connection.Close();
+                        usedShowtimes.Add(showtime);
+                        count++;
+                    }
+                }
+            }
+            MessageBox.Show("New Showings are generated, please don't hit this button again as does not drop the showing table.");
         }
     }
 }

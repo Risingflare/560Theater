@@ -67,10 +67,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.activateBtn = new System.Windows.Forms.Button();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.uxGenerateShowings = new System.Windows.Forms.ToolStripLabel();
             this.tabControl.SuspendLayout();
             this.Movie.SuspendLayout();
             this.Theater.SuspendLayout();
             this.Showing.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -78,20 +81,20 @@
             this.tabControl.Controls.Add(this.Movie);
             this.tabControl.Controls.Add(this.Theater);
             this.tabControl.Controls.Add(this.Showing);
-            this.tabControl.Location = new System.Drawing.Point(12, 12);
+            this.tabControl.Location = new System.Drawing.Point(12, 30);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(498, 326);
+            this.tabControl.Size = new System.Drawing.Size(498, 308);
             this.tabControl.TabIndex = 0;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.indexChange);
             // 
             // Movie
             // 
             this.Movie.Controls.Add(this.movieList);
-            this.Movie.Location = new System.Drawing.Point(8, 27);
+            this.Movie.Location = new System.Drawing.Point(4, 22);
             this.Movie.Name = "Movie";
             this.Movie.Padding = new System.Windows.Forms.Padding(3);
-            this.Movie.Size = new System.Drawing.Size(482, 291);
+            this.Movie.Size = new System.Drawing.Size(490, 282);
             this.Movie.TabIndex = 0;
             this.Movie.Text = "Movie";
             this.Movie.UseVisualStyleBackColor = true;
@@ -107,10 +110,10 @@
             this.MovieCreatedOnCol,
             this.MovieUpdatedOnCol});
             this.movieList.FullRowSelect = true;
-            this.movieList.Location = new System.Drawing.Point(0, 0);
+            this.movieList.Location = new System.Drawing.Point(-3, 0);
             this.movieList.MultiSelect = false;
             this.movieList.Name = "movieList";
-            this.movieList.Size = new System.Drawing.Size(490, 300);
+            this.movieList.Size = new System.Drawing.Size(490, 286);
             this.movieList.TabIndex = 3;
             this.movieList.UseCompatibleStateImageBehavior = false;
             this.movieList.View = System.Windows.Forms.View.Details;
@@ -152,10 +155,10 @@
             // Theater
             // 
             this.Theater.Controls.Add(this.theaterList);
-            this.Theater.Location = new System.Drawing.Point(8, 27);
+            this.Theater.Location = new System.Drawing.Point(4, 22);
             this.Theater.Name = "Theater";
             this.Theater.Padding = new System.Windows.Forms.Padding(3);
-            this.Theater.Size = new System.Drawing.Size(482, 291);
+            this.Theater.Size = new System.Drawing.Size(490, 282);
             this.Theater.TabIndex = 1;
             this.Theater.Text = "Theater";
             this.Theater.UseVisualStyleBackColor = true;
@@ -206,10 +209,10 @@
             // Showing
             // 
             this.Showing.Controls.Add(this.showingList);
-            this.Showing.Location = new System.Drawing.Point(8, 27);
+            this.Showing.Location = new System.Drawing.Point(4, 22);
             this.Showing.Name = "Showing";
             this.Showing.Padding = new System.Windows.Forms.Padding(3);
-            this.Showing.Size = new System.Drawing.Size(482, 291);
+            this.Showing.Size = new System.Drawing.Size(490, 282);
             this.Showing.TabIndex = 2;
             this.Showing.Text = "Showing";
             this.Showing.UseVisualStyleBackColor = true;
@@ -282,7 +285,7 @@
             // 
             // addBtn
             // 
-            this.addBtn.Location = new System.Drawing.Point(12, 340);
+            this.addBtn.Location = new System.Drawing.Point(25, 363);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(108, 23);
             this.addBtn.TabIndex = 1;
@@ -292,7 +295,7 @@
             // 
             // editBtn
             // 
-            this.editBtn.Location = new System.Drawing.Point(126, 340);
+            this.editBtn.Location = new System.Drawing.Point(139, 363);
             this.editBtn.Name = "editBtn";
             this.editBtn.Size = new System.Drawing.Size(108, 23);
             this.editBtn.TabIndex = 2;
@@ -302,7 +305,7 @@
             // 
             // deleteBtn
             // 
-            this.deleteBtn.Location = new System.Drawing.Point(240, 340);
+            this.deleteBtn.Location = new System.Drawing.Point(253, 363);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(108, 23);
             this.deleteBtn.TabIndex = 3;
@@ -312,21 +315,21 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(104, 369);
+            this.textBox1.Location = new System.Drawing.Point(104, 404);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(406, 20);
             this.textBox1.TabIndex = 4;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(104, 395);
+            this.textBox2.Location = new System.Drawing.Point(104, 430);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(406, 20);
             this.textBox2.TabIndex = 5;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(104, 421);
+            this.textBox3.Location = new System.Drawing.Point(104, 456);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(406, 20);
             this.textBox3.TabIndex = 6;
@@ -334,7 +337,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 372);
+            this.label1.Location = new System.Drawing.Point(12, 407);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 7;
@@ -343,7 +346,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 398);
+            this.label2.Location = new System.Drawing.Point(12, 433);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 8;
@@ -352,7 +355,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 424);
+            this.label3.Location = new System.Drawing.Point(12, 459);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 13);
             this.label3.TabIndex = 9;
@@ -360,7 +363,7 @@
             // 
             // activateBtn
             // 
-            this.activateBtn.Location = new System.Drawing.Point(354, 340);
+            this.activateBtn.Location = new System.Drawing.Point(367, 363);
             this.activateBtn.Name = "activateBtn";
             this.activateBtn.Size = new System.Drawing.Size(108, 23);
             this.activateBtn.TabIndex = 10;
@@ -368,11 +371,29 @@
             this.activateBtn.UseVisualStyleBackColor = true;
             this.activateBtn.Click += new System.EventHandler(this.activateBtn_Click);
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.uxGenerateShowings});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(525, 25);
+            this.toolStrip1.TabIndex = 11;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // uxGenerateShowings
+            // 
+            this.uxGenerateShowings.Name = "uxGenerateShowings";
+            this.uxGenerateShowings.Size = new System.Drawing.Size(108, 22);
+            this.uxGenerateShowings.Text = "Generate Showings";
+            this.uxGenerateShowings.Click += new System.EventHandler(this.uxGenerateShowings_Click);
+            // 
             // AdminGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(522, 453);
+            this.ClientSize = new System.Drawing.Size(525, 493);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.activateBtn);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -391,6 +412,8 @@
             this.Movie.ResumeLayout(false);
             this.Theater.ResumeLayout(false);
             this.Showing.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -437,5 +460,7 @@
         private System.Windows.Forms.ColumnHeader ShowingUpdatedOnCol;
         private System.Windows.Forms.ColumnHeader ShowingLocationCol;
         private System.Windows.Forms.Button activateBtn;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripLabel uxGenerateShowings;
     }
 }

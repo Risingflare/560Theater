@@ -22,15 +22,13 @@ namespace _560Theater
         private ShowHistoryDel showHistoryHandler;
         private ShowMoviesDel showMoviesHandler;
         private ShowTheatersDel showTheaterHandler;
-        private GenerateShowingDel generate;
         uxLoginScreen loginScreen;
-        public uxCustomerUI(ShowShowtimeDel showdel, ShowHistoryDel histdel, ShowMoviesDel moviesdel, ShowTheatersDel theatersDel, GenerateShowingDel s, uxLoginScreen loginScreen)
+        public uxCustomerUI(ShowShowtimeDel showdel, ShowHistoryDel histdel, ShowMoviesDel moviesdel, ShowTheatersDel theatersDel,  uxLoginScreen loginScreen)
         {
             showShowtimeHandler = showdel;
             showHistoryHandler = histdel;
             showMoviesHandler = moviesdel;
             showTheaterHandler = theatersDel;
-            generate = s;
             this.loginScreen = loginScreen;
             InitializeComponent();
         }
@@ -62,6 +60,10 @@ namespace _560Theater
                 showtime = uxHoursNumeric.Value.ToString() + ":" + uxMinutesNumeric.Value.ToString() + ":00";
             }
             showShowtimeHandler(moviename, theatername, showtime);
+            uxMovieListBox.SelectedItems.Clear();
+            uxTheaterListBox.SelectedItems.Clear();
+            uxHoursNumeric.Value = 00;
+            uxMinutesNumeric.Value = 00;
         }
         /// <summary>
         /// Updates the movie list box
@@ -111,10 +113,5 @@ namespace _560Theater
             showMoviesHandler();
         }
 
-        private void uxGenerateShowings_Click(object sender, EventArgs e)
-        {
-            generate();
-            MessageBox.Show("Done");
-        }
     }
 }

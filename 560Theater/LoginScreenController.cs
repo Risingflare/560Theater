@@ -55,7 +55,7 @@ namespace _560Theater
                 if (UserId != -1)  // valid
                 {
                     Form1Controller controller = new Form1Controller(UserId);
-                    uxCustomerUI customerUI = new uxCustomerUI(controller.Showtimes, controller.History, controller.GetMovieList, controller.GetTheaterList, controller.GenerateShowtimes, login);
+                    uxCustomerUI customerUI = new uxCustomerUI(controller.Showtimes, controller.History, controller.GetMovieList, controller.GetTheaterList, login);
                     controller.UpdateMovies(customerUI.UpdateMovie);
                     controller.UpdateTheater(customerUI.UpdateTheater);
                     customerUI.Show();

@@ -12,3 +12,18 @@ SELECT U.EmailAddress as Email
 	,U.UserID 
 FROM dbo.[User] U
 	JOIN dbo.Customer C ON C.UserID = U.UserID;
+GO
+
+/*
+ Get the CustomerId using the given UserId
+*/
+CREATE OR ALTER PROCEDURE [dbo].[GetCustomerID]
+	@UserId INT
+AS
+SELECT C.CustomerID as CustomerId
+FROM dbo.Customer C
+WHERE C.UserID = @UserId
+GO
+
+SELECT *
+FROM dbo.Customer

@@ -11,7 +11,10 @@ namespace _560Theater
     /// This class will be the controller in our MVC interface.
     /// It will use procedures to execute any requests to the database.
     /// </summary>
-    public delegate void RemoveTicketHistoryDel(string ticket);
+    public delegate void RemoveTicketHistoryDel(int index);
+    public delegate void LoadTicketHistory();
+    public delegate void BuyTicketDel(int showingID);
+    public delegate void ListViewTicketHistory(string name);
     class Form1Controller
     {        
         SqlConnection connection;
@@ -23,27 +26,25 @@ namespace _560Theater
         List<string> theaternames;
         List<string> theaterLocation;
         int customerID;
-        /// <summary>
-        /// A test string that I use to test my list boxes.
-        /// </summary>
-        List<string> test;
-        public Form1Controller(int customerID)
+        public Form1Controller(int userId)
         {
             connection = new SqlConnection("Data Source=mssql.cs.ksu.edu;Initial Catalog=cis560_team04;Integrated Security=True;Encrypt=False");
             cmd = new SqlCommand();
-            this.customerID = customerID;
             movies = new List<ListBoxTheaterMovie>();
             theaters = new List<ListBoxTheaterMovie>();
             movienames = new List<string>();
             theaternames = new List<string>();
             theaterLocation = new List<string>();
+            customerID = GetCustomerId(userId);
+            if (customerID == -1) throw new Exception("There was trouble in getting the correct customer");
         }
         /// <summary>
         /// I think this gets the procedure information from the database.
         /// </summary>
         public void GetMovieList()
         {
-            string moviename = "";         
+            string moviename = "";
+            cmd.Parameters.Clear();
             connection.Open();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "dbo.GetMovies";//This is getting the movie list procedure
@@ -79,6 +80,7 @@ namespace _560Theater
         public void GetTheaterList()
         {
             string theatername = "";
+            cmd.Parameters.Clear();
             connection.Open();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "dbo.GetTheaters";//This is getting the theater list procedure
@@ -118,8 +120,10 @@ namespace _560Theater
         /// </summary>
         public void History()
         {
-            HistoryGUIController controller = new HistoryGUIController(connection,cmd,reader);
-            HistoryGUI gui = new HistoryGUI(controller.HistoryRemoveTicket);
+            HistoryGUIController controller = new HistoryGUIController(connection,cmd,reader,customerID);
+            HistoryGUI gui = new HistoryGUI(controller.HistoryRemoveTicket, controller.GetTickets);
+            controller.UpdateTicketForm(gui.UpdateTicketListView);
+            
             gui.Show();
         }
 
@@ -132,88 +136,36 @@ namespace _560Theater
         /// <param name="time"></param>
         public void Showtimes(string moviename,string theatername,string time)
         {
-            ShowTimeController controller = new ShowTimeController(connection, cmd, reader);
-            ShowTimeGUI gui = new ShowTimeGUI(connection, cmd, reader,moviename,theatername,time);
+            ShowTimeController controller = new ShowTimeController(connection, cmd, reader, customerID);
+            ShowTimeGUI gui = new ShowTimeGUI(connection, cmd, reader,moviename,theatername,time, controller.BuyTicket);
             gui.Show();
         }
         
-        public void GenerateShowtimes()
+        private int GetCustomerId(int userId)
         {
-            string showtime;
-            List<string> usedShowtimes = new List<string>();
-            int[] hours = new int[] { 14, 15, 16, 17, 18, 19, 20 };
-            int[] minutes = new int[] { 0, 15, 30, 45 };
-            Random rn = new Random();
-            for (int k = 0; k < theaternames.Count; k++)
+            int customerID = -1;
+            cmd.Parameters.Clear();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "dbo.GetCustomerID";//This is getting the theater list procedure
+            cmd.Connection = connection;
+
+            SqlParameter userIdparam = new SqlParameter();
+            userIdparam.ParameterName = "@UserId";
+            userIdparam.SqlDbType = System.Data.SqlDbType.Int;
+            userIdparam.Direction = System.Data.ParameterDirection.Input;
+            userIdparam.Value = userId;
+
+            cmd.Parameters.Add(userIdparam);
+            connection.Open();
+            using (reader = cmd.ExecuteReader())
             {
-                usedShowtimes.Clear();
-                int count = 0;
-                while (count < 5)
+                while (reader.Read())
                 {
-                    cmd.Parameters.Clear();
-                    int i = rn.Next(0, 6);
-                    int j = rn.Next(0, 3);
-                    int room = rn.Next(1, 9);
-                    int m = rn.Next(0, movienames.Count - 1);
-                    int hour = hours[i];
-                    int minute = minutes[j];
-                    if (minute == 0)
-                    {
-                        showtime = hour.ToString() + ":00" + ":00";
-                    }
-                    else
-                    {
-                        showtime = hour.ToString() + ":" + minute.ToString() + ":00";
-                    }
-                    if (usedShowtimes.Contains(showtime) == false)
-                    {
-                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                        cmd.CommandText = "dbo.CreateShowing";//This is getting the theater list procedure
-                        cmd.Connection = connection;
-
-                        SqlParameter theatername = new SqlParameter();
-                        theatername.ParameterName = "@TheaterName";
-                        theatername.SqlDbType = System.Data.SqlDbType.NVarChar;
-                        theatername.Direction = System.Data.ParameterDirection.Input;
-                        theatername.Value = theaternames[k];
-
-                        SqlParameter moviename = new SqlParameter();
-                        moviename.ParameterName = "@MovieName";
-                        moviename.SqlDbType = System.Data.SqlDbType.NVarChar;
-                        moviename.Direction = System.Data.ParameterDirection.Input;
-                        moviename.Value = movienames[m];
-
-                        SqlParameter roomnum = new SqlParameter();
-                        roomnum.ParameterName = "@Room";
-                        roomnum.SqlDbType = System.Data.SqlDbType.Int;
-                        roomnum.Direction = System.Data.ParameterDirection.Input;
-                        roomnum.Value = room;
-
-                        SqlParameter showtimeparam = new SqlParameter();
-                        showtimeparam.ParameterName = "@ShowTime";
-                        showtimeparam.SqlDbType = System.Data.SqlDbType.Time;
-                        showtimeparam.Direction = System.Data.ParameterDirection.Input;
-                        showtimeparam.Value = showtime;
-
-                        SqlParameter location = new SqlParameter();
-                        location.ParameterName = "@Location";
-                        location.SqlDbType = System.Data.SqlDbType.NVarChar;
-                        location.Direction = System.Data.ParameterDirection.Input;
-                        location.Value = theaterLocation[k];
-
-                        cmd.Parameters.Add(theatername);
-                        cmd.Parameters.Add(moviename);
-                        cmd.Parameters.Add(roomnum);
-                        cmd.Parameters.Add(showtimeparam);
-                        cmd.Parameters.Add(location);
-                        connection.Open();
-                        cmd.ExecuteNonQuery();
-                        connection.Close();
-                        usedShowtimes.Add(showtime);
-                        count++;
-                    }
+                     customerID = Convert.ToInt32(reader["CustomerId"]);
                 }
             }
+            connection.Close();
+            return customerID;
         }
     }
 }
