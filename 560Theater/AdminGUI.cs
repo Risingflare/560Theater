@@ -280,6 +280,8 @@ namespace _560Theater
                         String movieName = textBox1.Text.Trim();
                         String genre = textBox2.Text.Trim();
                         int releaseYear;
+                        int movieId = int.Parse(movieList.SelectedItems[0].Text);
+
                         if (textBox3.Text.Trim() == "")
                         {
                             int.TryParse(movieList.SelectedItems[0].SubItems[2].Text, out releaseYear);
@@ -304,6 +306,13 @@ namespace _560Theater
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         cmd.CommandText = "dbo.AdminEditMovie";
                         cmd.Connection = connection;
+
+                        SqlParameter id = new SqlParameter();
+                        id.ParameterName = "@MovieID";
+                        id.SqlDbType = System.Data.SqlDbType.Int;
+                        id.Direction = System.Data.ParameterDirection.Input;
+                        id.Value = movieId;
+                        cmd.Parameters.Add(id);
 
                         SqlParameter name = new SqlParameter();
                         name.ParameterName = "@MovieName";
@@ -359,6 +368,7 @@ namespace _560Theater
                     {
                         String theaterName = textBox1.Text;
                         String Location = textBox2.Text;
+                        int theaterId = int.Parse(theaterList.SelectedItems[0].Text);
 
                         if (theaterName.Length == 0)
                         {
@@ -374,6 +384,13 @@ namespace _560Theater
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         cmd.CommandText = "dbo.AdminEditTheater";
                         cmd.Connection = connection;
+
+                        SqlParameter id = new SqlParameter();
+                        id.ParameterName = "@TheaterID";
+                        id.SqlDbType = System.Data.SqlDbType.Int;
+                        id.Direction = System.Data.ParameterDirection.Input;
+                        id.Value = theaterId;
+                        cmd.Parameters.Add(id);
 
                         SqlParameter name = new SqlParameter();
                         name.ParameterName = "@TheaterName";
@@ -453,7 +470,7 @@ namespace _560Theater
 
                     connection.Close();
                     cmd.Parameters.Clear();
-                    updateMovieTable();
+                    updateTheaterTable();
                 }
             }
             else if (tabControl.SelectedTab.Name.Equals("Showing"))
@@ -476,7 +493,7 @@ namespace _560Theater
 
                     connection.Close();
                     cmd.Parameters.Clear();
-                    updateMovieTable();
+                    updateShowingTable();
                 }
             }
         }
@@ -526,7 +543,7 @@ namespace _560Theater
 
                     connection.Close();
                     cmd.Parameters.Clear();
-                    updateMovieTable();
+                    updateTheaterTable();
                 }
             }
             else if (tabControl.SelectedTab.Name.Equals("Showing"))
@@ -549,7 +566,7 @@ namespace _560Theater
 
                     connection.Close();
                     cmd.Parameters.Clear();
-                    updateMovieTable();
+                    updateShowingTable();
                 }
             }
         }
@@ -559,6 +576,7 @@ namespace _560Theater
             if (tabControl.SelectedTab.Name.Equals("Movie"))
             {
                 updateMovieTable();
+                addBtn.Enabled = true;
                 editBtn.Enabled = true;
                 label1.Text = "Movie Name:";
                 label1.Show();
@@ -573,6 +591,7 @@ namespace _560Theater
             else if (tabControl.SelectedTab.Name.Equals("Theater"))
             {
                 updateTheaterTable();
+                addBtn.Enabled = true;
                 editBtn.Enabled = true;
                 label1.Text = "Theater Name:";
                 label1.Show();
@@ -587,6 +606,7 @@ namespace _560Theater
             else if (tabControl.SelectedTab.Name.Equals("Showing"))
             {
                 updateShowingTable();
+                addBtn.Enabled = false;
                 editBtn.Enabled = false;
                 label1.Hide();
                 label2.Hide();
