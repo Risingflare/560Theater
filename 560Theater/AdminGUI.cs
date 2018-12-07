@@ -576,6 +576,7 @@ namespace _560Theater
             if (tabControl.SelectedTab.Name.Equals("Movie"))
             {
                 updateMovieTable();
+                addBtn.Enabled = true;
                 editBtn.Enabled = true;
                 label1.Text = "Movie Name:";
                 label1.Show();
@@ -590,6 +591,7 @@ namespace _560Theater
             else if (tabControl.SelectedTab.Name.Equals("Theater"))
             {
                 updateTheaterTable();
+                addBtn.Enabled = true;
                 editBtn.Enabled = true;
                 label1.Text = "Theater Name:";
                 label1.Show();
@@ -604,6 +606,7 @@ namespace _560Theater
             else if (tabControl.SelectedTab.Name.Equals("Showing"))
             {
                 updateShowingTable();
+                addBtn.Enabled = false;
                 editBtn.Enabled = false;
                 label1.Hide();
                 label2.Hide();
