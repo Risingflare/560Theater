@@ -91,10 +91,10 @@
             // Movie
             // 
             this.Movie.Controls.Add(this.movieList);
-            this.Movie.Location = new System.Drawing.Point(4, 22);
+            this.Movie.Location = new System.Drawing.Point(8, 27);
             this.Movie.Name = "Movie";
             this.Movie.Padding = new System.Windows.Forms.Padding(3);
-            this.Movie.Size = new System.Drawing.Size(490, 282);
+            this.Movie.Size = new System.Drawing.Size(482, 273);
             this.Movie.TabIndex = 0;
             this.Movie.Text = "Movie";
             this.Movie.UseVisualStyleBackColor = true;
@@ -155,10 +155,10 @@
             // Theater
             // 
             this.Theater.Controls.Add(this.theaterList);
-            this.Theater.Location = new System.Drawing.Point(4, 22);
+            this.Theater.Location = new System.Drawing.Point(8, 27);
             this.Theater.Name = "Theater";
             this.Theater.Padding = new System.Windows.Forms.Padding(3);
-            this.Theater.Size = new System.Drawing.Size(490, 282);
+            this.Theater.Size = new System.Drawing.Size(482, 273);
             this.Theater.TabIndex = 1;
             this.Theater.Text = "Theater";
             this.Theater.UseVisualStyleBackColor = true;
@@ -210,10 +210,10 @@
             // Showing
             // 
             this.Showing.Controls.Add(this.showingList);
-            this.Showing.Location = new System.Drawing.Point(4, 22);
+            this.Showing.Location = new System.Drawing.Point(8, 27);
             this.Showing.Name = "Showing";
             this.Showing.Padding = new System.Windows.Forms.Padding(3);
-            this.Showing.Size = new System.Drawing.Size(490, 282);
+            this.Showing.Size = new System.Drawing.Size(482, 273);
             this.Showing.TabIndex = 2;
             this.Showing.Text = "Showing";
             this.Showing.UseVisualStyleBackColor = true;
@@ -375,18 +375,19 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.uxGenerateShowings});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(525, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(525, 35);
             this.toolStrip1.TabIndex = 11;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // uxGenerateShowings
             // 
             this.uxGenerateShowings.Name = "uxGenerateShowings";
-            this.uxGenerateShowings.Size = new System.Drawing.Size(108, 22);
+            this.uxGenerateShowings.Size = new System.Drawing.Size(221, 32);
             this.uxGenerateShowings.Text = "Generate Showings";
             this.uxGenerateShowings.Click += new System.EventHandler(this.uxGenerateShowings_Click);
             // 
@@ -408,7 +409,8 @@
             this.Controls.Add(this.addBtn);
             this.Controls.Add(this.tabControl);
             this.Name = "AdminGUI";
-            this.Text = "AdminGUI";
+            this.ShowIcon = false;
+            this.Text = "Manage Showings";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.onClose);
             this.tabControl.ResumeLayout(false);
             this.Movie.ResumeLayout(false);

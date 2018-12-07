@@ -102,7 +102,7 @@
             this.Controls.Add(this.uxHistoryListView);
             this.Controls.Add(this.uxHistoryRemoveSelected);
             this.Name = "HistoryGUI";
-            this.Text = "HistoryGUI";
+            this.Text = "Purchase History";
             this.Load += new System.EventHandler(this.HistoryGUI_Load);
             this.ResumeLayout(false);
 

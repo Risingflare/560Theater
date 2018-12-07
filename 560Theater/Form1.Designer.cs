@@ -60,7 +60,7 @@
             this.uxShowtimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.uxShowtimeLabel.Location = new System.Drawing.Point(9, 343);
             this.uxShowtimeLabel.Name = "uxShowtimeLabel";
-            this.uxShowtimeLabel.Size = new System.Drawing.Size(72, 17);
+            this.uxShowtimeLabel.Size = new System.Drawing.Size(148, 32);
             this.uxShowtimeLabel.TabIndex = 2;
             this.uxShowtimeLabel.Text = "Showtime:";
             // 
@@ -70,7 +70,7 @@
             this.uxTheaterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.uxTheaterLabel.Location = new System.Drawing.Point(12, 32);
             this.uxTheaterLabel.Name = "uxTheaterLabel";
-            this.uxTheaterLabel.Size = new System.Drawing.Size(84, 17);
+            this.uxTheaterLabel.Size = new System.Drawing.Size(165, 32);
             this.uxTheaterLabel.TabIndex = 4;
             this.uxTheaterLabel.Text = "Theater List";
             // 
@@ -80,7 +80,7 @@
             this.uxMovieLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.uxMovieLabel.Location = new System.Drawing.Point(252, 32);
             this.uxMovieLabel.Name = "uxMovieLabel";
-            this.uxMovieLabel.Size = new System.Drawing.Size(71, 17);
+            this.uxMovieLabel.Size = new System.Drawing.Size(143, 32);
             this.uxMovieLabel.TabIndex = 5;
             this.uxMovieLabel.Text = "Movie List";
             // 
@@ -105,18 +105,19 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.uxHistory});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(466, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(466, 35);
             this.toolStrip1.TabIndex = 8;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // uxHistory
             // 
             this.uxHistory.Name = "uxHistory";
-            this.uxHistory.Size = new System.Drawing.Size(80, 22);
+            this.uxHistory.Size = new System.Drawing.Size(160, 32);
             this.uxHistory.Text = "Ticket History";
             this.uxHistory.Click += new System.EventHandler(this.uxHistory_Click);
             // 
@@ -155,7 +156,7 @@
             this.uxDescriptionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.uxDescriptionLabel.Location = new System.Drawing.Point(9, 314);
             this.uxDescriptionLabel.Name = "uxDescriptionLabel";
-            this.uxDescriptionLabel.Size = new System.Drawing.Size(253, 16);
+            this.uxDescriptionLabel.Size = new System.Drawing.Size(490, 29);
             this.uxDescriptionLabel.TabIndex = 13;
             this.uxDescriptionLabel.Text = "Military Time using 15 minutes increments";
             // 
@@ -195,7 +196,7 @@
             this.Controls.Add(this.uxShowtimeLabel);
             this.Controls.Add(this.uxTheaterListBox);
             this.Name = "uxCustomerUI";
-            this.Text = "Customer";
+            this.Text = "Filter Showtimes";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.uxCustomerUI_FormClosed);
             this.Load += new System.EventHandler(this.uxCustomerUI_Load);
             this.toolStrip1.ResumeLayout(false);

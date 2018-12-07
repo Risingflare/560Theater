@@ -31,10 +31,10 @@
             this.uxShowtimeListView = new System.Windows.Forms.ListView();
             this.chMovieName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chTheaterName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chLocation = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chShowtime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chRoom = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.uxBuyTicket = new System.Windows.Forms.Button();
-            this.chLocation = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // uxShowtimeListView
@@ -65,6 +65,11 @@
             this.chTheaterName.Text = "Theater Name";
             this.chTheaterName.Width = 145;
             // 
+            // chLocation
+            // 
+            this.chLocation.Text = "Location";
+            this.chLocation.Width = 166;
+            // 
             // chShowtime
             // 
             this.chShowtime.Text = "ShowTime";
@@ -86,11 +91,6 @@
             this.uxBuyTicket.UseVisualStyleBackColor = true;
             this.uxBuyTicket.Click += new System.EventHandler(this.uxBuyTicket_Click);
             // 
-            // chLocation
-            // 
-            this.chLocation.Text = "Location";
-            this.chLocation.Width = 166;
-            // 
             // ShowTimeGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -99,7 +99,7 @@
             this.Controls.Add(this.uxBuyTicket);
             this.Controls.Add(this.uxShowtimeListView);
             this.Name = "ShowTimeGUI";
-            this.Text = "ShowTimeGUI";
+            this.Text = "Showtimes";
             this.Load += new System.EventHandler(this.ShowTimeGUI_Load);
             this.ResumeLayout(false);
 
