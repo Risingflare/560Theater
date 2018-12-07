@@ -172,6 +172,7 @@
             this.TheaterIsActiveCol,
             this.TheaterCreatedOnCol,
             this.TheaterUpdatedOnCol});
+            this.theaterList.FullRowSelect = true;
             this.theaterList.Location = new System.Drawing.Point(0, 0);
             this.theaterList.Name = "theaterList";
             this.theaterList.Size = new System.Drawing.Size(490, 300);
@@ -229,6 +230,7 @@
             this.ShowingIsActiveCol,
             this.ShowingCreatedOnCol,
             this.ShowingUpdatedOnCol});
+            this.showingList.FullRowSelect = true;
             this.showingList.Location = new System.Drawing.Point(0, 0);
             this.showingList.Name = "showingList";
             this.showingList.Size = new System.Drawing.Size(490, 300);
