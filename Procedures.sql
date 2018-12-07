@@ -107,7 +107,8 @@ SET Location = @Location,
 	WHERE T.TheaterName = @TheaterName;
 GO
 /*
-
+"Deletes" the theater from the list. It will set it to inactive.
+Id - the id of the theater that is going to be deleted.
 */
 CREATE OR ALTER PROCEDURE dbo.AdminDeleteTheater
 	@id INT
@@ -118,7 +119,7 @@ SET IsActive = 0, UpdatedOn = SYSDATETIMEOFFSET()
 WHERE TheaterID = @id;
 GO
 /*
-
+Whenever we update the theater table. We will make sure that all showings that are dependent have the same activity as their parent theater.
 */
 CREATE OR ALTER TRIGGER dbo.UpdateShowingAfterTheaterDelete
 ON dbo.Theater
@@ -130,7 +131,9 @@ AS
 	JOIN inserted i on i.TheaterName = S.TheaterName
 GO
 /*
-
+Adds a theater to our theater database
+TheaterName - the name of the new theater
+Location - the location of the new theater.
 */
 CREATE OR ALTER PROCEDURE dbo.AddTheater
 @TheaterName NVARCHAR(100),
@@ -142,7 +145,8 @@ VALUES
 (@TheaterName, @Location, 1);
 GO
 /*
-
+"Deletes" the selected showing. It will set it to inactive.
+id - the showing we want to delete.
 */
 CREATE OR ALTER PROCEDURE dbo.AdminDeleteShowing
 @id INT
@@ -152,7 +156,9 @@ UPDATE dbo.Showing
 SET IsActive=0,UpdatedOn = SYSDATETIMEOFFSET()
 WHERE ShowingID = @id;
 GO
-
+/*
+Creates a trigger that updates the showtimes whenever its parent movie is changed.
+*/
 CREATE OR ALTER TRIGGER dbo.UpdateShowingAfterMovieDelete
 ON dbo.Movie
 FOR UPDATE
@@ -192,7 +198,9 @@ WHERE (S.MovieName = @MovieName) and (S.TheaterName = @TheaterName) and (S.ShowT
 GO
 
 /*
-
+Creates a ticket.
+CustomerId - foreign key which refrences which customer this ticket belongs to.
+ShowingId - foreign key the refrences which specifc showing this ticket belongs to
 */
 CREATE OR ALTER PROCEDURE dbo.CreateTicket
 	@CustomerId INT,
@@ -202,7 +210,8 @@ INSERT dbo.Ticket(CustomerID, ShowingID, IsActive)
 VALUES(@CustomerId,@ShowingId,1);
 GO
 /*
-
+Gets the ticket information using the CustomerId
+CustomerId - the customer who is logged in
 */
 CREATE OR ALTER PROCEDURE dbo.GetTicket
 	@CustomerId INT
@@ -212,7 +221,10 @@ FROM dbo.Ticket T
 	JOIN dbo.Showing S ON S.ShowingID = T.ShowingID
 WHERE T.CustomerID = @CustomerId and T.IsActive = 1;
 GO
-
+/*
+"Deletes" the ticket. It sets it inactive
+TicketId - the ticket that is going to be deleted
+*/
 CREATE OR ALTER PROCEDURE dbo.CustomerDeleteTicket
 	@TicketId as INT
 AS
