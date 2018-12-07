@@ -73,6 +73,10 @@ namespace _560Theater
             uxPasswordBox.Clear();
         }
 
+        private void uxHelpButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Refer to documentation for admin login\nCreate Account for customer login");
+        }
     }
 }
 

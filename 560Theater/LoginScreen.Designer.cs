@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.uxEmailTextbox = new System.Windows.Forms.TextBox();
             this.uxLogin = new System.Windows.Forms.Button();
             this.uxNewAccount = new System.Windows.Forms.Button();
@@ -40,38 +37,11 @@
             this.uxAdminRadioButton = new System.Windows.Forms.RadioButton();
             this.uxCustomerRadioButton = new System.Windows.Forms.RadioButton();
             this.uxDontHaveAcctLabel = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.uxReadOnlyTxtbox = new System.Windows.Forms.TextBox();
+            this.uxHelpProvider = new System.Windows.Forms.HelpProvider();
+            this.uxHelpButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(161, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(145, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Authentication Complete";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(216, 48);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(155, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "CustomerQuickLogin: \'c\' and \'c\'";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(216, 35);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(140, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "AdminQuickLogin: \'a\' and \'a\'";
             // 
             // uxEmailTextbox
             // 
@@ -130,10 +100,10 @@
             // 
             this.uxAdminRadioButton.AutoSize = true;
             this.uxAdminRadioButton.Font = new System.Drawing.Font("Miriam CLM", 8.249999F, System.Drawing.FontStyle.Bold);
-            this.uxAdminRadioButton.Location = new System.Drawing.Point(62, 55);
+            this.uxAdminRadioButton.Location = new System.Drawing.Point(64, 43);
             this.uxAdminRadioButton.Name = "uxAdminRadioButton";
             this.uxAdminRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.uxAdminRadioButton.Size = new System.Drawing.Size(55, 16);
+            this.uxAdminRadioButton.Size = new System.Drawing.Size(101, 28);
             this.uxAdminRadioButton.TabIndex = 9;
             this.uxAdminRadioButton.Text = "Admin";
             this.uxAdminRadioButton.UseVisualStyleBackColor = true;
@@ -145,7 +115,7 @@
             this.uxCustomerRadioButton.Location = new System.Drawing.Point(45, 77);
             this.uxCustomerRadioButton.Name = "uxCustomerRadioButton";
             this.uxCustomerRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.uxCustomerRadioButton.Size = new System.Drawing.Size(72, 16);
+            this.uxCustomerRadioButton.Size = new System.Drawing.Size(130, 28);
             this.uxCustomerRadioButton.TabIndex = 10;
             this.uxCustomerRadioButton.Text = "Customer";
             this.uxCustomerRadioButton.UseVisualStyleBackColor = true;
@@ -159,41 +129,48 @@
             this.uxDontHaveAcctLabel.TabIndex = 11;
             this.uxDontHaveAcctLabel.Text = "Don\'t have an account?";
             // 
-            // label4
+            // label1
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(216, 80);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(228, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Can use any admin/customer login in database";
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Miriam CLM", 10F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(254, 41);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(129, 29);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Welcome!";
             // 
-            // label5
+            // uxReadOnlyTxtbox
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(216, 93);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(201, 13);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Created Accounts are saved to database";
+            this.uxReadOnlyTxtbox.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.uxReadOnlyTxtbox.Location = new System.Drawing.Point(248, 73);
+            this.uxReadOnlyTxtbox.Multiline = true;
+            this.uxReadOnlyTxtbox.Name = "uxReadOnlyTxtbox";
+            this.uxReadOnlyTxtbox.ReadOnly = true;
+            this.uxReadOnlyTxtbox.Size = new System.Drawing.Size(150, 36);
+            this.uxReadOnlyTxtbox.TabIndex = 13;
+            this.uxReadOnlyTxtbox.Text = "Create an account or login with an existing account.";
             // 
-            // label6
+            // uxHelpButton
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(216, 106);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(146, 13);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "RadioButton must match user";
+            this.uxHelpButton.BackColor = System.Drawing.Color.Red;
+            this.uxHelpButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxHelpButton.Location = new System.Drawing.Point(402, 12);
+            this.uxHelpButton.Name = "uxHelpButton";
+            this.uxHelpButton.Size = new System.Drawing.Size(47, 27);
+            this.uxHelpButton.TabIndex = 14;
+            this.uxHelpButton.Text = "Help";
+            this.uxHelpButton.UseVisualStyleBackColor = false;
+            this.uxHelpButton.Click += new System.EventHandler(this.uxHelpButton_Click);
             // 
             // uxLoginScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(461, 296);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.uxHelpButton);
+            this.Controls.Add(this.uxReadOnlyTxtbox);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.uxDontHaveAcctLabel);
             this.Controls.Add(this.uxCustomerRadioButton);
             this.Controls.Add(this.uxAdminRadioButton);
@@ -203,21 +180,15 @@
             this.Controls.Add(this.uxNewAccount);
             this.Controls.Add(this.uxLogin);
             this.Controls.Add(this.uxEmailTextbox);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Name = "uxLoginScreen";
-            this.Text = "Login";
+            this.ShowIcon = false;
+            this.Text = "TheaterZone";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox uxEmailTextbox;
         private System.Windows.Forms.Button uxLogin;
         private System.Windows.Forms.Button uxNewAccount;
@@ -227,8 +198,9 @@
         private System.Windows.Forms.RadioButton uxAdminRadioButton;
         private System.Windows.Forms.RadioButton uxCustomerRadioButton;
         private System.Windows.Forms.Label uxDontHaveAcctLabel;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox uxReadOnlyTxtbox;
+        private System.Windows.Forms.HelpProvider uxHelpProvider;
+        private System.Windows.Forms.Button uxHelpButton;
     }
 }
