@@ -77,7 +77,7 @@ namespace _560Theater
             this.uxCreateAcctLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uxCreateAcctLabel.Location = new System.Drawing.Point(133, 57);
             this.uxCreateAcctLabel.Name = "uxCreateAcctLabel";
-            this.uxCreateAcctLabel.Size = new System.Drawing.Size(192, 25);
+            this.uxCreateAcctLabel.Size = new System.Drawing.Size(369, 46);
             this.uxCreateAcctLabel.TabIndex = 4;
             this.uxCreateAcctLabel.Text = "Create an Account";
             // 
@@ -87,7 +87,7 @@ namespace _560Theater
             this.uxEmailLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.uxEmailLabel.Location = new System.Drawing.Point(12, 211);
             this.uxEmailLabel.Name = "uxEmailLabel";
-            this.uxEmailLabel.Size = new System.Drawing.Size(111, 20);
+            this.uxEmailLabel.Size = new System.Drawing.Size(224, 37);
             this.uxEmailLabel.TabIndex = 5;
             this.uxEmailLabel.Text = "Email Address";
             // 
@@ -97,7 +97,7 @@ namespace _560Theater
             this.uxFNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.uxFNameLabel.Location = new System.Drawing.Point(34, 116);
             this.uxFNameLabel.Name = "uxFNameLabel";
-            this.uxFNameLabel.Size = new System.Drawing.Size(86, 20);
+            this.uxFNameLabel.Size = new System.Drawing.Size(175, 37);
             this.uxFNameLabel.TabIndex = 6;
             this.uxFNameLabel.Text = "First Name";
             // 
@@ -107,7 +107,7 @@ namespace _560Theater
             this.uxLNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.uxLNameLabel.Location = new System.Drawing.Point(34, 162);
             this.uxLNameLabel.Name = "uxLNameLabel";
-            this.uxLNameLabel.Size = new System.Drawing.Size(86, 20);
+            this.uxLNameLabel.Size = new System.Drawing.Size(173, 37);
             this.uxLNameLabel.TabIndex = 7;
             this.uxLNameLabel.Text = "Last Name";
             // 
@@ -117,7 +117,7 @@ namespace _560Theater
             this.uxPasswordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.uxPasswordLabel.Location = new System.Drawing.Point(42, 250);
             this.uxPasswordLabel.Name = "uxPasswordLabel";
-            this.uxPasswordLabel.Size = new System.Drawing.Size(78, 20);
+            this.uxPasswordLabel.Size = new System.Drawing.Size(158, 37);
             this.uxPasswordLabel.TabIndex = 8;
             this.uxPasswordLabel.Text = "Password";
             // 
@@ -152,6 +152,7 @@ namespace _560Theater
             this.Controls.Add(this.uxFNameTxtbox);
             this.Name = "CreateAccount";
             this.Text = "CreateAccount";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.uxCustomerUI_FormClosed);
             this.Load += new System.EventHandler(this.CreateAccount_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

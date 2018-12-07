@@ -116,9 +116,10 @@
             // 
             // uxHistory
             // 
+            this.uxHistory.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.uxHistory.Name = "uxHistory";
-            this.uxHistory.Size = new System.Drawing.Size(160, 32);
-            this.uxHistory.Text = "Ticket History";
+            this.uxHistory.Size = new System.Drawing.Size(192, 32);
+            this.uxHistory.Text = "Purchase History";
             this.uxHistory.Click += new System.EventHandler(this.uxHistory_Click);
             // 
             // uxHoursNumeric
@@ -196,7 +197,7 @@
             this.Controls.Add(this.uxShowtimeLabel);
             this.Controls.Add(this.uxTheaterListBox);
             this.Name = "uxCustomerUI";
-            this.Text = "Filter Showtimes";
+            this.Text = "Find Showings";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.uxCustomerUI_FormClosed);
             this.Load += new System.EventHandler(this.uxCustomerUI_Load);
             this.toolStrip1.ResumeLayout(false);

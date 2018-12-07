@@ -1,0 +1,8 @@
+USE cis560_team04;
+SELECT * FROM DBO.[Admin]
+SELECT * FROM DBO.[User]
+SELECT * FROM DBO.[Customer]
+SELECT * FROM DBO.[Movie]
+SELECT * FROM DBO.[Showing]
+SELECT * FROM DBO.[Ticket]
+SELECT * FROM DBO.[Theater];

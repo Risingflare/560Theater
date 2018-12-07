@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS dbo.Showing
 DROP TABLE IF EXISTS dbo.Theater
 DROP TABLE IF EXISTS dbo.Movie
 
-CREATE TABLE dbo.[User] -- BOOLEAN FOR CUSTOMER/ADMIN
+CREATE TABLE dbo.[User]
 (
    UserID INT NOT NULL IDENTITY(1, 1) PRIMARY KEY ,
    FirstName NVARCHAR(32) NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE dbo.Showing
 	TheaterName NVARCHAR(100) NOT NULL ,
 	MovieName NVARCHAR(100) NOT NULL FOREIGN KEY REFERENCES dbo.Movie(MovieName),
 	Room INT NOT NULL,
-	ShowTime TIME NOT NULL, -- MAY BE APPROPRIATE TO USE DATETIME2(0) WHICH INCLUDES BOTH DATE AND TIME (for when we provide customers with their purchase history)
+	ShowTime TIME NOT NULL, 
 	[Location] NVARCHAR(100) NOT NULL,
 	IsActive BIT NOT NULL,
 	CreatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
@@ -118,23 +118,24 @@ VALUES
 
 INSERT dbo.[User](FirstName, LastName, EmailAddress, [Password], isActive)
 VALUES
-	(N'Koty', N'Lange', N'koty@ksu.edu', N'12345',1),
+	(N'Koty', N'Lange', N'Koty@ksu.edu', N'12345',1),
 	(N'Carson', N'Funk', N'Carson@ksu.edu', N'12345',1),
 	(N'Jesse', N'Molenda', N'Jesse@ksu.edu', N'12345',1),
 	(N'Victor', N'Aguirre', N'Victor@ksu.edu', N'12345',1),
 	(N'Jake', N'Willson', N'Jake@ksu.edu', N'12345',1),
-	(N'Steven', N'Zwahl', N'Steven@ksu.edu', N'12345',1),
-	(N'Admin', N'Admin', N'a', N'a', 1), -- temp
-	(N'Customer',N'Customer',N'c',N'c',1); -- temp
+	(N'Steven', N'Zwahl', N'Steven@ksu.edu', N'12345',1);
 
--- STATIC ADMINS (with one TEMP USER)
+-- STATIC ADMINS MANAGE THIS THEATER
 INSERT dbo.[Admin](UserID)
 SELECT U.UserID
 FROM dbo.[User] U
-WHERE U.UserID < 8
--- TEMP USER
-INSERT dbo.[Customer](UserID)
-SELECT U.UserID
-FROM dbo.[User] U
-WHERE U.UserID = 8;
+WHERE U.UserID < 7
 
+/*USE cis560_team04;
+SELECT * FROM DBO.[Admin]
+SELECT * FROM DBO.[User]
+SELECT * FROM DBO.[Customer]
+SELECT * FROM DBO.[Movie]
+SELECT * FROM DBO.[Showing]
+SELECT * FROM DBO.[Ticket]
+SELECT * FROM DBO.[Theater];*/
