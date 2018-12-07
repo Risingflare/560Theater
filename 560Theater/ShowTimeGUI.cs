@@ -28,11 +28,6 @@ namespace _560Theater
             UpdateShowtime(moviename, theatername, time);
         }
 
-        private void ShowTimeGUI_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void UpdateShowtime(string moviename, string theatername, string time)
         {
             connection.Close();

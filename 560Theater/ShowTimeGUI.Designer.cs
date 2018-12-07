@@ -100,7 +100,6 @@
             this.Controls.Add(this.uxShowtimeListView);
             this.Name = "ShowTimeGUI";
             this.Text = "Showtimes";
-            this.Load += new System.EventHandler(this.ShowTimeGUI_Load);
             this.ResumeLayout(false);
 
         }

@@ -24,7 +24,6 @@ namespace _560Theater
     /// </summary>
     public delegate void ShowTheatersDel();
     /// <summary>
-    public delegate void GenerateShowingDel();
     /// This delegate handles the showing of the string to the list boxes.
     /// </summary>
     /// <param name="name"></param>

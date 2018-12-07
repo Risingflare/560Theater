@@ -86,7 +86,6 @@
     <Compile Include="ShowTimeGUI.Designer.cs">
       <DependentUpon>ShowTimeGUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Ticket.cs" />
     <EmbeddedResource Include="AdminGUI.resx">
       <DependentUpon>AdminGUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -114,6 +113,7 @@
     <EmbeddedResource Include="ShowTimeGUI.resx">
       <DependentUpon>ShowTimeGUI.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

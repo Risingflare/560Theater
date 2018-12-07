@@ -22,9 +22,6 @@ namespace _560Theater
         SqlDataReader reader;
         List<ListBoxTheaterMovie> movies;
         List<ListBoxTheaterMovie> theaters;
-        List<string> movienames;
-        List<string> theaternames;
-        List<string> theaterLocation;
         int customerID;
         public Form1Controller(int userId)
         {
@@ -32,9 +29,6 @@ namespace _560Theater
             cmd = new SqlCommand();
             movies = new List<ListBoxTheaterMovie>();
             theaters = new List<ListBoxTheaterMovie>();
-            movienames = new List<string>();
-            theaternames = new List<string>();
-            theaterLocation = new List<string>();
             customerID = GetCustomerId(userId);
             if (customerID == -1) throw new Exception("There was trouble in getting the correct customer");
         }
@@ -57,7 +51,6 @@ namespace _560Theater
                     bool b = (bool)reader["Active"];
                     if (b)
                     {
-                        movienames.Add(name);
                         moviename = moviename + name + "\n";
                     }
                 }
@@ -94,8 +87,6 @@ namespace _560Theater
                     bool b = (bool)reader["Active"];
                     if(b)
                     {
-                        theaterLocation.Add(location);
-                        theaternames.Add(name);
                         theatername = theatername + name + "\n";
                     }
                 }
