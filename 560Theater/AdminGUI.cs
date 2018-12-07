@@ -586,13 +586,15 @@ namespace _560Theater
                 textBox1.Clear();
                 textBox2.Clear();
                 textBox3.Clear();
+                textBox1.Show();
+                textBox2.Show();
                 textBox3.Show();
             }
             else if (tabControl.SelectedTab.Name.Equals("Theater"))
             {
                 updateTheaterTable();
                 addBtn.Enabled = true;
-                editBtn.Enabled = true;
+                editBtn.Enabled = false;
                 label1.Text = "Theater Name:";
                 label1.Show();
                 label2.Text = "Location";
@@ -601,6 +603,8 @@ namespace _560Theater
                 textBox1.Clear();
                 textBox2.Clear();
                 textBox3.Clear();
+                textBox1.Show();
+                textBox2.Show();
                 textBox3.Hide();
             }
             else if (tabControl.SelectedTab.Name.Equals("Showing"))
@@ -611,7 +615,9 @@ namespace _560Theater
                 label1.Hide();
                 label2.Hide();
                 label3.Hide();
-                textBox3.Show();
+                textBox1.Hide();
+                textBox2.Hide();
+                textBox3.Hide();
             }
         }
 
