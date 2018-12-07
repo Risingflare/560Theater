@@ -470,7 +470,7 @@ namespace _560Theater
 
                     connection.Close();
                     cmd.Parameters.Clear();
-                    updateMovieTable();
+                    updateTheaterTable();
                 }
             }
             else if (tabControl.SelectedTab.Name.Equals("Showing"))
@@ -493,7 +493,7 @@ namespace _560Theater
 
                     connection.Close();
                     cmd.Parameters.Clear();
-                    updateMovieTable();
+                    updateShowingTable();
                 }
             }
         }
@@ -543,7 +543,7 @@ namespace _560Theater
 
                     connection.Close();
                     cmd.Parameters.Clear();
-                    updateMovieTable();
+                    updateTheaterTable();
                 }
             }
             else if (tabControl.SelectedTab.Name.Equals("Showing"))
@@ -566,7 +566,7 @@ namespace _560Theater
 
                     connection.Close();
                     cmd.Parameters.Clear();
-                    updateMovieTable();
+                    updateShowingTable();
                 }
             }
         }
