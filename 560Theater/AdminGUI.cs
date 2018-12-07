@@ -810,7 +810,7 @@ namespace _560Theater
             {
                 usedShowtimes.Clear();
                 int count = 0;
-                while (count < 5)
+                while (count < 15)
                 {
                     cmd.Parameters.Clear();
                     int i = rn.Next(0, 6);
